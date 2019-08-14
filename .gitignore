@@ -6,3 +6,4 @@ app/styles/styles.min.css
 .DS_Store
 yarn-error.log
 lib/
+private.js
