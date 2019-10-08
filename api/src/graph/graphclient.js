@@ -46,7 +46,7 @@ class V {
   }
 
   // builder methods
-  addKVStatement(method, key, value) {
+  kvPairStatement(method, key, value) {
     const alias = this.generateNewVariableName();
 
     this.statements.push(`.${method}('${key}', ${alias})`);
@@ -55,7 +55,13 @@ class V {
     return this;
   }
 
-  addMethodStatement(method, value) {
+  noParamMethodStatement(method) {
+    this.statements.push(`.${method}()`);
+
+    return this;
+  }
+
+  singleParamMethodStatement(method, value) {
     const alias = this.generateNewVariableName();
 
     this.statements.push(`.${method}(${alias})`);
@@ -65,25 +71,31 @@ class V {
   }
 
   // add properties
-  addProperty(key, value) {
-    return this.addKVStatement('property', key, value);
+  property(key, value) {
+    return this.kvPairStatement('property', key, value);
   }
 
-  partition(key) {
-    return this.addProperty(PARTITION_KEY, key);
-  }
-
-  addProperties(map) {
+  multipleProperties(map) {
     Object.keys(map).forEach(key => {
-      this.addProperty(key, map[key]);
+      this.property(key, map[key]);
     });
 
     return this;
   }
 
+  partition(key) {
+    return this.property(PARTITION_KEY, key);
+  }
+
+  properties(property) {
+    return property
+      ? this.singleParamMethodStatement('properties', properties)
+      : this.noParamMethodStatement('properties');
+  }
+
   // add edge
   addE(relationship) {
-    return this.addMethodStatement('addE', relationship);
+    return this.singleParamMethodStatement('addE', relationship);
   }
 
   to(target) {
@@ -105,17 +117,26 @@ class V {
     return this;
   }
 
+  // drop
+  drop() {
+    return this.noParamMethodStatement('drop');
+  }
+
   // query / traverse
   has(key, value) {
-    return this.addKVStatement('has', key, value);
+    return this.kvPairStatement('has', key, value);
+  }
+
+  hasId(id) {
+    return this.singleParamMethodStatement('hasId', id);
   }
 
   hasLabel(value) {
-    return this.addMethodStatement('hasLabel', value);
+    return this.singleParamMethodStatement('hasLabel', value);
   }
 
   hasNot(key) {
-    return this.addMethodStatement('hasNot', key);
+    return this.singleParamMethodStatement('hasNot', key);
   }
 }
 

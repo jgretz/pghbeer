@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- '10'
+after_success:
+- yarn build
+before_deploy:
+- cd ./lib
+deploy:
+  provider: heroku
+  api_key:
+    secure: ojSTccV9YYNRz7Zrg17IXeFXF3jIQ5mXnkUosHE+fMEvPIbRPO28TpIkxf/7wzkvV/XrV/QsycE0LrG2+aa5H1lDP5MVfta2qhyr6e9z0YC1QD3LrbVrES0xnYM/oYyFtECK1BUNpN+ER1j/3vQB1rw9oILltUdmZe6Z+UQdz0nPZa1NYxh3WRQDc7RLfPwAMWYekZld5rem5M49jtxwtsZrJjkSNzW0ZLNTEj3JY7ql4PQpgU61GGcKAZBPbOjGPfVAvSKN6DIwH66CFc+/gBASYJDOYsLfQ6AZAgbCf1JRNq1GJfC1sy/dVIwaplS3iUjMAf6zUwy6z5RMZ9ZxLR6AyNXw7NR3YCElh+w6WOABFGnwxgMoXHobov+m3AICR3gosfqSR/pqFzQlKV0nbcB2nsJjF3svgtUm/xXFpsyyOyFNuiGQ+nI3hPN9DQrZhIJhR9o7oOzora93CCt//apm4zY6rwpcQ29IdEH+jNiYiNAryPVUykvouJnPuFp7mqhv1lp3OZvEoK3y7kU7Ipfk9PXIQGj9LRcWJMEHuMlTk+bBB/BUjp+axH+wjMa46pbzFoeSBXSkDf3PbjPvPpAkEizvJwJQrjR5qLaQwSWDJOmS2N7NhbMMTd0gBLFUAtxuYWoLflQt+xp2+10+Z0hO2PJYHv6x/d+avwcljeo=
+  app: pghbeer
+  skip_cleanup: true
+  on:
+    repo: jgretz/pghbeer

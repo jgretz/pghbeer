@@ -6,6 +6,6 @@ import CrudService from './crud.service';
 @Dependencies(GraphClient)
 export default class BeerService extends CrudService {
   constructor(graphClient) {
-    super(graphClient, 'beer', 'beer');
+    super(graphClient, 'style', 'style');
   }
 }

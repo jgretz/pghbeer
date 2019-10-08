@@ -1,0 +1,21 @@
+{
+  "name": "pghbeer",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Josh Gretz",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/common": "^6.8.2",
+    "@nestjs/core": "^6.8.2",
+    "@nestjs/microservices": "^6.8.2",
+    "@nestjs/platform-express": "^6.8.2",
+    "@nestjs/websockets": "^6.8.2",
+    "core-js": "3.2.1",
+    "gremlin": "^3.4.3",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.3"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "botb-list",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build-server": "node tools/build_server.js",
+    "build-site": "node tools/build_site.js",
+    "start": "nodemon src/index.js --exec babel-node",
+    "build": "node tools/build.js",
+    "test": "echo future",
+    "publish": "yarn build && git subtree push --prefix lib heroku master"
+  },
+  "author": "Josh Gretz",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/plugin-external-helpers": "^7.2.0",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.5.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/register": "^7.6.2",
+    "@nestjs/testing": "^6.8.2",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.18.2",
+    "supertest": "^4.0.2"
+  }
+}
