@@ -1,14 +1,14 @@
 language: node_js
 node_js:
-- '10'
+  - "10"
 after_success:
-- yarn build
+  - yarn build
 before_deploy:
-- cd ./lib
+  - cd ./lib
 deploy:
   provider: heroku
   api_key:
-    secure: ojSTccV9YYNRz7Zrg17IXeFXF3jIQ5mXnkUosHE+fMEvPIbRPO28TpIkxf/7wzkvV/XrV/QsycE0LrG2+aa5H1lDP5MVfta2qhyr6e9z0YC1QD3LrbVrES0xnYM/oYyFtECK1BUNpN+ER1j/3vQB1rw9oILltUdmZe6Z+UQdz0nPZa1NYxh3WRQDc7RLfPwAMWYekZld5rem5M49jtxwtsZrJjkSNzW0ZLNTEj3JY7ql4PQpgU61GGcKAZBPbOjGPfVAvSKN6DIwH66CFc+/gBASYJDOYsLfQ6AZAgbCf1JRNq1GJfC1sy/dVIwaplS3iUjMAf6zUwy6z5RMZ9ZxLR6AyNXw7NR3YCElh+w6WOABFGnwxgMoXHobov+m3AICR3gosfqSR/pqFzQlKV0nbcB2nsJjF3svgtUm/xXFpsyyOyFNuiGQ+nI3hPN9DQrZhIJhR9o7oOzora93CCt//apm4zY6rwpcQ29IdEH+jNiYiNAryPVUykvouJnPuFp7mqhv1lp3OZvEoK3y7kU7Ipfk9PXIQGj9LRcWJMEHuMlTk+bBB/BUjp+axH+wjMa46pbzFoeSBXSkDf3PbjPvPpAkEizvJwJQrjR5qLaQwSWDJOmS2N7NhbMMTd0gBLFUAtxuYWoLflQt+xp2+10+Z0hO2PJYHv6x/d+avwcljeo=
+    secure: EtzQjZvqp+bLph4Se5oCZET5t2HGluLEf204WQOajTVyRdqO1gkFLD08+xOyuyDY8YAl7oB7YvEjIowZ/eKLb1odDiWq5eMNL9WremETnlpUFXs1kKZkiJ5RsrQCBrMD5FoleIKoR+Pq3PEOJQPGNFyFDECPPGCh8+uppR4qBW75icPVEONEE0EhoJZU8vVPH99vEds0GPQ6ul4iaj4QXU4M4EScQwSt+8XaJe0YMdtPCezlTTDiyQnuxb4tKy0QIKTOl+XQ765fNkV2CGl6t0p/PZxeXhbjSxF/13XhZELH2rDnPx8xNtzS0drQuaqbUJVNP7kCopd86nsg18o5xLE0tKlP1Mwf8s1Qb/vZhHIKRy3WiWyaN/FpAA0rQihBXGhhC/cn+DCD8UsPqtX34UFIZ2UwES6Jt6XQSMzoMlAPfwO0me+eHlv08pieydzdwMug+KdJcvevprBoeqqmdnuA1yxLagT12rj+B6BhRm33wzhij9pEVIIEFQrKXtQPDrHMfUz3Yp07fvsUh8kEqehqi5u1ORuvuerqqcpyVBtnIDDHL5EvQ7TShIfDTTz86hubJh0HCYjWge5GpfTdVunA1mlQ+XAMzB61E8OMIts8CyWpaDmiefJ++GVJ4sFe9pbdI2z1qYfoliC3s4lGGTTyVau/vo30eqtLx8quLUw=
   app: pghbeer
   skip_cleanup: true
   on:
