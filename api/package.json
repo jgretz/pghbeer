@@ -9,7 +9,8 @@
     "start:dev": "nodemon",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "build": "babel -d lib/ src"
   },
   "dependencies": {
     "@nestjs/common": "^6.8.2",
@@ -23,6 +24,7 @@
     "rxjs": "^6.5.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/plugin-external-helpers": "^7.2.0",
