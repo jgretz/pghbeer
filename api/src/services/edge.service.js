@@ -1,11 +1,14 @@
 import {Injectable, Dependencies} from '@nestjs/common';
 import {GraphClient} from '../graph';
-import CrudService from './crud.service';
 
 @Injectable()
 @Dependencies(GraphClient)
-export default class UserService extends CrudService {
+export default class CrudService {
   constructor(graphClient) {
-    super(graphClient, 'user', 'user');
+    this.g = graphClient;
+  }
+
+  async create(obj) {
+    return [];
   }
 }

@@ -5,14 +5,18 @@ import {join} from 'path';
 import {
   BeerController,
   BreweryController,
+  EdgeController,
   EventController,
+  StatController,
   StyleController,
   UserController,
 } from './api';
 import {
   BeerService,
   BreweryService,
+  EdgeService,
   EventService,
+  StatService,
   StyleService,
   UserService,
 } from './services';
@@ -33,12 +37,22 @@ const clientPath = () => {
       renderPath: '/',
     }),
   ],
-  controllers: [BeerController],
+  controllers: [
+    BeerController,
+    BreweryController,
+    EdgeController,
+    EventController,
+    StatController,
+    StyleController,
+    UserController,
+  ],
   providers: [
     GraphClient,
     BeerService,
     BreweryService,
+    EdgeService,
     EventService,
+    StatService,
     StyleService,
     UserService,
   ],

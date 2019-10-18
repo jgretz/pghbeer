@@ -33,8 +33,14 @@ class V {
   // submit
   async submit() {
     const q = this.queryValues();
+    const clientInstance = client();
 
-    return await client().submit(q.statement, q.arguments);
+    try {
+      const results = await clientInstance.submit(q.statement, q.arguments);
+      return results;
+    } finally {
+      clientInstance.close();
+    }
   }
 
   // output

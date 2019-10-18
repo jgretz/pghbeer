@@ -7,3 +7,5 @@ app/styles/styles.min.css
 yarn-error.log
 lib/
 private.js
+
+import/data
