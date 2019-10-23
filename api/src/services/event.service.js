@@ -4,7 +4,7 @@ import CrudService from './crud.service';
 
 @Injectable()
 @Dependencies(GraphClient)
-export default class BreweryService extends CrudService {
+export default class Eventervice extends CrudService {
   constructor(graphClient) {
     super(graphClient, 'event', 'event');
   }

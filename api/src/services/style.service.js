@@ -4,7 +4,7 @@ import CrudService from './crud.service';
 
 @Injectable()
 @Dependencies(GraphClient)
-export default class BeerService extends CrudService {
+export default class StyleService extends CrudService {
   constructor(graphClient) {
     super(graphClient, 'style', 'style');
   }
