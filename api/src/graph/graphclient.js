@@ -35,6 +35,8 @@ class V {
     const q = this.queryValues();
     const clientInstance = client();
 
+    console.log(q.statement, q.arguments);
+
     try {
       const results = await clientInstance.submit(q.statement, q.arguments);
       return results;
@@ -105,20 +107,13 @@ class V {
   }
 
   to(target) {
-    if (target instanceof V) {
-      const query = target.queryValues();
+    const query = target.queryValues();
 
-      this.statements.push(`.to(${query.statement})`);
-      this.arguments = {
-        ...this.arguments,
-        ...query.arguments,
-      };
-    } else {
-      const alias = this.generateNewVariableName();
-
-      this.statements.push(`.to(g.V(${alias}))`);
-      this.arguments[alias] = target;
-    }
+    this.statements.push(`.to(${query.statement})`);
+    this.arguments = {
+      ...this.arguments,
+      ...query.arguments,
+    };
 
     return this;
   }
