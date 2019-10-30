@@ -1,5 +1,11 @@
-import React from 'react';
+import {compose} from '@truefit/bach';
+import {renderIf} from '@truefit/bach-recompose';
 
-export default () => (
-  <div>Beers of the Burgh Winter Warmer list coming soon !!!</div>
-);
+import {Checklist} from '../../checklist/components';
+import Welcome from './welcome';
+
+const isBotbList = () => {
+  return window.location.hostname === 'list.beersoftheburgh';
+};
+
+export default compose(renderIf(isBotbList, Checklist))(Welcome);
