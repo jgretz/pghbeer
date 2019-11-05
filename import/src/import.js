@@ -255,9 +255,7 @@ const main = async () => {
     // await uploadAll('users', users, identity);
     // await uploadAll('events', events, identity);
 
-    stats.splice(0, 4367);
-
-    await uploadStats(stats);
+    // await uploadStats(stats);
   } catch (err) {
     console.error(err); // eslint-disable-line
   }

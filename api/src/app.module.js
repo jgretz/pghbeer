@@ -5,6 +5,7 @@ import {join} from 'path';
 import {
   BeerController,
   BreweryController,
+  DataController,
   EdgeController,
   EventController,
   StatController,
@@ -14,6 +15,7 @@ import {
 import {
   BeerService,
   BreweryService,
+  DataService,
   EdgeService,
   EventService,
   StatService,
@@ -40,6 +42,7 @@ const clientPath = () => {
   controllers: [
     BeerController,
     BreweryController,
+    DataController,
     EdgeController,
     EventController,
     StatController,
@@ -50,6 +53,7 @@ const clientPath = () => {
     GraphClient,
     BeerService,
     BreweryService,
+    DataService,
     EdgeService,
     EventService,
     StatService,

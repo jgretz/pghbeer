@@ -1,5 +1,6 @@
 export {default as BeerService} from './beer.service';
 export {default as BreweryService} from './brewery.service';
+export {default as DataService} from './data.service';
 export {default as EdgeService} from './edge.service';
 export {default as EventService} from './event.service';
 export {default as StatService} from './stat.service';

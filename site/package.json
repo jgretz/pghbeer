@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@material-ui/styles": "^4.5.0",
+    "@material-ui/styles": "^4.5.2",
     "@truefit/bach": "^1.1.1",
     "@truefit/bach-material-ui": "^1.1.0",
     "@truefit/bach-recompose": "^1.1.1",

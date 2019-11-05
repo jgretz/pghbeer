@@ -12,7 +12,7 @@ export default {
   },
   devtool: 'eval-source-map',
   plugins: [
-    new EnvironmentPlugin({API_BASE_URL: 'http://localhost:4000/api/'}),
+    new EnvironmentPlugin({API_BASE_URL: 'http://localhost:3000/api/'}),
     new HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({template: 'app/index.ejs'}),
   ],

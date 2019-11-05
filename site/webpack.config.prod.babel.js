@@ -25,7 +25,7 @@ export default {
   },
   devtool: false,
   plugins: [
-    new EnvironmentPlugin({API_BASE_URL: '/api/'}),
+    new EnvironmentPlugin({API_BASE_URL: '/api'}),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css',
       chunkFilename: '[id].[chunkhash].css',

@@ -3,12 +3,12 @@
 /* eslint-disable object-shorthand */
 import {combineReducers} from 'redux';
 import {connectRouter} from 'connected-react-router';
-import checklist from './features/checklist/reducers';
+import beers from './features/beers/reducers';
 
 const rootReducer = history =>
   combineReducers({
     features: combineReducers({
-      checklist: checklist,
+      beers: beers,
     }),
     router: connectRouter(history),
   });
