@@ -4,6 +4,11 @@ import {ServeStaticModule} from '@nestjs/serve-static';
 import {join} from 'path';
 
 import {BeersController} from './features/beers';
+import {BreweriesController} from './features/breweries';
+import {EventsController} from './features/events';
+import {StatsController} from './features/stats';
+import {StylesController} from './features/styles';
+import {UsersController} from './features/users';
 import {CrudModule} from './features/crud';
 
 const clientPath = () => {
@@ -23,6 +28,13 @@ const clientPath = () => {
     CqrsModule,
     CrudModule,
   ],
-  controllers: [BeersController],
+  controllers: [
+    BeersController,
+    BreweriesController,
+    EventsController,
+    StatsController,
+    StylesController,
+    UsersController,
+  ],
 })
 export class AppModule {}

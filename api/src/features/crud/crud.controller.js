@@ -14,7 +14,7 @@ import {FindAll} from './findAll';
 import {FindOne} from './findOne';
 import {Create} from './create';
 import {Update} from './update';
-import {Delete} from './delete';
+import {Destroy} from './destroy';
 
 @Dependencies(QueryBus, CommandBus)
 export class CrudController {
@@ -49,6 +49,6 @@ export class CrudController {
   @Delete(':id')
   @Bind(Param('id'))
   async remove(id) {
-    return this.commandBus.execute(new Delete(this.tableName, id));
+    return this.commandBus.execute(new Destroy(this.tableName, id));
   }
 }

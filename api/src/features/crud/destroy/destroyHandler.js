@@ -1,16 +1,16 @@
 import {Dependencies} from '@nestjs/common';
 import {CommandHandler} from '@nestjs/cqrs';
-import {Delete} from './delete';
+import {Destroy} from './destroy';
 import {DATABASE} from '../../../constants';
 
-@CommandHandler(Delete)
+@CommandHandler(Destroy)
 @Dependencies(DATABASE)
-export class DeleteHandler {
+export class DestroyHandler {
   constructor(database) {
     this.database = database;
   }
 
   async execute({tableName, obj}) {
-    return await this.database[tableName].destoy(obj);
+    return await this.database[tableName].destroy(obj);
   }
 }

@@ -3,4 +3,4 @@ import {TableName, CrudController} from '../crud';
 
 @Controller('users')
 @TableName('users')
-export default class UsersController extends CrudController {}
+export class UsersController extends CrudController {}

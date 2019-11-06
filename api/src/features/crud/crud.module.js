@@ -6,7 +6,7 @@ import {FindAllHandler} from './findAll';
 import {FindOneHandler} from './findOne';
 import {CreateHandler} from './create';
 import {UpdateHandler} from './update';
-import {DeleteHandler} from './delete';
+import {DestroyHandler} from './destroy';
 
 @Module({
   imports: [CqrsModule],
@@ -16,7 +16,7 @@ import {DeleteHandler} from './delete';
     FindOneHandler,
     CreateHandler,
     UpdateHandler,
-    DeleteHandler,
+    DestroyHandler,
   ],
 })
 export class CrudModule {}
