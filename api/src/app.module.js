@@ -1,28 +1,10 @@
 import {Module} from '@nestjs/common';
+import {CqrsModule} from '@nestjs/cqrs';
 import {ServeStaticModule} from '@nestjs/serve-static';
 import {join} from 'path';
 
-import {
-  BeerController,
-  BreweryController,
-  DataController,
-  EdgeController,
-  EventController,
-  StatController,
-  StyleController,
-  UserController,
-} from './api';
-import {
-  BeerService,
-  BreweryService,
-  DataService,
-  EdgeService,
-  EventService,
-  StatService,
-  StyleService,
-  UserService,
-} from './services';
-import {GraphClient} from './graph';
+import {BeersController} from './features/beers';
+import {CrudModule} from './features/crud';
 
 const clientPath = () => {
   if (process.env.NODE_ENV === 'PRODUCTION') {
@@ -38,27 +20,9 @@ const clientPath = () => {
       rootPath: clientPath(),
       renderPath: '/',
     }),
+    CqrsModule,
+    CrudModule,
   ],
-  controllers: [
-    BeerController,
-    BreweryController,
-    DataController,
-    EdgeController,
-    EventController,
-    StatController,
-    StyleController,
-    UserController,
-  ],
-  providers: [
-    GraphClient,
-    BeerService,
-    BreweryService,
-    DataService,
-    EdgeService,
-    EventService,
-    StatService,
-    StyleService,
-    UserService,
-  ],
+  controllers: [BeersController],
 })
 export class AppModule {}
