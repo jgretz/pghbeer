@@ -7,6 +7,6 @@ export const loadBeersFromServer = async () => {
 
   return {
     type: BEERS_LOADED_FROM_SERVER,
-    payload: response.data._items,
+    payload: response.data,
   };
 };
