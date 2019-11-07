@@ -8,17 +8,30 @@ configureHttp({
   baseConfig: {
     baseURL: 'http://localhost:3000',
   },
+  baseHeaders: {
+    auth_key:
+      'ykE^WULrJczXdT*PDEgpSHqh0blfPR6pbzQG7q^t!3$4ic38tfJg4&9quqZI%cWA9oc1G&vrcXZBW6qMlxEBi^$Jf9X4drCL',
+  },
 });
 
-const newId = generateNewVariableName();
-
-const mapWithIndex = _.map.convert({cap: false});
 const identity = x => x;
+
+const results = {};
+const postArray = async (route, data) => {
+  for (const item of data) {
+    const response = await post(`api/${route}`, item);
+
+    item.id = response.data.id;
+
+    console.log(`Posted to ${route} with id of ${item.id} named ${item.name}`);
+  }
+
+  results[route] = data;
+};
 
 // styles //
 const styleFilter = s => s && !s.includes('%') && !s.includes('TBD');
-
-const stylePrep = (s, index) => {
+const parseStyleName = s => {
   const name = matches(s)(
     (s = null) => '',
     (s = 'PA v1.0') => 'IPA',
@@ -27,235 +40,131 @@ const stylePrep = (s, index) => {
     s => s,
   );
 
-  return {
-    id: newId(),
-    name,
-  };
+  return {name};
 };
 
-const importStyles = () =>
-  data.beers
-  |> _.map(b => b.type)
-  |> _.uniq
-  |> _.filter(styleFilter)
-  |> mapWithIndex(stylePrep);
+const importStyles = async () => {
+  const styles =
+    data.beers
+    |> _.map(b => b.type)
+    |> _.uniq
+    |> _.filter(styleFilter)
+    |> _.map(parseStyleName);
+
+  styles.push({name: 'Unknown'});
+
+  await postArray('styles', styles);
+};
 
 // breweries //
-const breweryPrep = (b, index) => {
+const parseBreweryName = b => {
   const name = matches(b)(
     (s = null) => '',
     (s = /[’]/) => s.replace(/[’]/, "'"),
     s => s,
   );
 
-  return {
-    id: newId(),
-    name,
-  };
+  return {name};
 };
 
-const importBreweries = () =>
-  data.beers |> _.map(b => b.brewery) |> _.uniq |> mapWithIndex(breweryPrep);
+const importBreweries = async () => {
+  const breweries =
+    data.beers |> _.map(b => b.brewery) |> _.uniq |> _.map(parseBreweryName);
+
+  await postArray('breweries', breweries);
+};
 
 // beers //
-const beerPrep = (styles, breweries) => b => {
-  const beer = {
-    id: newId(),
-    name: b.name,
-    abv: b.abv,
-  };
+const parseAbv = abv => parseFloat(abv.replace('%', ''));
 
-  const style = _.find(x => x.name === stylePrep(b.type).name)(styles);
-  const brewery = _.find(x => x.name === breweryPrep(b.brewery).name)(
-    breweries,
+const fillBeer = b => {
+  const style =
+    _.find(x => x.name === parseStyleName(b.type).name)(results.styles) ||
+    _.find(x => x.name === 'Unknown')(results.styles);
+
+  const brewery = _.find(x => x.name === parseBreweryName(b.brewery).name)(
+    results.breweries,
   );
 
   return {
-    beer,
-    style,
-    brewery,
+    name: b.name,
+    abv: b.abv ? parseAbv(b.abv) : null,
+    style_id: style.id,
+    brewery_id: brewery.id,
   };
 };
 
-const importBeers = (styles, breweries) =>
-  data.beers |> _.map(beerPrep(styles, breweries));
+const importBeers = async () => {
+  const beers = data.beers |> _.map(fillBeer);
+
+  await postArray('beers', beers);
+};
 
 // users //
-const prepUser = (webuserid, index) => ({
-  id: newId(),
+const fillUser = webuserid => ({
   name: 'anonymous',
   webuserid,
 });
 
-const importUsers = () =>
-  data.stats |> _.map(s => s.webuserid) |> _.uniq |> mapWithIndex(prepUser);
+const importUsers = async () => {
+  const users =
+    data.stats
+    |> _.map(s => s.webuserid)
+    |> _.uniq
+    |> _.filter(identity)
+    |> _.map(fillUser);
+
+  await postArray('users', users);
+};
+
+// events //
+const importEvents = async () => {
+  const events = [
+    {
+      name: 'Beers of the Burgh - Summer 2019',
+      date: new Date(2019, 6, 14),
+    },
+    {
+      name: 'Beers of the Burgh - Winter 2019',
+      date: new Date(2019, 11, 2),
+    },
+  ];
+
+  await postArray('events', events);
+};
 
 // summer history //
-const prepStat = (beers, users, events) => s => {
-  const stat = {
-    id: newId(),
-    date: s.checkdate,
-    opinion: 0, // unknown
-  };
-
-  const beer = _.find(
-    x => x.beer.name === s.beer && x.brewery.name === s.brewery,
-  )(beers);
-  const user = _.find(x => x.webuserid === s.webuserid)(users);
-  const event = events[0];
+const fillStat = s => {
+  const beer = _.find(x => x.name === s.beer)(results.beers);
+  const user = _.find(x => x.webuserid === s.webuserid)(results.users);
+  const event = results.events[0];
 
   return {
-    stat,
-    beer,
-    user,
-    event,
+    date: s.checkdate,
+    opinion: 0, // unknown
+    beer_id: beer.id,
+    user_id: user.id,
+    event_id: event.id,
   };
 };
 
-const importEvents = () => [
-  {
-    id: '1',
-    name: 'Beers of the Burgh - Summer 2019',
-    date: new Date(2019, 6, 14),
-  },
-  {
-    id: '2',
-    name: 'Beers of the Burgh - Winter 2019',
-    date: new Date(2019, 11, 2),
-  },
-];
+const importStats = async () => {
+  const stats = data.stats |> _.map(fillStat);
 
-const importStats = (beers, users, events) =>
-  data.stats |> _.map(prepStat(beers, users, events));
-
-// upload
-const sleep = milliseconds => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
-};
-
-let count = 0;
-const uploadAll = async (route, arr, map) => {
-  for (const obj of arr.map(map)) {
-    await post(route, obj);
-    await sleep(300); // attempting to keep going and not hit the azure rate limit
-
-    console.log(`Uploaded ${obj.id || count++} to ${route}`);
-  }
-};
-
-const relateBeers = async beers => {
-  for (const b of beers) {
-    const {beer, style, brewery} = b;
-
-    if (!beer) {
-      continue;
-    }
-
-    if (style) {
-      await post('edge', {
-        label: 'hasStyle',
-        from: {
-          v: 'beer',
-          properties: {name: beer.name},
-        },
-        to: {
-          v: 'style',
-          properties: {name: style.name},
-        },
-      });
-
-      console.log(`Related beer ${beer.name} to style ${style.name}`);
-    }
-
-    if (brewery) {
-      await post('edge', {
-        label: 'craftedBy',
-        from: {
-          v: 'beer',
-          properties: {name: beer.name},
-        },
-        to: {
-          v: 'brewery',
-          properties: {name: brewery.name},
-        },
-      });
-
-      console.log(`Related beer ${beer.name} to brewery ${brewery.name}`);
-    }
-  }
-};
-
-const uploadStats = async stats => {
-  for (const s of stats) {
-    const {stat, beer, user, event} = s;
-
-    if (!beer || !user || !event) {
-      continue;
-    }
-
-    await post('stats', stat);
-
-    await post('edge', {
-      label: 'drank',
-      from: {
-        v: 'stat',
-        properties: {id: stat.id},
-      },
-      to: {
-        v: 'beer',
-        properties: {name: beer.name},
-      },
-    });
-
-    await post('edge', {
-      label: 'at',
-      from: {
-        v: 'stat',
-        properties: {id: stat.id},
-      },
-      to: {
-        v: 'event',
-        properties: {name: event.name},
-      },
-    });
-
-    await post('edge', {
-      label: 'by',
-      from: {
-        v: 'stat',
-        properties: {id: stat.id},
-      },
-      to: {
-        v: 'user',
-        properties: {webuserid: user.webuserid},
-      },
-    });
-
-    console.log(`Recorded stat - ${stat.id}`);
-
-    await sleep(300); // attempting to keep going and not hit the azure rate limit
-  }
+  await postArray('stats', stats);
 };
 
 // logic
 const main = async () => {
   try {
-    const styles = importStyles();
-    const breweries = importBreweries();
-    const beers = importBeers(styles, breweries);
-    const users = importUsers();
-    const events = importEvents();
-    const stats = importStats(beers, users, events);
+    await importStyles();
+    await importBreweries();
+    await importBeers();
 
-    // await uploadAll('styles', styles, identity);
-    // await uploadAll('breweries', breweries, identity);
-    // await uploadAll('beers', beers, x => x.beer);
-    // await relateBeers(beers);
+    await importEvents();
+    await importUsers();
 
-    // await uploadAll('users', users, identity);
-    // await uploadAll('events', events, identity);
-
-    // await uploadStats(stats);
+    await importStats();
   } catch (err) {
     console.error(err); // eslint-disable-line
   }

@@ -11,6 +11,13 @@ export class UpdateHandler {
   }
 
   async execute({tableName, id, obj}) {
-    return await this.database[tableName].update({id}, obj);
+    return await this.database[tableName].update(
+      {id},
+      {
+        ...obj,
+
+        update_date: moment.utc().toDate(),
+      },
+    );
   }
 }

@@ -1,8 +1,9 @@
 create table stats
 (
   id SERIAL PRIMARY KEY,
-  beer_id INT NOT NULL,
+  date TIMESTAMP NOT NULL,
   opinion INT NOT NULL,
+  beer_id INT NOT NULL,
   user_id INT NOT NULL,
   event_id INT NOT NULL,
 
