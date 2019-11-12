@@ -154,17 +154,27 @@ const importStats = async () => {
   await postArray('stats', stats);
 };
 
+const recordAvailableBeers = async () => {
+  const response = await get('api/beers');
+  const event_id = 1;
+
+  for (const beer of response.data) {
+    await post('api/eventbeerlist', {event_id, beer_id: beer.id});
+
+    console.log(`Recorded beer ${beer.name} available at Summer 2019`);
+  }
+};
+
 // logic
 const main = async () => {
   try {
-    await importStyles();
-    await importBreweries();
-    await importBeers();
-
-    await importEvents();
-    await importUsers();
-
-    await importStats();
+    // await importStyles();
+    // await importBreweries();
+    // await importBeers();
+    // await importEvents();
+    // await importUsers();
+    // await importStats();
+    // await recordAvailableBeers();
   } catch (err) {
     console.error(err); // eslint-disable-line
   }

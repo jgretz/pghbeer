@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier --write \"**/*.js\"",
-    "start": "babel-node src/import.js"
+    "start": "babel-node src/importSummer2019.js"
   },
   "dependencies": {
     "@truefit/http-utils": "^1.0.9",

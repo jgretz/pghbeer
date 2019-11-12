@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Debug Program",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
-      "program": "${workspaceRoot}/src/import.js",
+      "program": "${workspaceRoot}/src/importSummer2019.js",
       "protocol": "inspector",
       "restart": true,
       "runtimeArgs": ["--harmony", "--nolazy"]

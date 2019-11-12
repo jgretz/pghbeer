@@ -5,7 +5,7 @@ import {join} from 'path';
 
 import {BeersController} from './features/beers';
 import {BreweriesController} from './features/breweries';
-import {EventsController} from './features/events';
+import {EventsController, EventBeerListController} from './features/events';
 import {StatsController} from './features/stats';
 import {StylesController} from './features/styles';
 import {UsersController} from './features/users';
@@ -32,6 +32,7 @@ const clientPath = () => {
     BeersController,
     BreweriesController,
     EventsController,
+    EventBeerListController,
     StatsController,
     StylesController,
     UsersController,
