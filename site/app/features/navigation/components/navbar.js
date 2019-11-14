@@ -13,7 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 const Navbar = ({classes}) => (
-  <div>
+  <div className={classes.nav}>
     <AppBar position="sticky">
       <Toolbar>
         <img src={BotbLogo} className={classes.botbLogo} />
@@ -29,6 +29,9 @@ const Navbar = ({classes}) => (
 
 export default compose(
   withStyles({
+    nav: {
+      position: 'fixed',
+    },
     lights: {
       height: '40px',
       width: '100hw',

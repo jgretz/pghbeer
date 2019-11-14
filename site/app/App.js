@@ -37,7 +37,8 @@ export default withRouter(
 
     withStyles({
       body: {
-        height: '100vh',
+        minHeight: '100vh',
+        height: '100%',
         width: '100hw',
 
         backgroundImage: `url(${Background})`,

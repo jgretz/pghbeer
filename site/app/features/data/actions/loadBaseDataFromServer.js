@@ -4,10 +4,12 @@ import {
   loadBeersForEventsFromServer,
   loadEventsFromServer,
 } from '../../events/actions';
+import {loadStylesFromServer} from '../../styles/actions';
 
 export const loadBaseDataFromServer = () => dispatch => {
   dispatch(loadBeersFromServer());
   dispatch(loadBreweriesFromServer());
   dispatch(loadEventsFromServer());
+  dispatch(loadStylesFromServer());
   dispatch(loadBeersForEventsFromServer());
 };
