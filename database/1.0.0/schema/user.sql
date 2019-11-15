@@ -8,3 +8,5 @@ create table users
   create_date TIMESTAMP NOT NULL,
   update_date TIMESTAMP NOT NULL
 )
+
+create index users_webuserid on users (id, webuserid);

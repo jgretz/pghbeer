@@ -4,7 +4,11 @@ import {enforceKeyMiddleware} from './middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+
+  if (process.env.NODE_ENV !== 'PRODUCTION') {
+    app.enableCors();
+  }
+
   app.setGlobalPrefix('api');
   app.use(enforceKeyMiddleware);
 

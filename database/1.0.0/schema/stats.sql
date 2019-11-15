@@ -9,4 +9,6 @@ create table stats
 
   create_date TIMESTAMP NOT NULL,
   update_date TIMESTAMP NOT NULL
-)
+);
+
+create index stats_user on stats (user_id);

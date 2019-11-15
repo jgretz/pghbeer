@@ -1,10 +1,10 @@
 import _ from 'lodash/fp';
 import React from 'react';
-import {compose, withMemo} from '@truefit/bach';
+import {compose, withMemo, withEffect} from '@truefit/bach';
 import {withSelector} from '@truefit/bach-redux';
 import {withStyles} from '@truefit/bach-material-ui';
 
-import {listForEventSelector} from '../selectors';
+import {listForSelectedEventSelector} from '../selectors';
 
 import Brewery from './brewery';
 
@@ -17,7 +17,12 @@ const List = ({classes, breweries}) => (
 );
 
 export default compose(
-  withSelector('list', listForEventSelector),
+  withEffect(() => {
+    // i wanted to use react-helmet, but it still uses componentWillMount
+    document.title = 'BotB Winter Warmer';
+  }, []),
+
+  withSelector('list', listForSelectedEventSelector),
   withMemo(
     'breweries',
     ({list}) =>

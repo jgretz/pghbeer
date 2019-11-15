@@ -3,12 +3,21 @@ import {CqrsModule} from '@nestjs/cqrs';
 import {ServeStaticModule} from '@nestjs/serve-static';
 import {join} from 'path';
 
+import {Database} from './database';
 import {BeersController} from './features/beers';
 import {BreweriesController} from './features/breweries';
 import {EventsController, EventBeerListController} from './features/events';
-import {StatsController} from './features/stats';
+import {
+  StatsController,
+  StatsForUserController,
+  FindStatsByWebUserIdHandler,
+} from './features/stats';
 import {StylesController} from './features/styles';
-import {UsersController} from './features/users';
+import {
+  UsersController,
+  UserByWebUserIdController,
+  FindUserByWebUserIdHandler,
+} from './features/users';
 import {CrudModule} from './features/crud';
 
 const clientPath = () => {
@@ -28,14 +37,21 @@ const clientPath = () => {
     CqrsModule,
     CrudModule,
   ],
+  providers: [
+    Database,
+    FindStatsByWebUserIdHandler,
+    FindUserByWebUserIdHandler,
+  ],
   controllers: [
     BeersController,
     BreweriesController,
     EventsController,
     EventBeerListController,
     StatsController,
+    StatsForUserController,
     StylesController,
     UsersController,
+    UserByWebUserIdController,
   ],
 })
 export class AppModule {}

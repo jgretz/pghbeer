@@ -15,4 +15,6 @@ export const loadDataFromServer = route => async dispatch => {
       data: response.data,
     },
   });
+
+  return response;
 };
