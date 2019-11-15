@@ -7,8 +7,9 @@ import beers from './features/beers/reducers';
 import breweries from './features/breweries/reducers';
 import checklist from './features/checklist/reducers';
 import events from './features/events/reducers';
-import stats from './features/stats/reducers';
 import shared from './features/shared/reducers';
+import navigation from './features/navigation/reducers';
+import stats from './features/stats/reducers';
 import styles from './features/styles/reducers';
 import users from './features/users/reducers';
 
@@ -19,8 +20,9 @@ const rootReducer = history =>
       breweries: breweries,
       checklist: checklist,
       events: events,
-      stats: stats,
       shared: shared,
+      navigation: navigation,
+      stats: stats,
       styles: styles,
       users: users,
     }),

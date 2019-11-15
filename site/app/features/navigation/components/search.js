@@ -1,12 +1,16 @@
 import React from 'react';
-import {compose} from '@truefit/bach';
+import {compose, withCallback} from '@truefit/bach';
+import {withActions, withSelector} from '@truefit/bach-redux';
 import {withStyles} from '@truefit/bach-material-ui';
 
 import {fade} from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-const Search = ({classes}) => (
+import {updateSearch} from '../actions';
+import {searchSelector} from '../selectors';
+
+const Search = ({classes, search, handleChange}) => (
   <div className={classes.search}>
     <div className={classes.searchIcon}>
       <SearchIcon />
@@ -18,11 +22,20 @@ const Search = ({classes}) => (
         input: classes.inputInput,
       }}
       inputProps={{'aria-label': 'search'}}
+      onChange={handleChange}
+      value={search}
     />
   </div>
 );
 
 export default compose(
+  withActions({updateSearch}),
+  withCallback('handleChange', ({updateSearch}) => e => {
+    updateSearch(e.target.value);
+  }),
+
+  withSelector('search', searchSelector),
+
   withStyles(theme => ({
     search: {
       position: 'relative',

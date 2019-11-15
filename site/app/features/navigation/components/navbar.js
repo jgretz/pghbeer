@@ -15,7 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 const Navbar = ({classes}) => (
   <div className={classes.nav}>
     <AppBar>
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <img src={BotbLogo} className={classes.botbLogo} />
 
         <Search />
@@ -38,6 +38,10 @@ export default compose(
       height: 96,
       width: '100%',
     },
+    toolbar: {
+      padding: 0,
+    },
+
     lights: {
       position: 'fixed',
 
@@ -52,7 +56,7 @@ export default compose(
     },
     botbLogo: {
       marginTop: -5,
-      marginLeft: -10,
+      marginLeft: '6px',
       height: 40,
     },
   }),

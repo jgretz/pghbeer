@@ -7,6 +7,21 @@ import {beersSelector} from '../../beers/selectors';
 import {breweriesSelector} from '../../breweries/selectors';
 import {stylesSelector} from '../../styles/selectors';
 import {statsForActiveUserSelector} from '../../stats/selectors';
+import {searchSelector} from '../../navigation/selectors';
+
+const searchFilter = search => beer => {
+  if (search.length === 0) {
+    return true;
+  }
+
+  const searchToken = search.toLowerCase();
+
+  return (
+    beer.name.toLowerCase().includes(searchToken) ||
+    beer.brewery?.name.toLowerCase().includes(searchToken) ||
+    beer.style?.name.toLowerCase().includes(searchToken)
+  );
+};
 
 export default createSelector(
   selectedEventSelector,
@@ -15,7 +30,9 @@ export default createSelector(
   breweriesSelector,
   stylesSelector,
   statsForActiveUserSelector,
-  (selectedEvent, beersForEvents, beers, breweries, styles, stats) => {
+  searchSelector,
+
+  (selectedEvent, beersForEvents, beers, breweries, styles, stats, search) => {
     if (beers.length === 0 || breweries.length === 0 || styles.length === 0) {
       return [];
     }
@@ -33,6 +50,7 @@ export default createSelector(
           stats,
         ),
       }))
+      |> _.filter(searchFilter(search))
       |> _.sortBy(x => x.name)
       |> _.groupBy(x => x.brewery.name)
     );
