@@ -11,15 +11,9 @@ export class FindStatsByWebUserIdHandler {
   }
 
   async execute({webuserid}) {
-    return await this.database.stats
-      .join({
-        users: {
-          type: 'INNER',
-          on: {id: 'user_id'},
-        },
-      })
-      .find({
-        'users.webuserid': webuserid,
-      });
+    return await this.database.stats.where(
+      'user_id in (SELECT id FROM users WHERE webuserid = ${webuserid})',
+      {webuserid},
+    );
   }
 }

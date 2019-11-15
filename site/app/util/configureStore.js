@@ -1,9 +1,11 @@
-import promiseMiddlware from 'redux-promise-middleware';
-import thunkMiddleware from 'redux-thunk';
-import asyncAwaitMiddleware from 'redux-async-await';
 import {applyMiddleware, createStore} from 'redux';
 import {connectRouter, routerMiddleware} from 'connected-react-router';
 import createRootReducer from '../rootReducer';
+
+import promiseMiddlware from 'redux-promise-middleware';
+import thunkMiddleware from 'redux-thunk';
+import asyncAwaitMiddleware from 'redux-async-await';
+import {statsMiddleware} from '../features/stats/middleware';
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -39,6 +41,7 @@ export const configureStore = history => {
     promiseMiddlware,
     asyncAwaitMiddleware,
     routerMiddleware(history),
+    statsMiddleware,
   ];
 
   return PRODUCTION

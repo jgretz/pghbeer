@@ -6,6 +6,7 @@ import {beersForEventsSelector} from '../../events/selectors';
 import {beersSelector} from '../../beers/selectors';
 import {breweriesSelector} from '../../breweries/selectors';
 import {stylesSelector} from '../../styles/selectors';
+import {statsForActiveUserSelector} from '../../stats/selectors';
 
 export default createSelector(
   selectedEventSelector,
@@ -13,7 +14,8 @@ export default createSelector(
   beersSelector,
   breweriesSelector,
   stylesSelector,
-  (selectedEvent, beersForEvents, beers, breweries, styles) => {
+  statsForActiveUserSelector,
+  (selectedEvent, beersForEvents, beers, breweries, styles, stats) => {
     if (beers.length === 0 || breweries.length === 0 || styles.length === 0) {
       return [];
     }
@@ -27,6 +29,9 @@ export default createSelector(
         ...x,
         style: _.find(y => y.id === x.style_id)(styles),
         brewery: _.find(y => y.id === x.brewery_id)(breweries),
+        stat: _.find(y => y.beer_id === x.id && y.event_id === selectedEvent)(
+          stats,
+        ),
       }))
       |> _.sortBy(x => x.name)
       |> _.groupBy(x => x.brewery.name)

@@ -19,7 +19,7 @@ const List = ({classes, breweries}) => (
 export default compose(
   withEffect(() => {
     // i wanted to use react-helmet, but it still uses componentWillMount
-    document.title = 'BotB Winter Warmer';
+    document.title = 'BotB - Winter Warmer';
   }, []),
 
   withSelector('list', listForSelectedEventSelector),
