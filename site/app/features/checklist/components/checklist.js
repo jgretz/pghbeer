@@ -34,6 +34,9 @@ export default compose(
   withStyles({
     container: {
       padding: '90px 10px 20px 10px',
+
+      margin: '0 auto',
+      maxWidth: '1200px',
     },
   }),
 )(List);
