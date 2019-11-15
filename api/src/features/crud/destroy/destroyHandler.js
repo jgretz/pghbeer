@@ -10,7 +10,7 @@ export class DestroyHandler {
     this.database = database;
   }
 
-  async execute({tableName, obj}) {
-    return await this.database[tableName].destroy(obj);
+  async execute({tableName, id}) {
+    return await this.database[tableName].destroy(id);
   }
 }
