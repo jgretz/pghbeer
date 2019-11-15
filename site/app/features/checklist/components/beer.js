@@ -76,24 +76,26 @@ const BeerCheckbox = ({classes, beer}) => (
   </div>
 );
 
-const BeerDetail = ({classes, beer, beerName}) => (
+const BeerDetail = ({classes, beerName, beerDetail}) => (
   <div className={classes.detailContainer}>
     <div className={classes.name}>{beerName}</div>
-    <div className={classes.detail}>
-      {beer.style.name} | {beer.abv}%
-    </div>
+    <div className={classes.detail}>{beerDetail}</div>
   </div>
 );
 
-const Beer = ({classes, beer, beerName}) => (
+const Beer = ({classes, beer, beerName, beerDetail}) => (
   <div className={classes.beerContainer}>
     <BeerCheckbox classes={classes} beer={beer} />
-    <BeerDetail classes={classes} beer={beer} beerName={beerName} />
+    <BeerDetail classes={classes} beerName={beerName} beerDetail={beerDetail} />
   </div>
 );
 
 export default compose(
   withMemo('beerName', ({beer}) => limitLength(beer.name, 24)),
+  withMemo(
+    'beerDetail',
+    ({beer}) => `${beer.style.name} ${beer.abv ? `| ${beer.abv}%` : ''}`,
+  ),
 
   withStyles(theme => ({
     beerContainer: {

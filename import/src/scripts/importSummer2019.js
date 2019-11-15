@@ -1,8 +1,9 @@
 import _ from 'lodash/fp';
 import {matches} from 'z';
 import {configureHttp, get, post} from '@truefit/http-utils';
-import data from '../data/data.json';
-import generateNewVariableName from './generateNewVariableName';
+
+import data from '../../data/summer2019.json';
+import generateNewVariableName from '../util/generateNewVariableName';
 
 configureHttp({
   baseConfig: {
@@ -166,18 +167,16 @@ const recordAvailableBeers = async () => {
 };
 
 // logic
-const main = async () => {
+export default async () => {
   try {
-    // await importStyles();
-    // await importBreweries();
-    // await importBeers();
-    // await importEvents();
-    // await importUsers();
-    // await importStats();
-    // await recordAvailableBeers();
+    await importStyles();
+    await importBreweries();
+    await importBeers();
+    await importEvents();
+    await importUsers();
+    await importStats();
+    await recordAvailableBeers();
   } catch (err) {
     console.error(err); // eslint-disable-line
   }
 };
-
-main();
