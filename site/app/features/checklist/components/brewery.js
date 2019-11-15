@@ -1,11 +1,11 @@
 import React from 'react';
-import {compose} from '@truefit/bach';
-import {withStyles} from '@truefit/bach-material-ui';
+
+import {ScrollElement} from 'react-scroll';
 
 import Beer from './beer';
 
 const Brewery = ({brewery}) => (
-  <div>
+  <div name={brewery.name.substring(0, 1)}>
     <h1>{brewery.name}</h1>
     {brewery.beers.map(b => (
       <Beer key={b.id} beer={b} />
@@ -13,4 +13,4 @@ const Brewery = ({brewery}) => (
   </div>
 );
 
-export default compose(withStyles({}))(Brewery);
+export default ScrollElement(Brewery);

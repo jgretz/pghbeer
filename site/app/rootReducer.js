@@ -7,11 +7,11 @@ import beers from './features/beers/reducers';
 import breweries from './features/breweries/reducers';
 import checklist from './features/checklist/reducers';
 import events from './features/events/reducers';
-import shared from './features/shared/reducers';
 import navigation from './features/navigation/reducers';
+import users from './features/users/reducers';
+import shared from './features/shared/reducers';
 import stats from './features/stats/reducers';
 import styles from './features/styles/reducers';
-import users from './features/users/reducers';
 
 const rootReducer = history =>
   combineReducers({
@@ -20,11 +20,11 @@ const rootReducer = history =>
       breweries: breweries,
       checklist: checklist,
       events: events,
-      shared: shared,
       navigation: navigation,
+      users: users,
+      shared: shared,
       stats: stats,
       styles: styles,
-      users: users,
     }),
     router: connectRouter(history),
   });
