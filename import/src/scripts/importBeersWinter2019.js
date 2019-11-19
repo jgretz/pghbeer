@@ -14,7 +14,9 @@ configureHttp({
   },
 });
 
-const inputFilePath = path.join(__dirname, '../../data/botbww2019.csv');
+const TEST = false;
+
+const inputFilePath = path.join(__dirname, '../../data/botbww2019-4.csv');
 const beers = [];
 const event_id = 2;
 
@@ -62,6 +64,11 @@ const uploadBeer = database => async beer => {
     |> _.find(b => b.name.toLowerCase() === beer.brewery.toLowerCase());
 
   if (!brewery) {
+    if (TEST) {
+      console.log('Brewery', beer);
+      return;
+    }
+
     const response = await post('breweries', {name: beer.brewery});
     brewery = response.data;
     database.breweries.push(brewery);
@@ -74,6 +81,11 @@ const uploadBeer = database => async beer => {
     |> _.find(s => s.name.toLowerCase() === beer.style.toLowerCase());
 
   if (!style) {
+    if (TEST) {
+      console.log('Style', beer);
+      return;
+    }
+
     const response = await post('styles', {name: beer.style});
     style = response.data;
     database.styles.push(style);
@@ -90,6 +102,11 @@ const uploadBeer = database => async beer => {
     );
 
   if (!databaseBeer) {
+    if (TEST) {
+      console.log('Beer', beer);
+      return;
+    }
+
     const response = await post('beers', {
       name: beer.name,
       abv: beer.abv,
@@ -101,6 +118,10 @@ const uploadBeer = database => async beer => {
     databaseBeer = response.data;
 
     console.log(`Added Beer - ${beer.name}`);
+  }
+
+  if (TEST) {
+    return;
   }
 
   await post('eventbeerlist', {event_id, beer_id: databaseBeer.id});

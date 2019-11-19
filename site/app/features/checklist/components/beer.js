@@ -9,12 +9,12 @@ import IconButton from '@material-ui/core/IconButton';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
-import {limitLength} from '../../shared/services';
 import {
   recordBeerConsumed,
   recordOpinion,
   removeBeerConsumed,
 } from '../actions';
+
 import {OPINION} from '../../stats/constants';
 
 const BeerCheckBoxForKnownOpinion = compose(
@@ -78,8 +78,12 @@ const BeerCheckbox = ({classes, beer}) => (
 
 const BeerDetail = ({classes, beerName, beerDetail}) => (
   <div className={classes.detailContainer}>
-    <div className={classes.name}>{beerName}</div>
-    <div className={classes.detail}>{beerDetail}</div>
+    <div className={classes.name}>
+      <span>{beerName}</span>
+    </div>
+    <div className={classes.detail}>
+      <span>{beerDetail}</span>
+    </div>
   </div>
 );
 
@@ -91,7 +95,7 @@ const Beer = ({classes, beer, beerName, beerDetail}) => (
 );
 
 export default compose(
-  withMemo('beerName', ({beer}) => limitLength(beer.name, 24)),
+  withMemo('beerName', ({beer}) => beer.name),
   withMemo(
     'beerDetail',
     ({beer}) => `${beer.style.name} ${beer.abv ? `| ${beer.abv}%` : ''}`,
@@ -106,6 +110,9 @@ export default compose(
 
       alignItems: 'center',
       justifyContent: 'flex-start',
+
+      maxWidth: '100hw',
+      overflow: 'hidden',
     },
 
     checkContainer: {
@@ -129,16 +136,29 @@ export default compose(
       padding: '5px 5px 5px 10px',
       height: 60,
 
+      overflow: 'hidden',
+
       backgroundColor: theme.palette.secondary.main,
     },
 
     name: {
+      flex: 1,
+      minWidth: 0,
+
       fontSize: '1.3em',
       fontWeight: 'bold',
+
       whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
     detail: {
+      flex: 1,
+      minWidth: 0,
+
       whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     },
 
     checkboxCircle: {
