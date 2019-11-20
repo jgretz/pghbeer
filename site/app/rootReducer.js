@@ -4,8 +4,8 @@
 import {combineReducers} from 'redux';
 import {connectRouter} from 'connected-react-router';
 import beers from './features/beers/reducers';
-import breweries from './features/breweries/reducers';
 import checklist from './features/checklist/reducers';
+import breweries from './features/breweries/reducers';
 import events from './features/events/reducers';
 import navigation from './features/navigation/reducers';
 import shared from './features/shared/reducers';
@@ -17,8 +17,8 @@ const rootReducer = history =>
   combineReducers({
     features: combineReducers({
       beers: beers,
-      breweries: breweries,
       checklist: checklist,
+      breweries: breweries,
       events: events,
       navigation: navigation,
       shared: shared,

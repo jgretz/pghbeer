@@ -1,6 +1,7 @@
-import {Module} from '@nestjs/common';
+import {Module, CacheModule, CacheInterceptor} from '@nestjs/common';
 import {CqrsModule} from '@nestjs/cqrs';
 import {ServeStaticModule} from '@nestjs/serve-static';
+import {APP_INTERCEPTOR} from '@nestjs/core';
 import {join} from 'path';
 
 import {Database} from './database';
@@ -36,11 +37,16 @@ const clientPath = () => {
     }),
     CqrsModule,
     CrudModule,
+    CacheModule.register(),
   ],
   providers: [
     Database,
     FindStatsByWebUserIdHandler,
     FindUserByWebUserIdHandler,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
   ],
   controllers: [
     BeersController,
