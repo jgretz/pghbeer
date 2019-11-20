@@ -1,18 +1,24 @@
 import _ from 'lodash/fp';
 import React from 'react';
+
 import {compose, withMemo, withEffect} from '@truefit/bach';
 import {withSelector} from '@truefit/bach-redux';
 import {withStyles} from '@truefit/bach-material-ui';
 
+import {Navbar} from '../../navigation/components';
+import Brewery from './brewery';
+import Background from '../../../images/pghbackground.png';
+
 import {listForSelectedEventSelector} from '../selectors';
 
-import Brewery from './brewery';
-
 const List = ({classes, breweries}) => (
-  <div className={classes.container}>
-    {breweries.map(b => (
-      <Brewery key={b.name} brewery={b} />
-    ))}
+  <div className={classes.page}>
+    <div className={classes.container}>
+      <Navbar />
+      {breweries.map(b => (
+        <Brewery key={b.name} brewery={b} />
+      ))}
+    </div>
   </div>
 );
 
@@ -32,6 +38,18 @@ export default compose(
   ),
 
   withStyles({
+    page: {
+      minHeight: '100vh',
+      minWidth: '100hw',
+
+      height: '100%',
+      width: '100%',
+
+      backgroundImage: `url(${Background})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+    },
     container: {
       padding: '90px 10px 20px 10px',
 
