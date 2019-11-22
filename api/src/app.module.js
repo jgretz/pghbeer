@@ -2,8 +2,7 @@ import {Module, CacheModule, CacheInterceptor} from '@nestjs/common';
 import {CqrsModule} from '@nestjs/cqrs';
 import {ServeStaticModule} from '@nestjs/serve-static';
 import {APP_INTERCEPTOR} from '@nestjs/core';
-
-import {resolveClientPlath} from '../services';
+import {join} from 'path';
 
 import {Database} from './database';
 import {BeersController} from './features/beers';
@@ -24,10 +23,18 @@ import {
 } from './features/users';
 import {CrudModule} from './features/crud';
 
+const clientPath = () => {
+  if (process.env.NODE_ENV === 'PRODUCTION') {
+    return join(__dirname, '/site');
+  }
+
+  return join(__dirname, '../../lib/site');
+};
+
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: resolveClientPlath(),
+      rootPath: clientPath(),
       renderPath: '/*',
     }),
     CqrsModule,
