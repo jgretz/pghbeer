@@ -16,7 +16,7 @@ configureHttp({
 
 const TEST = false;
 
-const inputFilePath = path.join(__dirname, '../../data/botbww2019-5.csv');
+const inputFilePath = path.join(__dirname, '../../data/botbww2019-6.csv');
 const beers = [];
 const event_id = 2;
 
