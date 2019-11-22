@@ -11,7 +11,9 @@ import {EventsController, EventBeerListController} from './features/events';
 import {
   StatsController,
   StatsForUserController,
+  StatsForEventController,
   FindStatsByWebUserIdHandler,
+  FindStatsByEventIdHandler,
 } from './features/stats';
 import {StylesController} from './features/styles';
 import {
@@ -43,6 +45,7 @@ const clientPath = () => {
     Database,
     FindStatsByWebUserIdHandler,
     FindUserByWebUserIdHandler,
+    FindStatsByEventIdHandler,
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,
@@ -55,6 +58,7 @@ const clientPath = () => {
     EventBeerListController,
     StatsController,
     StatsForUserController,
+    StatsForEventController,
     StylesController,
     UsersController,
     UserByWebUserIdController,
