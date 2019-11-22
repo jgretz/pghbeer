@@ -39,7 +39,6 @@ export default compose(
     container: {
       padding: 20,
 
-      maxWidth: 1200,
       width: '100%',
 
       margin: 'auto',
