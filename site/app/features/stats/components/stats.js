@@ -37,7 +37,7 @@ export default compose(
 
   withStyles({
     container: {
-      padding: 20,
+      padding: 10,
 
       width: '100%',
 

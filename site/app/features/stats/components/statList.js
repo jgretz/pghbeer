@@ -11,15 +11,15 @@ const List = ({classes, title, stats}) => (
   <div>
     <h2 className={classes.listTitle}>{title}</h2>
     <div className={classes.container}>
-      <div className={classes.title}>Beer</div>
-      <div className={classes.title}>Brewery</div>
-      <div className={classes.title}>Count</div>
+      <div className={classes.detailTitle}>Beer</div>
+      <div className={classes.detailTitle}>Brewery</div>
+      <div className={classes.smTitle}>Count</div>
     </div>
     {stats.map(stat => (
       <div key={stat.beer_id} className={classes.container}>
         <div className={classes.detail}>{stat.beer?.name}</div>
         <div className={classes.detail}>{stat.brewery?.name}</div>
-        <div className={classes.detail}>{stat.count}</div>
+        <div className={classes.sm}>{stat.count}</div>
       </div>
     ))}
   </div>
@@ -42,17 +42,51 @@ export default compose(
     container: {
       display: 'flex',
       flexDirection: 'row',
+
+      width: '100%',
     },
-    title: {
-      width: '33%',
+    detailTitle: {
       fontWeight: 'bold',
-    },
-    detail: {
-      width: '33%',
+
+      flex: 1,
+      paddingLeft: 5,
+      paddingRight: 5,
 
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+    },
+    smTitle: {
+      fontWeight: 'bold',
+
+      flex: 0.35,
+      paddingLeft: 5,
+      paddingRight: 5,
+
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      textAlign: 'right',
+    },
+
+    detail: {
+      flex: 1,
+      paddingLeft: 5,
+      paddingRight: 5,
+
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
+    sm: {
+      flex: 0.35,
+      paddingLeft: 5,
+      paddingRight: 5,
+
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      textAlign: 'right',
     },
   }),
 )(List);
