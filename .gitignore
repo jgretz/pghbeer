@@ -2,12 +2,13 @@
 node_modules/
 dist/
 npm-debug.log
-app/styles/styles.min.css
 .DS_Store
 yarn-error.log
-lib/
-tools/lib
-tools/node_modules/
-private.js
+
+app/styles/styles.min.css
 
 import/data
+
+tools/.env
+tools/lib
+tools/node_modules/
