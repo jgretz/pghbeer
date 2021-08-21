@@ -1,14 +1,10 @@
 {
-  "name": "botb-list",
+  "name": "botb-list-tools",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build-server": "node tools/build_server.js",
-    "build-site": "node tools/build_site.js",
-    "start": "nodemon src/index.js --exec babel-node",
-    "build": "node tools/build.js",
-    "test": "echo future",
-    "publish": "yarn build && git subtree push --prefix lib heroku master"
+    "build": "node build.js",
+    "publish": "yarn build && git subtree push --prefix tools/lib heroku master"
   },
   "author": "Josh Gretz",
   "license": "MIT",

@@ -6,6 +6,8 @@ app/styles/styles.min.css
 .DS_Store
 yarn-error.log
 lib/
+tools/lib
+tools/node_modules/
 private.js
 
 import/data
