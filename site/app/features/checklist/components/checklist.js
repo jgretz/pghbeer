@@ -7,7 +7,7 @@ import {withStyles} from '@truefit/bach-material-ui';
 
 import {Navbar} from '../../navigation/components';
 import Brewery from './brewery';
-import Background from '../../../images/pghbackground.png';
+import Background from '../../../images/pghbackground.jpeg';
 
 import {listForSelectedEventSelector} from '../selectors';
 
@@ -25,7 +25,7 @@ const List = ({classes, breweries}) => (
 export default compose(
   withEffect(() => {
     // i wanted to use react-helmet, but it still uses componentWillMount
-    document.title = 'BotB - Winter Warmer';
+    document.title = 'Beers of the Burgh';
   }, []),
 
   withSelector('list', listForSelectedEventSelector),

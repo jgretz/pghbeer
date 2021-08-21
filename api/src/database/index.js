@@ -1,8 +1,26 @@
 import massive from 'massive';
+import {parse} from 'pg-connection-string';
+import {MassiveConnectOptions} from '@nestjsplus/massive';
 import {DATABASE_CONFIG, DATABASE} from '../constants';
 
 let database = null;
 let databaseInit = null;
+
+const parseOptions = () => {
+  const parseOptions = parse(DATABASE_CONFIG.databaseUrl);
+  const ssl = {
+    rejectUnauthorized: false,
+  };
+
+  return {
+    host: parseOptions.host,
+    port: parseInt(parseOptions.port, 10),
+    user: parseOptions.user,
+    password: parseOptions.password,
+    database: parseOptions.database,
+    ssl: ssl,
+  };
+};
 
 export const Database = {
   provide: DATABASE,
@@ -13,7 +31,8 @@ export const Database = {
     }
 
     if (!databaseInit) {
-      databaseInit = massive(DATABASE_CONFIG.databaseUrl);
+      const options = parseOptions();
+      databaseInit = massive(options);
     }
     database = await databaseInit;
     databaseInit = null;

@@ -23,7 +23,7 @@ const Icon = ({classes, open, openModal, closeModal}) => (
     >
       <Container className={classes.content}>
         <Typography variant="h5" className={classes.title}>
-          Beers of the Burgh - Winter Warmer
+          Beers of the Burgh
         </Typography>
         <Typography
           variant="h6"

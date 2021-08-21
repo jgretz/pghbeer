@@ -3,7 +3,7 @@ import {compose} from '@truefit/bach';
 import {withStyles} from '@truefit/bach-material-ui';
 
 import Lights from '../../../images/lights.png';
-import BotbLogo from '../../../images/botb-logo.png';
+import BotbLogo from '../../../images/botb-logo.jpeg';
 
 import Search from './search';
 import InfoIcon from './infoIcon';
@@ -24,7 +24,6 @@ const Navbar = ({classes}) => (
       </Toolbar>
     </AppBar>
     <Toolbar />
-    <div className={classes.lights} />
   </div>
 );
 

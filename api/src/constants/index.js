@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== 'PRODUCTION') {
-  require('./private').default();
+  require('dotenv').config();
 }
 
 export const DATABASE_CONFIG = {
