@@ -30,13 +30,13 @@ export default compose(
       display: 'inline-block',
       margin: '2px 0',
       padding: '4px 8px',
-      backgroundColor: 'rgba(175, 175, 175, .8)',
+      backgroundColor: 'rgba(0, 0, 0, .7)',
       borderRadius: '8px',
     },
     breweryTitle: {
       margin: 0,
       padding: 0,
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
     },
   })),
 )(ScrollElement(Brewery));

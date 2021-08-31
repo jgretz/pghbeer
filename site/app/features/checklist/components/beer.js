@@ -127,7 +127,7 @@ export default compose(
       width: 75,
       minWidth: 75,
 
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
     detailContainer: {
       flexGrow: 1,
@@ -138,7 +138,7 @@ export default compose(
 
       overflow: 'hidden',
 
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
 
     name: {
