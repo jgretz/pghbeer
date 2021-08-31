@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== 'PRODUCTION') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 export const DATABASE_CONFIG = {
   databaseUrl: process.env.DATABASE_URL,

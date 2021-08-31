@@ -9,8 +9,8 @@ import checklist from './features/checklist/reducers';
 import events from './features/events/reducers';
 import navigation from './features/navigation/reducers';
 import shared from './features/shared/reducers';
-import styles from './features/styles/reducers';
 import stats from './features/stats/reducers';
+import styles from './features/styles/reducers';
 import users from './features/users/reducers';
 
 const rootReducer = history =>
@@ -22,8 +22,8 @@ const rootReducer = history =>
       events: events,
       navigation: navigation,
       shared: shared,
-      styles: styles,
       stats: stats,
+      styles: styles,
       users: users,
     }),
     router: connectRouter(history),

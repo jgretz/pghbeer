@@ -45,6 +45,7 @@ export default compose(
       height: '100%',
       width: '100%',
 
+      backgroundAttachment: 'fixed',
       backgroundImage: `url(${Background})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
