@@ -1,7 +1,6 @@
 import _ from 'lodash/fp';
 import {get, post, configureHttp} from '@truefit/http-utils';
-import Beerset from '../../data/botb2021.json';
-import Breweryset from '../../data/breweries2021.json';
+import Beerset from '../../data/botb2021.2.json';
 
 configureHttp({
   baseConfig: {
@@ -109,9 +108,5 @@ export default async () => {
   const database = await prepData();
   for (const beer of Beerset) {
     await uploadBeer(database)(beer);
-  }
-
-  for (const brewery of Breweryset) {
-    await uploadBrewery(brewery);
   }
 };
