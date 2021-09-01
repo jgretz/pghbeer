@@ -1,6 +1,6 @@
 import _ from 'lodash/fp';
 import {get, post, configureHttp} from '@truefit/http-utils';
-import Beerset from '../../data/botb2021.2.json';
+import Beerset from '../../data/botb2021.3.json';
 
 configureHttp({
   baseConfig: {
