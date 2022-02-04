@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    // This was recommended to be enabled for the ForkTsCheckerWebpackPlugin
+    "importsNotUsedAsValues": "preserve",
+    "jsx": "react",
+    "noEmit": true,
+    // See auto enabled strict config options here: https://www.staging-typescript.org/tsconfig#strict
+    "strict": true,
+    "strictNullChecks": false,
+    "paths": {
+      "rootReducer": ["app/rootReducer.ts"]
+    }
+  },
+  "include": ["./app/**/*", "./webpack.config.*"]
+}
