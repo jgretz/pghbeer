@@ -4,7 +4,7 @@ import {LoadDataActions} from '../actions';
 
 export type LoadingState = boolean;
 
-const INITIAL = false;
+const INITIAL = true;
 
 export default createReducer(INITIAL, {
   [LoadDataActions.Start]: () => true,

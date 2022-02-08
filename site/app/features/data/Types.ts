@@ -27,10 +27,16 @@ export interface Event extends BaseObject {
 
 export interface Stat extends BaseObject {
   date: Date;
-  opinion: number;
+  opinion: StatOpinion;
   beer_id: number;
   user_id: number;
   event_id: number;
+}
+
+export enum StatOpinion {
+  Unknown = 0,
+  Like = 1,
+  Dislike = 2,
 }
 
 export interface BeerStyle extends BaseObject {
@@ -41,4 +47,11 @@ export interface User extends BaseObject {
   name: string;
   email: string;
   webuserid: string;
+}
+
+export interface BeerDetail {
+  brewery: Brewery;
+  beer: Beer;
+  style: BeerStyle;
+  opinion?: Stat;
 }

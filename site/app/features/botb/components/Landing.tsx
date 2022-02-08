@@ -6,6 +6,7 @@ import Background from '../../../images/pghbackground.jpg';
 
 import {loadData} from '../../data/actions';
 import loadingSelector from '../../data/selectors/loadingSelector';
+import Navigation from './Navigation';
 import Loading from './Loading';
 import List from './List';
 
@@ -50,6 +51,8 @@ const Landing = () => {
 
   return (
     <div className={classes.page}>
+      <Navigation />
+
       <div className={classes.container}>
         <Content />
       </div>
