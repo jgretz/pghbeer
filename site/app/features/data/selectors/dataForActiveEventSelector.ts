@@ -1,9 +1,28 @@
 import _ from 'lodash';
 import {ApplicationState} from 'rootReducer';
-import {BeerDetail} from '../Types';
+import {Beer, BeerDetail, BeerStyle, Brewery} from '../Types';
+
+const doesBeerPassSearchFilter = (
+  beer: Beer,
+  brewery: Brewery,
+  style: BeerStyle,
+  searchFilter: string,
+) => {
+  if (searchFilter.length === 0) {
+    return true;
+  }
+
+  const searchToken = searchFilter.toLowerCase();
+
+  return (
+    beer.name.toLowerCase().includes(searchToken) ||
+    brewery.name.toLowerCase().includes(searchToken) ||
+    style.name.toLowerCase().includes(searchToken)
+  );
+};
 
 export default (state: ApplicationState) => {
-  const {activeEvent, activeUser, breweries, beers, styles} = state.features.data;
+  const {activeEvent, activeUser, breweries, beers, styles, searchTerm} = state.features.data;
 
   const detailData = activeEvent.beers
     .map((beerListItem) => {
@@ -18,6 +37,10 @@ export default (state: ApplicationState) => {
         activeUser.stats,
         (s) => s.beer_id === beer.id && s.event_id === beerListItem.event_id,
       );
+
+      if (!doesBeerPassSearchFilter(beer, brewery, style, searchTerm)) {
+        return null;
+      }
 
       return {
         brewery,
