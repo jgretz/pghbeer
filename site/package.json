@@ -6,7 +6,7 @@
     "lint": "eslint 'app/**/*.{ts,tsx}' 'webpack.config.*' --color --fix",
     "type-check": "tsc",
     "pretty": "prettier --write '**/*.{ts,tsx,scss}'",
-    "webpack": "webpack --config webpack.config.prod.ts --bail",
+    "webpack": "NODE_ENV=production webpack --config webpack.config.prod.ts --bail",
     "clean": "rimraf ./lib",
     "build": "yarn run generateAllFiles && yarn run webpack",
     "generateAllFiles": "wall-e g -actions -components -constants -services -selectors -types -reducers -rootReducer -utils",

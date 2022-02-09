@@ -15,7 +15,7 @@ export default {
   },
   output: {
     path: path.resolve(__dirname, './lib'),
-    publicPath: '/react/',
+    publicPath: '/',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
   },
@@ -77,7 +77,7 @@ export default {
               '@babel/preset-typescript',
               '@babel/preset-react',
             ],
-            plugins: [['@babel/plugin-proposal-decorators', {legacy: true}], 'react-refresh/babel'],
+            plugins: [['@babel/plugin-proposal-decorators', {legacy: true}]],
           },
         },
       },
