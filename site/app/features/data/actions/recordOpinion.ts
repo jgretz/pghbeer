@@ -24,12 +24,13 @@ export const recordOpinion =
     };
 
     if (beerDetail.opinion) {
+      dispatch(opinionRecorded(payload as Stat));
+
       await put(`/stats/${beerDetail.opinion.id}`, payload);
     } else {
       const response = await post<Stat>('/stats', payload);
 
       payload.id = response.data.id;
+      dispatch(opinionRecorded(payload as Stat));
     }
-
-    dispatch(opinionRecorded(payload as Stat));
   };

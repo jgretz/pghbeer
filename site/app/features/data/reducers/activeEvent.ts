@@ -2,12 +2,15 @@ import {createReducer, PayloadAction} from '@reduxjs/toolkit';
 import {EVENT_ID} from '../../../constants';
 
 import {LoadDataActions} from '../actions';
+import {fromLocalStorage, passIntoLocalStorage} from '../services';
 import {Event, EventBeerListItem} from '../Types';
 
 export type ActiveEventState = {
   event: Event;
   beers: EventBeerListItem[];
 };
+
+const EVENT_LIST = 'EVENT_LIST';
 
 const INITIAL: ActiveEventState = {
   event: {
@@ -17,7 +20,7 @@ const INITIAL: ActiveEventState = {
     update_date: new Date(),
   },
 
-  beers: [],
+  beers: fromLocalStorage(EVENT_LIST, []),
 };
 
 export default createReducer(INITIAL, {
@@ -26,6 +29,6 @@ export default createReducer(INITIAL, {
     action: PayloadAction<EventBeerListItem[]>,
   ) => ({
     event: state.event,
-    beers: action.payload,
+    beers: passIntoLocalStorage(EVENT_LIST, action.payload),
   }),
 });

@@ -3,6 +3,10 @@ import {createReducer, PayloadAction} from '@reduxjs/toolkit';
 
 import {LoadDataActions, RecordOpinionActions, RemoveOpinionActions} from '../actions';
 import {Stat, User} from '../Types';
+import {fromLocalStorage, passIntoLocalStorage} from '../services';
+
+const USER = 'USER';
+const STATS = 'STATS';
 
 export type ActiveUserState = {
   user?: User;
@@ -10,19 +14,19 @@ export type ActiveUserState = {
 };
 
 const INITIAL: ActiveUserState = {
-  user: null,
-  stats: null,
+  user: fromLocalStorage(USER, null),
+  stats: fromLocalStorage(STATS, []),
 };
 
 export default createReducer(INITIAL, {
   [LoadDataActions.UserLoaded]: (state: ActiveUserState, action: PayloadAction<User>) => ({
-    user: action.payload,
+    user: passIntoLocalStorage(USER, action.payload),
     stats: state.stats,
   }),
 
   [LoadDataActions.UserStatsLoaded]: (state: ActiveUserState, action: PayloadAction<Stat[]>) => ({
     user: state.user,
-    stats: action.payload,
+    stats: passIntoLocalStorage(STATS, action.payload),
   }),
 
   [RecordOpinionActions.Record]: ({stats}: ActiveUserState, {payload}: PayloadAction<Stat>) => {
@@ -33,6 +37,8 @@ export default createReducer(INITIAL, {
     } else {
       stats.push(payload);
     }
+
+    passIntoLocalStorage(STATS, stats);
   },
 
   [RemoveOpinionActions.Remove]: (
@@ -41,7 +47,10 @@ export default createReducer(INITIAL, {
   ) => {
     return {
       user,
-      stats: stats.filter((s) => s.id !== payload.id),
+      stats: passIntoLocalStorage(
+        STATS,
+        stats.filter((s) => s.id !== payload.id),
+      ),
     };
   },
 });

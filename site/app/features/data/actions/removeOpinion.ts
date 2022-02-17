@@ -10,7 +10,7 @@ export enum RemoveOpinionActions {
 const opinionRemoved = createAction<Stat>(RemoveOpinionActions.Remove);
 
 export const removeOpinion = (beerDetail: BeerDetail) => async (dispatch: Dispatch) => {
-  await del(`/stats/${beerDetail.opinion.id}`);
-
   dispatch(opinionRemoved(beerDetail.opinion));
+
+  await del(`/stats/${beerDetail.opinion.id}`);
 };
