@@ -41,6 +41,22 @@ export default createReducer(INITIAL, {
     passIntoLocalStorage(STATS, stats);
   },
 
+  [RecordOpinionActions.UpdateOpinionId]: (
+    {stats}: ActiveUserState,
+    {payload}: PayloadAction<Stat>,
+  ) => {
+    const index = _.findIndex(
+      stats,
+      (s) => !s.id && s.beer_id === payload.beer_id && s.user_id === payload.user_id,
+    );
+
+    if (index > -1) {
+      stats[index] = payload;
+    }
+
+    passIntoLocalStorage(STATS, stats);
+  },
+
   [RemoveOpinionActions.Remove]: (
     {user, stats}: ActiveUserState,
     {payload}: PayloadAction<Stat>,
