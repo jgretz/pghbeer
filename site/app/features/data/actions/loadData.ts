@@ -58,6 +58,14 @@ const loadUserStats = async (user: User) => {
   return response.data;
 };
 
+const loadUserAndStats = async (dispatch: Dispatch) => {
+  const user = await loadUser();
+  dispatch(userLoaded(user));
+
+  const stats = await loadUserStats(user);
+  dispatch(statsLoaded(stats));
+};
+
 const loadListBasedData = async <T>(
   url: string,
   dispatch: Dispatch,
@@ -68,27 +76,33 @@ const loadListBasedData = async <T>(
   dispatch(actionCreator(response.data));
 };
 
+const loadIndependentLists = async (dispatch: Dispatch) => {
+  await Promise.all([
+    loadListBasedData<Beer>('beers', dispatch, beersLoaded),
+    loadListBasedData<Brewery>('breweries', dispatch, breweriesLoaded),
+    loadListBasedData<BeerStyle>('styles', dispatch, stylesLoaded),
+  ]);
+};
+
 const loadBeerList = async () => {
   const response = await get<EventBeerListItem[]>(`/eventbeerlist?event_id=${EVENT_ID}`);
 
   return response.data;
 };
 
+const loadListForEvent = async (dispatch: Dispatch) => {
+  const beerlist = await loadBeerList();
+  dispatch(beerListLoaded(beerlist));
+};
+
 export const loadData = async (dispatch: Dispatch) => {
   dispatch(started());
 
-  const user = await loadUser();
-  dispatch(userLoaded(user));
-
-  const stats = await loadUserStats(user);
-  dispatch(statsLoaded(stats));
-
-  await loadListBasedData<Beer>('beers', dispatch, beersLoaded);
-  await loadListBasedData<Brewery>('breweries', dispatch, breweriesLoaded);
-  await loadListBasedData<BeerStyle>('styles', dispatch, stylesLoaded);
-
-  const beerlist = await loadBeerList();
-  dispatch(beerListLoaded(beerlist));
+  await Promise.all([
+    loadUserAndStats(dispatch),
+    loadIndependentLists(dispatch),
+    loadListForEvent(dispatch),
+  ]);
 
   dispatch(complete());
 };
