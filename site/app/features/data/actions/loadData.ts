@@ -5,7 +5,7 @@ import {get, post} from '@truefit/http-utils';
 import {Dispatch} from 'redux';
 import {createAction, PayloadActionCreator} from '@reduxjs/toolkit';
 import {getWebUserId} from '../services';
-import {Beer, Brewery, BeerStyle, User, Stat, EventBeerListItem} from '../Types';
+import {Beer, Brewery, BeerStyle, Event, User, Stat, EventBeerListItem} from '../Types';
 import {DEFAULT_EVENT_ID} from '../../../constants';
 
 export enum LoadDataActions {
@@ -14,6 +14,7 @@ export enum LoadDataActions {
   UserLoaded = 'LOAD_DATA/USER_LOADED',
   UserStatsLoaded = 'LOAD_DATA/USER_STATS_LOADED',
 
+  EventsLoaded = 'LOAD_DATA/EVENTS_LOADED',
   BeersLoaded = 'LOAD_DATA/BEERS_LOADED',
   BreweriesLoaded = 'LOAD_DATA/BREWERIES_LOADED',
   StylesLoaded = 'LOAD_DATA/STYLES_LOADED',
@@ -28,6 +29,7 @@ const started = createAction(LoadDataActions.Start);
 const userLoaded = createAction<User>(LoadDataActions.UserLoaded);
 const statsLoaded = createAction<Stat[]>(LoadDataActions.UserStatsLoaded);
 
+const eventsLoaded = createAction<Event[]>(LoadDataActions.EventsLoaded);
 const beersLoaded = createAction<Beer[]>(LoadDataActions.BeersLoaded);
 const breweriesLoaded = createAction<Brewery[]>(LoadDataActions.BreweriesLoaded);
 const stylesLoaded = createAction<BeerStyle[]>(LoadDataActions.StylesLoaded);
@@ -78,6 +80,7 @@ const loadListBasedData = async <T>(
 
 const loadIndependentLists = async (dispatch: Dispatch) => {
   await Promise.all([
+    loadListBasedData<Event>('events', dispatch, eventsLoaded),
     loadListBasedData<Beer>('beers', dispatch, beersLoaded),
     loadListBasedData<Brewery>('breweries', dispatch, breweriesLoaded),
     loadListBasedData<BeerStyle>('styles', dispatch, stylesLoaded),

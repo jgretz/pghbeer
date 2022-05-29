@@ -16,6 +16,7 @@ const INITIAL: ActiveEventState = {
   event: {
     id: DEFAULT_EVENT_ID,
     name: 'Beers of the Burgh',
+    date: new Date(2022, 5, 11),
     create_date: new Date(),
     update_date: new Date(),
   },

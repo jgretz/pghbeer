@@ -23,6 +23,7 @@ export interface EventBeerListItem extends BaseObject {
 
 export interface Event extends BaseObject {
   name: string;
+  date: Date;
 }
 
 export interface Stat extends BaseObject {

@@ -7,7 +7,7 @@ import {IconButton} from '@mui/material';
 import {ThumbUp, ThumbDown} from '@mui/icons-material';
 
 import {BeerDetail, StatOpinion} from '../../data/Types';
-import {activeUserSelector} from '../../data/selectors';
+import {activeEventSelector, activeUserSelector} from '../../data/selectors';
 
 import {recordOpinion, removeOpinion} from '../../data/actions';
 
@@ -99,10 +99,12 @@ const CheckboxNotDrank = ({beer}: Props) => {
   const classes = useStyles();
 
   const user = useSelector(activeUserSelector);
+  const event = useSelector(activeEventSelector);
   const dispatch = useDispatch();
+
   const handleClick = useCallback(() => {
-    dispatch(recordOpinion(user, beer, StatOpinion.Unknown));
-  }, [beer, user]);
+    dispatch(recordOpinion(user, event, beer, StatOpinion.Unknown));
+  }, [beer, user, event]);
 
   return <div className={classes.checkboxCircle} onClick={handleClick} />;
 };
@@ -111,15 +113,16 @@ const CheckboxUnknown = ({beer}: Props) => {
   const classes = useStyles();
 
   const user = useSelector(activeUserSelector);
+  const event = useSelector(activeEventSelector);
   const dispatch = useDispatch();
 
   const handleLikeClick = useCallback(() => {
-    dispatch(recordOpinion(user, beer, StatOpinion.Like));
-  }, [beer, user]);
+    dispatch(recordOpinion(user, event, beer, StatOpinion.Like));
+  }, [beer, user, event]);
 
   const handleDislikeClick = useCallback(() => {
-    dispatch(recordOpinion(user, beer, StatOpinion.Dislike));
-  }, [beer, user]);
+    dispatch(recordOpinion(user, event, beer, StatOpinion.Dislike));
+  }, [beer, user, event]);
 
   return (
     <div>

@@ -2,8 +2,7 @@ import moment from 'moment';
 import {post, put} from '@truefit/http-utils';
 import {Dispatch} from 'redux';
 import {createAction} from '@reduxjs/toolkit';
-import {Stat, BeerDetail, User, StatOpinion} from '../Types';
-import {DEFAULT_EVENT_ID} from '../../../constants';
+import {Stat, BeerDetail, User, Event, StatOpinion} from '../Types';
 
 export enum RecordOpinionActions {
   Record = 'RECORD_OPINION/Recorded',
@@ -14,7 +13,8 @@ const opinionRecorded = createAction<Stat>(RecordOpinionActions.Record);
 const updateOpinionId = createAction<Stat>(RecordOpinionActions.UpdateOpinionId);
 
 export const recordOpinion =
-  (user: User, beerDetail: BeerDetail, opinion: StatOpinion) => async (dispatch: Dispatch) => {
+  (user: User, event: Event, beerDetail: BeerDetail, opinion: StatOpinion) =>
+  async (dispatch: Dispatch) => {
     const payload = {
       ...(beerDetail.opinion ?? {}),
 
@@ -22,7 +22,7 @@ export const recordOpinion =
       opinion,
       beer_id: beerDetail.beer.id,
       user_id: user.id,
-      event_id: DEFAULT_EVENT_ID,
+      event_id: event.id,
     };
 
     if (beerDetail.opinion) {
