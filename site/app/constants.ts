@@ -1,1 +1,1 @@
-export const EVENT_ID = 2;
+export const DEFAULT_EVENT_ID = 3;

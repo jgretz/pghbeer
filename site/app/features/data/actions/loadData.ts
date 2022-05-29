@@ -6,7 +6,7 @@ import {Dispatch} from 'redux';
 import {createAction, PayloadActionCreator} from '@reduxjs/toolkit';
 import {getWebUserId} from '../services';
 import {Beer, Brewery, BeerStyle, User, Stat, EventBeerListItem} from '../Types';
-import {EVENT_ID} from '../../../constants';
+import {DEFAULT_EVENT_ID} from '../../../constants';
 
 export enum LoadDataActions {
   Start = 'LOAD_DATA/START',
@@ -53,7 +53,7 @@ const loadUser = async () => {
 };
 
 const loadUserStats = async (user: User) => {
-  const response = await get<Stat[]>(`/stats?user_id=${user.id}&event_id=${EVENT_ID}`);
+  const response = await get<Stat[]>(`/stats?user_id=${user.id}&event_id=${DEFAULT_EVENT_ID}`);
 
   return response.data;
 };
@@ -85,7 +85,7 @@ const loadIndependentLists = async (dispatch: Dispatch) => {
 };
 
 const loadBeerList = async () => {
-  const response = await get<EventBeerListItem[]>(`/eventbeerlist?event_id=${EVENT_ID}`);
+  const response = await get<EventBeerListItem[]>(`/eventbeerlist?event_id=${DEFAULT_EVENT_ID}`);
 
   return response.data;
 };

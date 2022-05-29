@@ -1,5 +1,5 @@
 import {createReducer, PayloadAction} from '@reduxjs/toolkit';
-import {EVENT_ID} from '../../../constants';
+import {DEFAULT_EVENT_ID} from '../../../constants';
 
 import {LoadDataActions} from '../actions';
 import {fromLocalStorage, passIntoLocalStorage} from '../services';
@@ -14,7 +14,7 @@ const EVENT_LIST = 'EVENT_LIST';
 
 const INITIAL: ActiveEventState = {
   event: {
-    id: EVENT_ID,
+    id: DEFAULT_EVENT_ID,
     name: 'Beers of the Burgh',
     create_date: new Date(),
     update_date: new Date(),

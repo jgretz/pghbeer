@@ -3,7 +3,7 @@ import {post, put} from '@truefit/http-utils';
 import {Dispatch} from 'redux';
 import {createAction} from '@reduxjs/toolkit';
 import {Stat, BeerDetail, User, StatOpinion} from '../Types';
-import {EVENT_ID} from '../../../constants';
+import {DEFAULT_EVENT_ID} from '../../../constants';
 
 export enum RecordOpinionActions {
   Record = 'RECORD_OPINION/Recorded',
@@ -22,7 +22,7 @@ export const recordOpinion =
       opinion,
       beer_id: beerDetail.beer.id,
       user_id: user.id,
-      event_id: EVENT_ID,
+      event_id: DEFAULT_EVENT_ID,
     };
 
     if (beerDetail.opinion) {
