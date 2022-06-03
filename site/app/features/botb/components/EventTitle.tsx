@@ -8,7 +8,7 @@ import {Container, Dialog} from '@mui/material';
 
 import {Event} from '../../data/Types';
 import {activeEventSelector, eventsSelector} from '../../data/selectors';
-import {loadData, setActiveEvent} from '../../data/actions';
+import {loadData, setActiveEvent, setLoading} from '../../data/actions';
 
 interface ModalProps {
   isOpen: boolean;
@@ -111,8 +111,10 @@ const EventButton = ({event, closeModal}: EventProps) => {
   const dispatch = useDispatch();
   const onClick = useCallback(() => {
     closeModal();
+
     dispatch(setActiveEvent(event));
     dispatch(loadData);
+    dispatch(setLoading(true));
   }, [event, closeModal]);
 
   return (

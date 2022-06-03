@@ -5,9 +5,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import Background from '../../../images/pghbackground.jpg';
 
 import {loadData} from '../../data/actions';
-import loadingSelector from '../../data/selectors/loadingSelector';
 import Navigation from './Navigation';
-import Loading from './Loading';
 import List from './List';
 
 const useStyles = makeStyles(() => ({
@@ -45,16 +43,13 @@ const Landing = () => {
   }, []);
 
   const classes = useStyles();
-  const loading = useSelector(loadingSelector);
-
-  const Content = loading ? Loading : List;
 
   return (
     <div className={classes.page}>
       <Navigation />
 
       <div className={classes.container}>
-        <Content />
+        <List />
       </div>
     </div>
   );

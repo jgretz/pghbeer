@@ -11,6 +11,7 @@ import {activeEventSelector} from '../selectors';
 
 export enum LoadDataActions {
   Start = 'LOAD_DATA/START',
+  SetLoading = 'LOAD_DATA/SET_LOADING',
 
   UserLoaded = 'LOAD_DATA/USER_LOADED',
   UserStatsLoaded = 'LOAD_DATA/USER_STATS_LOADED',
@@ -26,6 +27,7 @@ export enum LoadDataActions {
 }
 
 const started = createAction(LoadDataActions.Start);
+const loadingSet = createAction<boolean>(LoadDataActions.SetLoading);
 
 const userLoaded = createAction<User>(LoadDataActions.UserLoaded);
 const statsLoaded = createAction<Stat[]>(LoadDataActions.UserStatsLoaded);
@@ -110,10 +112,12 @@ const loadListForEvent = async (dispatch: Dispatch, event: Event) => {
   dispatch(beerListLoaded(beerlist));
 };
 
-export const loadData = async (dispatch: Dispatch, getState: () => ApplicationState) => {
-  dispatch(started());
+export const setLoading = (loading: boolean) => loadingSet(loading);
 
+export const loadData = async (dispatch: Dispatch, getState: () => ApplicationState) => {
   const event = activeEventSelector(getState());
+
+  dispatch(started());
 
   await Promise.all([
     loadUserAndStats(dispatch, event),
