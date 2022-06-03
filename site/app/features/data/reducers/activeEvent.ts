@@ -1,7 +1,7 @@
 import {createReducer, PayloadAction} from '@reduxjs/toolkit';
 import {DEFAULT_EVENT_ID} from '../../../constants';
 
-import {LoadDataActions} from '../actions';
+import {LoadDataActions, SetActiveEventActions} from '../actions';
 import {fromLocalStorage, passIntoLocalStorage} from '../services';
 import {Event, EventBeerListItem} from '../Types';
 
@@ -31,5 +31,13 @@ export default createReducer(INITIAL, {
   ) => ({
     event: state.event,
     beers: passIntoLocalStorage(EVENT_LIST, action.payload),
+  }),
+
+  [SetActiveEventActions.SetActiveEvent]: (
+    state: ActiveEventState,
+    action: PayloadAction<Event>,
+  ) => ({
+    event: action.payload,
+    beers: state.beers,
   }),
 });

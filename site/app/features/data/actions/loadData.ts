@@ -6,7 +6,8 @@ import {Dispatch} from 'redux';
 import {createAction, PayloadActionCreator} from '@reduxjs/toolkit';
 import {getWebUserId} from '../services';
 import {Beer, Brewery, BeerStyle, Event, User, Stat, EventBeerListItem} from '../Types';
-import {DEFAULT_EVENT_ID} from '../../../constants';
+import {ApplicationState} from 'rootReducer';
+import {activeEventSelector} from '../selectors';
 
 export enum LoadDataActions {
   Start = 'LOAD_DATA/START',
@@ -38,12 +39,23 @@ const beerListLoaded = createAction<EventBeerListItem[]>(LoadDataActions.BeerLis
 
 const complete = createAction(LoadDataActions.Complete);
 
+const getArrayOf = async <T>(url: string): Promise<T[]> => {
+  const response = await get<T[]>(url);
+
+  // handle the case where bad data comes back because something may be down
+  if (response.data.constructor !== Array) {
+    return [];
+  }
+
+  return response.data;
+};
+
 const loadUser = async () => {
   const webUserId = getWebUserId();
 
-  const existing = await get<User[]>(`/users?webuserid=${webUserId}`);
-  if (existing.data.length >= 1) {
-    return existing.data[0];
+  const existing = await getArrayOf<User>(`/users?webuserid=${webUserId}`);
+  if (existing.length >= 1) {
+    return existing[0];
   }
 
   const newUserResponse = await post<User>(`/users`, {
@@ -54,17 +66,17 @@ const loadUser = async () => {
   return newUserResponse.data;
 };
 
-const loadUserStats = async (user: User) => {
-  const response = await get<Stat[]>(`/stats?user_id=${user.id}&event_id=${DEFAULT_EVENT_ID}`);
+const loadUserStats = async (user: User, event: Event) => {
+  const data = await getArrayOf<Stat>(`/stats?user_id=${user.id}&event_id=${event.id}`);
 
-  return response.data;
+  return data;
 };
 
-const loadUserAndStats = async (dispatch: Dispatch) => {
+const loadUserAndStats = async (dispatch: Dispatch, event: Event) => {
   const user = await loadUser();
   dispatch(userLoaded(user));
 
-  const stats = await loadUserStats(user);
+  const stats = await loadUserStats(user, event);
   dispatch(statsLoaded(stats));
 };
 
@@ -73,9 +85,9 @@ const loadListBasedData = async <T>(
   dispatch: Dispatch,
   actionCreator: PayloadActionCreator<T[]>,
 ) => {
-  const response = await get<T[]>(`/${url}`);
+  const data = await getArrayOf<T>(`/${url}`);
 
-  dispatch(actionCreator(response.data));
+  dispatch(actionCreator(data));
 };
 
 const loadIndependentLists = async (dispatch: Dispatch) => {
@@ -87,24 +99,26 @@ const loadIndependentLists = async (dispatch: Dispatch) => {
   ]);
 };
 
-const loadBeerList = async () => {
-  const response = await get<EventBeerListItem[]>(`/eventbeerlist?event_id=${DEFAULT_EVENT_ID}`);
+const loadBeerList = async (event: Event) => {
+  const data = await getArrayOf<EventBeerListItem>(`/eventbeerlist?event_id=${event.id}`);
 
-  return response.data;
+  return data;
 };
 
-const loadListForEvent = async (dispatch: Dispatch) => {
-  const beerlist = await loadBeerList();
+const loadListForEvent = async (dispatch: Dispatch, event: Event) => {
+  const beerlist = await loadBeerList(event);
   dispatch(beerListLoaded(beerlist));
 };
 
-export const loadData = async (dispatch: Dispatch) => {
+export const loadData = async (dispatch: Dispatch, getState: () => ApplicationState) => {
   dispatch(started());
 
+  const event = activeEventSelector(getState());
+
   await Promise.all([
-    loadUserAndStats(dispatch),
+    loadUserAndStats(dispatch, event),
     loadIndependentLists(dispatch),
-    loadListForEvent(dispatch),
+    loadListForEvent(dispatch, event),
   ]);
 
   dispatch(complete());
