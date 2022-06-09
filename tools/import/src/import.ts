@@ -11,7 +11,7 @@ import {
   syncStyles,
 } from './services';
 
-import importData from '../data/2022-summer-1';
+import importData from '../data/2022-summer-2';
 
 // database
 const connectToDatabase = async () => {
