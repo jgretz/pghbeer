@@ -93,12 +93,10 @@ const loadListBasedData = async <T>(
 };
 
 const loadIndependentLists = async (dispatch: Dispatch) => {
-  await Promise.all([
-    loadListBasedData<Event>('events', dispatch, eventsLoaded),
-    loadListBasedData<Beer>('beers', dispatch, beersLoaded),
-    loadListBasedData<Brewery>('breweries', dispatch, breweriesLoaded),
-    loadListBasedData<BeerStyle>('styles', dispatch, stylesLoaded),
-  ]);
+  await loadListBasedData<Event>('events', dispatch, eventsLoaded);
+  await loadListBasedData<Beer>('beers', dispatch, beersLoaded);
+  await loadListBasedData<Brewery>('breweries', dispatch, breweriesLoaded);
+  await loadListBasedData<BeerStyle>('styles', dispatch, stylesLoaded);
 };
 
 const loadBeerList = async (event: Event) => {
@@ -119,11 +117,9 @@ export const loadData = async (dispatch: Dispatch, getState: () => ApplicationSt
 
   dispatch(started());
 
-  await Promise.all([
-    loadUserAndStats(dispatch, event),
-    loadIndependentLists(dispatch),
-    loadListForEvent(dispatch, event),
-  ]);
+  await loadIndependentLists(dispatch);
+  await loadListForEvent(dispatch, event);
+  await loadUserAndStats(dispatch, event);
 
   dispatch(complete());
 };
