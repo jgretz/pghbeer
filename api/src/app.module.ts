@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { BeersController } from './controllers/beers.controller';
 import {
   PrismaService,
   BeersService,
@@ -8,10 +7,23 @@ import {
   EventsService,
   StylesService,
 } from './services';
+import {
+  BeersController,
+  BreweriesController,
+  EventBeersController,
+  EventsController,
+  StylesController,
+} from './controllers';
 
 @Module({
   imports: [],
-  controllers: [BeersController],
+  controllers: [
+    BeersController,
+    BreweriesController,
+    EventBeersController,
+    EventsController,
+    StylesController,
+  ],
   providers: [
     PrismaService,
     BeersService,
