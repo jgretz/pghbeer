@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model beers {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(80)
+  abv         Float?
+  brewery_id  Int
+  style_id    Int
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
+
+model breweries {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(80)
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
+
+model eventbeerlist {
+  id          Int      @id @default(autoincrement())
+  event_id    Int
+  beer_id     Int
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
+
+model events {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(80)
+  date        DateTime @db.Date
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
+
+model stats {
+  id          Int      @id @default(autoincrement())
+  date        DateTime @db.Timestamp(6)
+  opinion     Int
+  beer_id     Int
+  user_id     Int
+  event_id    Int
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
+
+model styles {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(80)
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
+
+model users {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(80)
+  email       String?  @db.VarChar(80)
+  webuserid   String   @db.VarChar(80)
+  create_date DateTime @db.Timestamp(6)
+  update_date DateTime @db.Timestamp(6)
+}
