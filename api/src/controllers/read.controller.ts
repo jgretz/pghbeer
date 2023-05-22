@@ -1,5 +1,5 @@
-import { Get } from '@nestjs/common';
-import { ReadService } from 'src/services/Types';
+import {Get} from '@nestjs/common';
+import {ReadService} from '../Types';
 
 export class ReadController<T> {
   private service: ReadService<T>;

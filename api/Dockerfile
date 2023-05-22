@@ -24,25 +24,29 @@ RUN apt-get update -qq && \
 COPY --link package.json package-lock.json ./
 RUN npm ci --include=dev
 
-# Generate Prisma Client
-COPY --link prisma .
-RUN npx prisma generate
-
 # Copy application code
 COPY --link . .
 
+# Generate Prisma Client
+RUN npx prisma generate
+
 # Build application
 RUN npm run build
-
 
 # Final stage for app image
 FROM base
 
 # Copy built application
-COPY --from=build /app /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/package-lock.json ./package-lock.json
+COPY --from=build /app/prisma ./prisma
 
-# Entrypoint prepares the database.
-ENTRYPOINT [ "/app/docker-entrypoint" ]
+# Install production node_modules
+RUN npm ci --production
+
+# Generate Prisma Client
+RUN npx prisma generate
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000

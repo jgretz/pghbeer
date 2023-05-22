@@ -1,4 +1,3 @@
-export * from './Types';
 export * from './beers.service';
 export * from './breweries.service';
 export * from './eventbeers.service';
