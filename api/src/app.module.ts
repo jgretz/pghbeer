@@ -3,6 +3,7 @@ import {
   PrismaService,
   BeersService,
   BreweriesService,
+  DataForEventService,
   EventBeersService,
   EventsService,
   StylesService,
@@ -10,6 +11,7 @@ import {
 import {
   BeersController,
   BreweriesController,
+  DataEventForEventController,
   EventBeersController,
   EventsController,
   StylesController,
@@ -20,6 +22,7 @@ import {
   controllers: [
     BeersController,
     BreweriesController,
+    DataEventForEventController,
     EventBeersController,
     EventsController,
     StylesController,
@@ -28,6 +31,7 @@ import {
     PrismaService,
     BeersService,
     BreweriesService,
+    DataForEventService,
     EventBeersService,
     EventsService,
     StylesService,

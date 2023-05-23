@@ -15,6 +15,10 @@ model beers {
   style_id    Int
   create_date DateTime @db.Timestamp(6)
   update_date DateTime @db.Timestamp(6)
+
+  eventbeerlist eventbeerlist[]
+  brewery       breweries       @relation(fields: [brewery_id], references: [id])
+  style         styles          @relation(fields: [style_id], references: [id])
 }
 
 model breweries {
@@ -22,6 +26,7 @@ model breweries {
   name        String   @db.VarChar(80)
   create_date DateTime @db.Timestamp(6)
   update_date DateTime @db.Timestamp(6)
+  beers       beers[]
 }
 
 model eventbeerlist {
@@ -30,14 +35,18 @@ model eventbeerlist {
   beer_id     Int
   create_date DateTime @db.Timestamp(6)
   update_date DateTime @db.Timestamp(6)
+
+  event events @relation(fields: [event_id], references: [id])
+  beer  beers  @relation(fields: [beer_id], references: [id])
 }
 
 model events {
-  id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(80)
-  date        DateTime @db.Date
-  create_date DateTime @db.Timestamp(6)
-  update_date DateTime @db.Timestamp(6)
+  id            Int             @id @default(autoincrement())
+  name          String          @db.VarChar(80)
+  date          DateTime        @db.Date
+  create_date   DateTime        @db.Timestamp(6)
+  update_date   DateTime        @db.Timestamp(6)
+  eventbeerlist eventbeerlist[]
 }
 
 model stats {
@@ -56,6 +65,7 @@ model styles {
   name        String   @db.VarChar(80)
   create_date DateTime @db.Timestamp(6)
   update_date DateTime @db.Timestamp(6)
+  beers       beers[]
 }
 
 model users {
