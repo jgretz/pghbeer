@@ -11,11 +11,13 @@ export class DataForEventService {
       select: {
         beer: {
           select: {
+            id: true,
             name: true,
             abv: true,
 
             brewery: {
               select: {
+                id: true,
                 name: true,
               },
             },
