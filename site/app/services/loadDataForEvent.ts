@@ -14,16 +14,25 @@ const sortBreweriesByName = function (a: string, b: string) {
   return a.localeCompare(b);
 };
 
-const addSortedBreweries = function (data: Record<string, Beer[]>) {
+const sortBeersByName = function (a: Beer, b: Beer) {
+  return a.name.localeCompare(b.name);
+};
+
+const sortBreweriesAndBeers = function (data: Record<string, Beer[]>) {
   const keys = Object.keys(data);
+  const sortedData: Record<string, Beer[]> = keys.reduce(function (record, key) {
+    record[key] = R.sort(sortBeersByName, data[key]);
+
+    return record;
+  }, {} as Record<string, Beer[]>);
 
   return {
     breweries: R.sort(sortBreweriesByName, keys),
-    data,
+    data: sortedData,
   };
 };
 
-const prepare = R.pipe(projectBeers, groupBeersByBrewery, addSortedBreweries);
+const prepare = R.pipe(projectBeers, groupBeersByBrewery, sortBreweriesAndBeers);
 
 export async function loadDataForEvent(eventId: number) {
   const url = `${DATA_URL}${eventId}`;

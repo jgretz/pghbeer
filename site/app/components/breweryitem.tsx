@@ -8,13 +8,13 @@ type Props = {
 
 export default function BreweryItem({name, beers}: Props) {
   return (
-    <>
-      <h1>{name}</h1>
+    <div className="pt-0.5">
+      <h1 className="line-clamp-1 text-3xl">{name}</h1>
       <div>
         {beers.map(function (b) {
           return <BeerItem key={b.id} beer={b} />;
         })}
       </div>
-    </>
+    </div>
   );
 }
