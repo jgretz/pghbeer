@@ -7,7 +7,7 @@ type Props = {
 
 export default function BeerItem({beer}: Props) {
   return (
-    <div className="my-1.5 flex flex-row items-center rounded-l-full bg-yellow-300 px-1 py-1 text-black">
+    <div className="my-1.5 flex flex-row items-center rounded-l-full bg-[#BE485C] px-1 py-1 text-white">
       <Checkmark beer={beer} />
       <div className="flex grow flex-col">
         <div className="line-clamp-1 grow  text-xl">{beer.name}</div>

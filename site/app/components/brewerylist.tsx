@@ -8,7 +8,7 @@ type Props = {
 
 export default function BreweryList({breweries, data}: Props) {
   return (
-    <div className="m-auto max-w-lg p-0.5">
+    <div className="container m-auto max-w-lg p-0.5">
       {breweries.map(function (k) {
         return <BreweryItem key={k} name={k} beers={data[k]} />;
       })}

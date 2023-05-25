@@ -4,6 +4,8 @@ import type {Beer} from '~/Types';
 import {EVENT_ID} from '~/constants';
 import BreweryList from '~/components/brewerylist';
 import {loadDataForEvent} from '~/services/loadDataForEvent';
+import Header from './header';
+// import Footer from './footer';
 
 type LoaderData = {
   breweries: string[];
@@ -22,8 +24,10 @@ export default function Index() {
   const data = useLoaderData<LoaderData>();
 
   return (
-    <div className="font-sans text-white">
+    <div className="relative font-sans text-black">
+      <Header />
       <BreweryList breweries={data.breweries} data={data.data} />
+      {/* <Footer /> */}
     </div>
   );
 }
