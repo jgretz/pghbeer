@@ -6,7 +6,9 @@ import {
   DataForEventService,
   EventBeersService,
   EventsService,
+  StatsService,
   StylesService,
+  UsersService,
 } from './services';
 import {
   BeersController,
@@ -14,6 +16,7 @@ import {
   DataEventForEventController,
   EventBeersController,
   EventsController,
+  StatsController,
   StylesController,
 } from './controllers';
 
@@ -25,6 +28,7 @@ import {
     DataEventForEventController,
     EventBeersController,
     EventsController,
+    StatsController,
     StylesController,
   ],
   providers: [
@@ -34,7 +38,9 @@ import {
     DataForEventService,
     EventBeersService,
     EventsService,
+    StatsService,
     StylesService,
+    UsersService,
   ],
 })
 export class AppModule {}

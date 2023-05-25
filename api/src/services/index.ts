@@ -4,4 +4,6 @@ export * from './dataforevent.service';
 export * from './eventbeers.service';
 export * from './events.service';
 export * from './prisma.service';
+export * from './stats.service';
 export * from './styles.service';
+export * from './users.service';

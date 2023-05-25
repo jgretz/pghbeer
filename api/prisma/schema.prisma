@@ -70,8 +70,6 @@ model styles {
 
 model users {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(80)
-  email       String?  @db.VarChar(80)
   webuserid   String   @db.VarChar(80)
   create_date DateTime @db.Timestamp(6)
   update_date DateTime @db.Timestamp(6)

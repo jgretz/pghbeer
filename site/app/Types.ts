@@ -18,3 +18,7 @@ export interface Beer {
   brewery: Brewery;
   style: Style;
 }
+
+export type SessionData = {
+  checked_beers: string;
+};
