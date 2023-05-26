@@ -1,0 +1,1022 @@
+[
+  {
+    "brewery": "Invisible Man Brewing",
+    "name": "Woodland Rites",
+    "style": "Spruce Tip IPA",
+    "abv": 8
+  },
+  {
+    "brewery": "Invisible Man Brewing",
+    "name": "Pineapple Upside Down Cake",
+    "style": "Dessert Sour",
+    "abv": 5.7
+  },
+  {
+    "brewery": "Invisible Man Brewing",
+    "name": "Green Inferno",
+    "style": "West Coast IPA",
+    "abv": 6
+  },
+  {
+    "brewery": "Invisible Man Brewing",
+    "name": "Rawth",
+    "style": "New England IPA",
+    "abv": 5.7
+  },
+  {
+    "brewery": "Helltown Brewing",
+    "name": "Lilith's Chariot",
+    "style": "Tart Cherry Ale",
+    "abv": 6
+  },
+  {
+    "brewery": "Helltown Brewing",
+    "name": "Hell's Delight",
+    "style": "American Lager",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Voodoo Brewery",
+    "name": "Beach Gear",
+    "style": "Blonde ale brewed with apricots",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Voodoo Brewery",
+    "name": "Lacto kooler green",
+    "style": "Sour Berliner weisse w/green",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Voodoo Brewery",
+    "name": "Empty calories",
+    "style": "American light lager",
+    "abv": 4.7
+  },
+  {
+    "brewery": "Hop Farm Brewing Co",
+    "name": "Margotberry",
+    "style": "Raspberry Berliner Weisse",
+    "abv": 8
+  },
+  {
+    "brewery": "Hop Farm Brewing Co",
+    "name": "Porch Bier",
+    "style": "German- Style Helles",
+    "abv": 5
+  },
+  {
+    "brewery": "Hop Farm Brewing Co",
+    "name": "Dinosaurs In Space",
+    "style": "New England IPA",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Lustra",
+    "style": "Hazy Pale Ale",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Pivot",
+    "style": "Extra Pale Ale",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Double Lustra",
+    "style": "Hazy DIPA",
+    "abv": 8.5
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Not Always Present",
+    "style": "Kölsch",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Fighting Elleck",
+    "style": "off dry hard apple cider",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Event Blend Celery",
+    "style": "semi sweet hard apple cider with fresh celery seed",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Allusion Brewing Co.",
+    "name": "Beer Flavored Beer",
+    "style": "American Light Lager",
+    "abv": 4.3
+  },
+  {
+    "brewery": "Allusion Brewing Co.",
+    "name": "Blue Lion",
+    "style": "Strawberry Rhubarb Cobler Sour",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Allusion Brewing Co.",
+    "name": "Phoenix Tears",
+    "style": "Blood Orange Milkshake IPA",
+    "abv": 6.7
+  },
+  {
+    "brewery": "Sobel's Obscure Brewery",
+    "name": "You Can't Put Pineapple on Pizza",
+    "style": "Pineapple Whip w/lactose and vanilla",
+    "abv": 7.5
+  },
+  {
+    "brewery": "Sobel's Obscure Brewery",
+    "name": "I don't know, Norman?",
+    "style": "California Common",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Sobel's Obscure Brewery",
+    "name": "Cornball IPA",
+    "style": "Belgian IPA",
+    "abv": 6
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Wizard Teeth",
+    "style": "Wit",
+    "abv": 4
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Turn that Think into a Drink",
+    "style": "DIPA",
+    "abv": 8.2
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Giraffe Nap",
+    "style": "West Coast IPA",
+    "abv": 7.5
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Wrench Dream",
+    "style": "Lager",
+    "abv": 4.4
+  },
+  {
+    "brewery": "Personal Day Seltzers",
+    "name": "Personal Day Lemon Hard Seltzer",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Seltzers",
+    "name": "Personal Day Lime Hard Seltzer",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Seltzers",
+    "name": "Personal Day Pineapple Hard Seltzer",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Seltzers",
+    "name": "Personal Day Grapefruit Hard Seltzer",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Burghers Brewing Co.",
+    "name": "Carrie",
+    "style": "Helles Lager",
+    "abv": 5.1
+  },
+  {
+    "brewery": "Burghers Brewing Co.",
+    "name": "Deutschtown Pils",
+    "style": "German Pilsner",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Burghers Brewing Co.",
+    "name": "Cucumber Falls",
+    "style": "Fruited Goze",
+    "abv": 4.4
+  },
+  {
+    "brewery": "Burghers Brewing Co.",
+    "name": "Knob & Tube",
+    "style": "Hazy Pale Ale",
+    "abv": 5.7
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Cindi's Hard Mountain Iced Tea",
+    "style": "Hard iced tea with a hint of citrus for yinz. Steam-brewed and fizz-free!",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Dry Country",
+    "style": "West Coast Pilsner",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Gulpin",
+    "style": "West Coast IPA",
+    "abv": 7
+  },
+  {
+    "brewery": "Noble Stein Brewing Company",
+    "name": "Welcome Sight",
+    "style": "Maibock (collab with Forbes Trail Brewing)",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Noble Stein Brewing Company",
+    "name": "Uncle Hefe",
+    "style": "Hefeweizen",
+    "abv": 5.7
+  },
+  {
+    "brewery": "Noble Stein Brewing Company",
+    "name": "Nonna Your Business",
+    "style": "Italian Pilsner",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Noble Stein Brewing Company",
+    "name": "Cut & Pastry",
+    "style": "Double Chocolate Stout",
+    "abv": 9
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Archer",
+    "style": "Kölsch",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Creekside Crush",
+    "style": "Hazy Pale Ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Dream Cannon Summer",
+    "style": "Sorbet Sour Ale",
+    "abv": 4.4
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "New Cult",
+    "style": "NEIPA",
+    "abv": 7
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Hive & Den",
+    "style": "Honey Brown Lager",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Shred of Dignity",
+    "style": "Coconut Lime Sour",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Secret Alphabet",
+    "style": "Chili Pepper Pale",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Blunt Force",
+    "style": "DIPA",
+    "abv": 8
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Good Eye Sniper",
+    "style": "DIPA",
+    "abv": 8.9
+  },
+  {
+    "brewery": "Back Alley Brewing Company",
+    "name": "Cinta Roja",
+    "style": "Strawberry Margarita Sour",
+    "abv": 5
+  },
+  {
+    "brewery": "Back Alley Brewing Company",
+    "name": "Cool Shoes",
+    "style": "Kölsch",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Moscow Mule",
+    "style": "Cocktail",
+    "abv": 11.5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Eastside",
+    "style": "Cocktail",
+    "abv": 12
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Mojito",
+    "style": "Cocktail",
+    "abv": 13
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Gin & Juice",
+    "style": "Cocktail",
+    "abv": 10.5
+  },
+  {
+    "brewery": "Links Brewing Company",
+    "name": "Links Pilsner",
+    "style": "German Pilsner",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Links Brewing Company",
+    "name": "Links Pale",
+    "style": "Hazy Pale Ale",
+    "abv": 5.7
+  },
+  {
+    "brewery": "Links Brewing Company",
+    "name": "Links Balance",
+    "style": "Cherry Wheat Ale",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Links Brewing Company",
+    "name": "Link 1010",
+    "style": "Barrel Aged Stout",
+    "abv": 12
+  },
+  {
+    "brewery": "The Smiling Moose",
+    "name": "5150",
+    "style": "Hazy India Pale Ale",
+    "abv": 6.7
+  },
+  {
+    "brewery": "The Smiling Moose",
+    "name": "Blood! Blood!",
+    "style": "Hard Seltzer",
+    "abv": 5.5
+  },
+  {
+    "brewery": "The Smiling Moose",
+    "name": "We’ve got the Wheat",
+    "style": "Wheat",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Acclamation Brewing",
+    "name": "Lemon Meringue",
+    "style": "IPA - Milkshake",
+    "abv": 6.6
+  },
+  {
+    "brewery": "Acclamation Brewing",
+    "name": "Ambrosia Smoothie",
+    "style": "Sour",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Blood Orange Wheat",
+    "style": "Fruit Beer",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Cucumber Falls Wheat",
+    "style": "Fruit Beer",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Desperation Kölsch",
+    "style": "Kölsch",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Wandering Swagman",
+    "style": "Hazy IPA",
+    "abv": 6.9
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Candied Sour [Skittles] (CDS v1.4)",
+    "style": "Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Ice Cream Sour [Raspberry/Mango/Marshmallow] (ICS v1.15)",
+    "style": "Smoothie Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Double IPA [Citra/Strata] (DIPA v4.6)",
+    "style": "Hazy DIPA",
+    "abv": 8.3
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Malty Amber Ale (MAA v1.0)",
+    "style": "Amber Ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Tropicalia",
+    "style": "Hazy IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Out of Tune Series: Rated R (raspberry)",
+    "style": "Fruited Sour",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Toque de Lima",
+    "style": "Mexican Lager",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Ambridge Ale",
+    "style": "American Pale Ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Pittsburgh Winery",
+    "name": "2019 Rose",
+    "style": "Rose",
+    "abv": 12.4
+  },
+  {
+    "brewery": "Pittsburgh Winery",
+    "name": "2019 Sauvignon Blanc",
+    "style": "Sauvignon Blanc",
+    "abv": 13.9
+  },
+  {
+    "brewery": "Pittsburgh Winery",
+    "name": "2019 Cabernet Sauvignon",
+    "style": "Cabernet Sauvignon",
+    "abv": 14.9
+  },
+  {
+    "brewery": "Pittsburgh Winery",
+    "name": "2020 Malbec",
+    "style": "Malbec",
+    "abv": 14
+  },
+  {
+    "brewery": "Cobblehaus Brewing Co.",
+    "name": "Black Bear",
+    "style": "Black IPA",
+    "abv": 6.7
+  },
+  {
+    "brewery": "Cobblehaus Brewing Co.",
+    "name": "Je Suis",
+    "style": "Saison",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Cobblehaus Brewing Co.",
+    "name": "Rosy Roots",
+    "style": "Pink Books IPA",
+    "abv": 7.6
+  },
+  {
+    "brewery": "Arboretum Trail Brewing Company",
+    "name": "Black Tie, Red Shoes",
+    "style": "BA Stout with Blackberry",
+    "abv": 11.5
+  },
+  {
+    "brewery": "Arboretum Trail Brewing Company",
+    "name": "Saison de Beez",
+    "style": "Petite Saison",
+    "abv": 4
+  },
+  {
+    "brewery": "Arboretum Trail Brewing Company",
+    "name": "Arbo Trail Magic",
+    "style": "Session IPA",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Arboretum Trail Brewing Company",
+    "name": "Pales in Comparison",
+    "style": "Pale Ale",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Conny Creek Brewing Co.",
+    "name": "Helles",
+    "style": "Munich Helles Lager",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Conny Creek Brewing Co.",
+    "name": "Synergee",
+    "style": "IPA",
+    "abv": 6
+  },
+  {
+    "brewery": "Cellar Works Brewing Co.",
+    "name": "Strawberry Banana Smooth Vibes",
+    "style": "Smoothie Seltzer",
+    "abv": 6
+  },
+  {
+    "brewery": "Cellar Works Brewing Co.",
+    "name": "Orange Tangerine Puff'd",
+    "style": "Smoothie Sour w/marshmallow",
+    "abv": 6
+  },
+  {
+    "brewery": "Cellar Works Brewing Co.",
+    "name": "Cherry Pie Baked Whip",
+    "style": "Smoothie Sour w/pie spices",
+    "abv": 6
+  },
+  {
+    "brewery": "Cellar Works Brewing Co.",
+    "name": "Fifty Foot Robot",
+    "style": "Hazy Pale Ale",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Cellar Works Brewing Co.",
+    "name": "Big Stream",
+    "style": "Kölsch",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Allegheny City Brewing",
+    "name": "Mr. Tangerine Man",
+    "style": "hazy IPA w tangerine puree",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Allegheny City Brewing",
+    "name": "First Street Barrel Stout",
+    "style": "whiskey barrel-aged imperial stout",
+    "abv": 10.1
+  },
+  {
+    "brewery": "Allegheny City Brewing",
+    "name": "Hudy",
+    "style": "Polish light lager",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Trace Bloomfield",
+    "name": "Prism & Progress",
+    "style": "IPA",
+    "abv": 7.7
+  },
+  {
+    "brewery": "Trace Bloomfield",
+    "name": "Foeder Coal Hill",
+    "style": "Oak Aged Lager",
+    "abv": 5.4
+  },
+  {
+    "brewery": "New Crescent Brewing Co.",
+    "name": "Betelgeuse",
+    "style": "Hazy IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "New Crescent Brewing Co.",
+    "name": "Graceland Wheat",
+    "style": "Peanut Butter Hefeweizen",
+    "abv": 5.6
+  },
+  {
+    "brewery": "New Crescent Brewing Co.",
+    "name": "Crimson, White and Indigo",
+    "style": "Cream Ale",
+    "abv": 5.4
+  },
+  {
+    "brewery": "New Crescent Brewing Co.",
+    "name": "O’Halley’s Comet",
+    "style": "Dry Irish Stout",
+    "abv": 5.25
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Pineapple Hazedelic Juice Grenade",
+    "style": "NEIPA",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Krispadelic",
+    "style": "Dry-Hoppped Kolsch",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "9th Anniversary",
+    "style": "Barrel-aged Stout",
+    "abv": 10.5
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Freeze Tag",
+    "style": "Strawberry Rhubarb Wheat",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Together Better",
+    "style": "Kölsch",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "It's Always Sunny",
+    "style": "Session IPA",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Jen's Porter",
+    "style": "Porter",
+    "abv": 5
+  },
+  {
+    "brewery": "The Leaning Cask Brewing Company",
+    "name": "Cheeky Doodle Brut",
+    "style": "Cider Ale",
+    "abv": 6.5
+  },
+  {
+    "brewery": "The Leaning Cask Brewing Company",
+    "name": "Pedigree",
+    "style": "Fruited Sour Blood Orange and Cranberry",
+    "abv": 6.8
+  },
+  {
+    "brewery": "The Leaning Cask Brewing Company",
+    "name": "GSP",
+    "style": "Dry Hopped Kolsch",
+    "abv": 4.5
+  },
+  {
+    "brewery": "The Leaning Cask Brewing Company",
+    "name": "Um...That's On Fire",
+    "style": "IPA",
+    "abv": 5.6
+  },
+  {
+    "brewery": "The Leaning Cask Brewing Company",
+    "name": "Imperial Ridgeback",
+    "style": "2XIPA West Coast",
+    "abv": 8
+  },
+  {
+    "brewery": "Acrospire Brewing Co.",
+    "name": "Serendipity",
+    "style": "West Coast IPA",
+    "abv": 7.2
+  },
+  {
+    "brewery": "Acrospire Brewing Co.",
+    "name": "No Evil",
+    "style": "Hefeweizen",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Screaming Tangerine",
+    "style": "Wheat ale with tangerines",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Lime Lager",
+    "style": "House lager conditioned on limes",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Smashing Watermelon",
+    "style": "Mixed fermentation ale conditioned on watermelon",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Tartburst Orange Creamsicle",
+    "style": "Sour ale conditioned on orange and vanilla",
+    "abv": 7.2
+  },
+  {
+    "brewery": "Bent Run Brewing Co.",
+    "name": "Moon Hopper",
+    "style": "Bold Pale Ale",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Bent Run Brewing Co.",
+    "name": "Pearl O’my Eye",
+    "style": "NEIPA",
+    "abv": 7.2
+  },
+  {
+    "brewery": "Bent Run Brewing Co.",
+    "name": "Deerfoot",
+    "style": "Nut Brown Ale",
+    "abv": 5
+  },
+  {
+    "brewery": "Bent Run Brewing Co.",
+    "name": "Sandstone Springs",
+    "style": "IPA",
+    "abv": 6
+  },
+  {
+    "brewery": "Levity Brewing Company",
+    "name": "Haze Frehley",
+    "style": "Hazy IPA",
+    "abv": 6.7
+  },
+  {
+    "brewery": "Levity Brewing Company",
+    "name": "Tang Glider Boysenberry",
+    "style": "Fruited Sour",
+    "abv": 4.2
+  },
+  {
+    "brewery": "Levity Brewing Company",
+    "name": "Dioecious",
+    "style": "Hoppy Sour",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Levity Brewing Company",
+    "name": "It's Hoplicated",
+    "style": "American IPA",
+    "abv": 7
+  },
+  {
+    "brewery": "Levity Brewing Company",
+    "name": "Hoodlebug Brown Ale",
+    "style": "Imperial Brown Ale",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Tortured Souls",
+    "name": "Dank Delirium",
+    "style": "West Coast IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Tortured Souls",
+    "name": "Mango Fett",
+    "style": "Mango Blonde",
+    "abv": 5.25
+  },
+  {
+    "brewery": "Old Thunder Brewing",
+    "name": "False Kingdom",
+    "style": "IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Old Thunder Brewing",
+    "name": "Blawnox Export",
+    "style": "Dortmunder",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Bona Fide Beer Company",
+    "name": "Bona Fide Lager",
+    "style": "American Lager",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Bona Fide Beer Company",
+    "name": "Bona Fide IPA",
+    "style": "American IPA",
+    "abv": 6
+  },
+  {
+    "brewery": "Bona Fide Beer Company",
+    "name": "Bonaveza Clara",
+    "style": "Mexican Lager",
+    "abv": 5
+  },
+  {
+    "brewery": "Bona Fide Beer Company",
+    "name": "Bonaveza Vienna",
+    "style": "Amber Mexican Lager",
+    "abv": 5
+  },
+  {
+    "brewery": "Golden Age Beer Co.",
+    "name": "Midwestern Pilsner",
+    "style": "Modern Pilsner",
+    "abv": 5
+  },
+  {
+    "brewery": "Golden Age Beer Co.",
+    "name": "Maibock",
+    "style": "Helles Bock",
+    "abv": 6.3
+  },
+  {
+    "brewery": "Recon Brewing",
+    "name": "Wandering Souls",
+    "style": "Hazy IPA",
+    "abv": 7
+  },
+  {
+    "brewery": "Recon Brewing",
+    "name": "Baja",
+    "style": "Mexican Lager",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Hitchhiker Brewing Company",
+    "name": "Citrus Summer",
+    "style": "Citrus Wheat Ale",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Hitchhiker Brewing Company",
+    "name": "Yoberry",
+    "style": "Smoothie Sour with Strawberry, Cocoa Nibs and Marshmallow",
+    "abv": 7
+  },
+  {
+    "brewery": "Hitchhiker Brewing Company",
+    "name": "One Last Saturday Night",
+    "style": "Hazy Pale Ale (Collab with Stick City)",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "Hoptruvian",
+    "style": "American IPA",
+    "abv": 7.2
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "Dahl",
+    "style": "peach chipotle saison",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "The One",
+    "style": "NZ Pilsner",
+    "abv": 6
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Stella",
+    "style": "Dry red",
+    "abv": 14.8
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Sangue di Giove",
+    "style": "Dry Rose",
+    "abv": 12.5
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Riesling",
+    "style": "Semi Dry White",
+    "abv": 12.5
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Black Raspberry",
+    "style": "Sweet Fruit",
+    "abv": 11.5
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Pinot Grigio",
+    "style": "Dry White",
+    "abv": 12
+  },
+  {
+    "brewery": "Hazel Grove Brewing",
+    "name": "Lil' Squatchy",
+    "style": "Coffee Pub Stout",
+    "abv": 3.6
+  },
+  {
+    "brewery": "Hazel Grove Brewing",
+    "name": "Relatively Soon",
+    "style": "American IPA",
+    "abv": 7
+  },
+  {
+    "brewery": "Mindful Brewing Company",
+    "name": "Schneider's Lemon Tea Sour",
+    "style": "Tea Beer",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Mindful Brewing Company",
+    "name": "Area 88",
+    "style": "American IPA",
+    "abv": 6.7
+  },
+  {
+    "brewery": "Mindful Brewing Company",
+    "name": "Lime Agave Wheat",
+    "style": "American Wheat",
+    "abv": 6
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Sucker Punch",
+    "style": "Grape Lemonade Fruited Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Shoots Like A Girl Anti Hero",
+    "style": "Black IPA",
+    "abv": 6.2
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Shupacabra",
+    "style": "Mexican Style Lager with Lime",
+    "abv": 6
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Extra Life",
+    "style": "Pixelated IPA",
+    "abv": 6
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Sidebar",
+    "style": "Imperial Stout (Collab With Cellar Works)",
+    "abv": 12
+  },
+  {
+    "brewery": "Mastic Trail Brewing",
+    "name": "Jake Sullivan",
+    "style": "Mexican Lager",
+    "abv": 5
+  },
+  {
+    "brewery": "Mastic Trail Brewing",
+    "name": "Dockside Pilsner",
+    "style": "Belgian Pilsner",
+    "abv": 5
+  },
+  {
+    "brewery": "Mastic Trail Brewing",
+    "name": "Peaches, Peaches, Peaches, Peaches, Peaches",
+    "style": "Bowser Inspired Peach Wheat",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Mastic Trail Brewing",
+    "name": "Davy Jones’ Locker",
+    "style": "Double Simcoe IPA",
+    "abv": 8.5
+  }
+]
