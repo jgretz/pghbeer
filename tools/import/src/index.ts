@@ -1,6 +1,5 @@
 import {PrismaClient, beers, breweries, styles} from '@prisma/client';
-import * as R from 'ramda';
-import * as data from './data/load1.json';
+import * as data from './data/load2.json';
 
 interface LoadData {
   brewery: string;
@@ -28,7 +27,7 @@ async function findBrewery(name: string) {
     //   },
     // });
 
-    console.log(brewery.name);
+    console.log(name);
   }
 
   return brewery;

@@ -1,0 +1,14 @@
+[
+  {
+    "brewery": "Mondays Brewing",
+    "name": "Lawnmower Beer",
+    "style": "Pilsner",
+    "abv": 5
+  },
+  {
+    "brewery": "Mondays Brewing",
+    "name": "Cathedral Beer",
+    "style": "Kölsch",
+    "abv": 5
+  }
+]
