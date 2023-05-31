@@ -19,7 +19,7 @@ export default function Footer({showSearch, showJump}: Props) {
   return (
     <>
       <div className="h-10"></div>
-      <div className="container fixed bottom-0 left-0 right-0 m-auto flex h-10 w-full max-w-lg flex-row justify-between bg-black text-white">
+      <div className="container fixed bottom-0 left-0 right-0 m-auto flex h-10 w-full max-w-lg flex-row justify-between bg-black bg-opacity-80 text-white">
         <div className="ml-1 flex items-center" onClick={handleShowJump}>
           <img src={hash} alt="jump icon" />
         </div>
