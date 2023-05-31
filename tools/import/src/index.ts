@@ -1,5 +1,5 @@
 import {PrismaClient, beers, breweries, styles} from '@prisma/client';
-import * as data from './data/load2.json';
+import * as data from './data/load3.json';
 
 interface LoadData {
   brewery: string;
@@ -111,13 +111,13 @@ async function main() {
 
     if (!brewery || !style) {
       console.log(`Something weird with ${d.name}`);
-      return;
+      continue;
     }
 
-    const beer = await findBeer(d.name, d.abv, brewery, style);
-    const event_id = 5;
+    // const beer = await findBeer(d.name, d.abv, brewery, style);
+    // const event_id = 5;
 
-    await ensureBeerAtEvent(beer, event_id);
+    // await ensureBeerAtEvent(beer, event_id);
   }
 }
 

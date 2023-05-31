@@ -1,0 +1,80 @@
+[
+  {
+    "brewery": "ShuBrew",
+    "name": "Welcome to Zelie",
+    "style": "Hoppy Lager",
+    "abv": 5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Moscow Mule",
+    "style": "Cocktail",
+    "abv": 11.5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Strawberry Mojito",
+    "style": "Cocktail",
+    "abv": 12
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Summer Cup",
+    "style": "Cocktail",
+    "abv": 10
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Gin & Juice",
+    "style": "Cocktail",
+    "abv": 10.5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Roselle",
+    "style": "Cocktail",
+    "abv": 0
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Demeter",
+    "style": "Foeder-Aged Barleywine",
+    "abv": 10.5
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Remo",
+    "style": "Tropical Ale",
+    "abv": 3.4
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Flux",
+    "style": "India Pale Ale ",
+    "abv": 7
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Alma",
+    "style": "Unfiltered Pilsner",
+    "abv": 5.9
+  },
+  {
+    "brewery": "Four Points Brewing",
+    "name": "Cut / Copy",
+    "style": "IPA",
+    "abv": 6.6
+  },
+  {
+    "brewery": "Four Points Brewing",
+    "name": "Sour Cerveza",
+    "style": "Sour Lager",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Four Points Brewing",
+    "name": "4P Dunkel",
+    "style": "Munich Style Dunkel",
+    "abv": 5.8
+  }
+]
