@@ -16,7 +16,8 @@
     "isbot": "^3.6.8",
     "ramda": "^0.29.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-scroll": "^1.8.9"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.2.7",
@@ -25,6 +26,7 @@
     "@types/ramda": "^0.29.1",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
+    "@types/react-scroll": "^1.8.7",
     "eslint": "^8.38.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
