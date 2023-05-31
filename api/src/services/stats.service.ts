@@ -8,8 +8,37 @@ import {StatOpinion} from 'src/Types';
 export class StatsService {
   constructor(private prisma: PrismaService, private usersService: UsersService) {}
 
-  async findAll() {
-    return await this.prisma.stats.findMany();
+  async findAll(event_id: number) {
+    return await this.prisma.stats.findMany({
+      select: {
+        opinion: true,
+        user_id: true,
+        date: true,
+
+        beer: {
+          select: {
+            id: true,
+            name: true,
+            abv: true,
+
+            brewery: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            style: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+      where: {
+        event_id,
+      },
+    });
   }
 
   async updateStats(beerId: number, eventId: number, userId: string, tasted: boolean) {
