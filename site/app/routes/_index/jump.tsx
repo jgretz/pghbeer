@@ -21,7 +21,7 @@ export function Jump({isVisible, setIsVisible, names}: Props) {
         duration: 1200,
         delay: 100,
         smooth: true,
-        offset: -90,
+        offset: -6,
       });
     },
     [setIsVisible],
