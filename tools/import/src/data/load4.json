@@ -1,0 +1,20 @@
+[
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "Certified",
+    "style": "Citra IPA",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "Muchos Mahalos",
+    "style": "Tropical Ale",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "Nine (IX)",
+    "style": "BA Imperial Stout",
+    "abv": 13.7
+  }
+]

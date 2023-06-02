@@ -1,5 +1,5 @@
 import {PrismaClient, beers, breweries, styles} from '@prisma/client';
-import * as data from './data/load3.json';
+import * as data from './data/load5.json';
 
 interface LoadData {
   brewery: string;
@@ -19,13 +19,13 @@ async function findBrewery(name: string) {
   });
 
   if (!brewery) {
-    // brewery = await prisma.breweries.create({
-    //   data: {
-    //     name,
-    //     create_date: new Date(),
-    //     update_date: new Date(),
-    //   },
-    // });
+    brewery = await prisma.breweries.create({
+      data: {
+        name,
+        create_date: new Date(),
+        update_date: new Date(),
+      },
+    });
 
     console.log(name);
   }
@@ -41,13 +41,13 @@ async function findStyle(name: string) {
   });
 
   if (!style) {
-    // style = await prisma.styles.create({
-    //   data: {
-    //     name,
-    //     create_date: new Date(),
-    //     update_date: new Date(),
-    //   },
-    // });
+    style = await prisma.styles.create({
+      data: {
+        name,
+        create_date: new Date(),
+        update_date: new Date(),
+      },
+    });
 
     console.log(name);
   }
@@ -65,16 +65,16 @@ async function findBeer(name: string, abv: number, brewery: breweries, style: st
   });
 
   if (!beer) {
-    // beer = await prisma.beers.create({
-    //   data: {
-    //     name,
-    //     abv,
-    //     brewery_id: brewery.id,
-    //     style_id: style.id,
-    //     create_date: new Date(),
-    //     update_date: new Date(),
-    //   },
-    // });
+    beer = await prisma.beers.create({
+      data: {
+        name,
+        abv,
+        brewery_id: brewery.id,
+        style_id: style.id,
+        create_date: new Date(),
+        update_date: new Date(),
+      },
+    });
 
     console.log(name);
   }
@@ -91,14 +91,14 @@ async function ensureBeerAtEvent(beer: beers, event_id: number) {
   });
 
   if (!beerEvent) {
-    // await prisma.eventbeerlist.create({
-    //   data: {
-    //     beer_id: beer.id,
-    //     event_id,
-    //     create_date: new Date(),
-    //     update_date: new Date(),
-    //   },
-    // });
+    await prisma.eventbeerlist.create({
+      data: {
+        beer_id: beer.id,
+        event_id,
+        create_date: new Date(),
+        update_date: new Date(),
+      },
+    });
 
     console.log(beer.name);
   }
@@ -114,10 +114,10 @@ async function main() {
       continue;
     }
 
-    // const beer = await findBeer(d.name, d.abv, brewery, style);
-    // const event_id = 5;
+    const beer = await findBeer(d.name, d.abv, brewery, style);
+    const event_id = 5;
 
-    // await ensureBeerAtEvent(beer, event_id);
+    await ensureBeerAtEvent(beer, event_id);
   }
 }
 

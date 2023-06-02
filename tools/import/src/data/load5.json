@@ -1,0 +1,20 @@
+[
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Doughboy",
+    "style": "Hazy Pale Ale",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Inner Groove Brewing",
+    "name": "Perdedor",
+    "style": "Hazy IPA",
+    "abv": 6.7
+  },
+  {
+    "brewery": "Inner Groove Brewing",
+    "name": "Hallerback Pils",
+    "style": "Pilsner",
+    "abv": 4.5
+  }
+]
