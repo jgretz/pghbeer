@@ -11,7 +11,7 @@ export default function BreweryItem({name, beers}: Props) {
 
   return (
     <div className="pt-0.5">
-      <h1 className="line-clamp-1 text-3xl" {...scrollProps}>
+      <h1 className="line-clamp-1 text-3xl text-[#4b90b4] " {...scrollProps}>
         {name}
       </h1>
       <div>

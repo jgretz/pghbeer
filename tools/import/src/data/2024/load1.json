@@ -1,0 +1,626 @@
+[
+  {
+    "brewery": "Bullseye Brewing Company",
+    "name": "Bradford's Blood Orange IPA",
+    "style": "IPA",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Bullseye Brewing Company",
+    "name": "Mad Brewers Imperial Stout",
+    "style": "Imperial Stout",
+    "abv": 9.3
+  },
+  {
+    "brewery": "Bullseye Brewing Company",
+    "name": "El Diablo Mexican Lager",
+    "style": "Mexican Lager",
+    "abv": 4.1
+  },
+  {
+    "brewery": "Bullseye Brewing Company",
+    "name": "Blueberry Wheat",
+    "style": "Wheat",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Bullseye Brewing Company",
+    "name": "Happy Skies Farm Saison",
+    "style": "Saison",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Cindi's Hard Mountain Tea",
+    "style": "Hard Tea",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "HAHPS West Coast IPA",
+    "style": "West Coast IPA",
+    "abv": 7
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Douse: Bourbon Vanilla",
+    "style": "Unknown Style",
+    "abv": 13.7
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Mango Breaker Sour DIPA",
+    "style": "Sour DIPA",
+    "abv": 8.5
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Hop Run Sparkling Hop Water",
+    "style": "Non-Alcoholic",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Lustra",
+    "style": "Pale Ale",
+    "abv": null
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Pilsner",
+    "style": "Pilsner",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Hard Seltzer",
+    "name": "Personal Day Hard Seltzer Lemon",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Hard Seltzer",
+    "name": "Personal Day Hard Seltzer Lime",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Hard Seltzer",
+    "name": "Personal Day Hard Seltzer Grapefruit",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Personal Day Hard Seltzer",
+    "name": "Personal Day Hard Seltzer Pineapple",
+    "style": "Hard Seltzer",
+    "abv": 5
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Ice Cream Cake Sour [Strawberry] (ICCS v1.0)",
+    "style": "Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Candied Sour [Grape Slushie] (CDS v1.25)",
+    "style": "Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "India Pale Ale (IPA v9.2)",
+    "style": "IPA",
+    "abv": 6.7
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Honey Kolsch (HK v2.0)",
+    "style": "Kolsch",
+    "abv": 5.1
+  },
+  {
+    "brewery": "Clarion River Brewing Company",
+    "name": "Saison",
+    "style": "Saison",
+    "abv": null
+  },
+  {
+    "brewery": "Clarion River Brewing Company",
+    "name": "IPA",
+    "style": "IPA",
+    "abv": null
+  },
+  {
+    "brewery": "Firewhistle Brewing",
+    "name": "First Due",
+    "style": "Blonde",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Firewhistle Brewing",
+    "name": "Firewhistle 139 Engine",
+    "style": "Irish Red",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Together Better",
+    "style": "Kolsch Style Ale",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Besor Faily",
+    "style": "American Pale Ale",
+    "abv": 5.7
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "It's Always Sunny with a Beer",
+    "style": "Session NEIPA",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "You Do You",
+    "style": "Non-Alcoholic Mango Guava Wheat",
+    "abv": 0.5
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "Lacto Kooler Green",
+    "style": "Sour Berliner Weisse",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "CreamSickel",
+    "style": "Orange Cream Light Lager",
+    "abv": 4.7
+  },
+  {
+    "brewery": "Old Thunder Brewing Company",
+    "name": "False Kingdom",
+    "style": "Lager",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Jackworth Ginger Beer",
+    "name": "Jackworth Ginger Beer Classic",
+    "style": "Alcoholic Ginger Beer",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Jackworth Ginger Beer",
+    "name": "Jackworth Ginger Beer Spicy",
+    "style": "Non-Alcoholic Ginger Beer",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Shortcake",
+    "style": "Strawberry Creme Ale",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Shellacked!",
+    "style": "IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Cold Drip City",
+    "style": "Coffee Blonde",
+    "abv": 5.9
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Rye Demise",
+    "style": "IPA",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Killer Diller",
+    "style": "IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Stella",
+    "style": "Dry Red",
+    "abv": 14.8
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Chardonnay",
+    "style": "Dry White",
+    "abv": 12.0
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Rose'",
+    "style": "Dry Rose'",
+    "abv": 15.4
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Riesling",
+    "style": "Semi-Dry White",
+    "abv": 12.5
+  },
+  {
+    "brewery": "Narcisi Winery",
+    "name": "Black Raspberry",
+    "style": "Sweet Fruit",
+    "abv": 11.5
+  },
+  {
+    "brewery": "Butler Area Society of Homebrewers",
+    "name": "Here Goes Sunshine",
+    "style": "Hazy IPA",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Butler Area Society of Homebrewers",
+    "name": "Common Ground",
+    "style": "Kentucky Common",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Trace Brewing",
+    "name": "Unknown Light Beer",
+    "style": "Lager or Pilsner",
+    "abv": null
+  },
+  {
+    "brewery": "Trace Brewing",
+    "name": "Unknown Hoppy Beer",
+    "style": "IPA or Pale Ale",
+    "abv": null
+  },
+  {
+    "brewery": "Big Rail Brewing",
+    "name": "Old Blue",
+    "style": "Cream Ale",
+    "abv": 4.0
+  },
+  {
+    "brewery": "Big Rail Brewing",
+    "name": "Black Knuckle",
+    "style": "Black IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Big Rail Brewing",
+    "name": "Wrought Iron",
+    "style": "Red Ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Fruiting Bodies",
+    "style": "Raspberry Wit",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Chillin' on the Roof",
+    "style": "IPA",
+    "abv": 7.7
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Banana Hammock",
+    "style": "Hefeweizen",
+    "abv": 5.4
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Bob!",
+    "style": "Sour Ale",
+    "abv": 7.5
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Cattitude",
+    "style": "West-Coast IPA",
+    "abv": 7.3
+  },
+  {
+    "brewery": "ShuBrew",
+    "name": "Streamline",
+    "style": "West-Coast Pilsner",
+    "abv": 5.9
+  },
+  {
+    "brewery": "Inner Groove",
+    "name": "Freaky Secrets",
+    "style": "Hazy IPA",
+    "abv": 6.3
+  },
+  {
+    "brewery": "Inner Groove",
+    "name": "Big Noise",
+    "style": "DIPA",
+    "abv": 8.0
+  },
+  {
+    "brewery": "Inner Groove",
+    "name": "Celebrity Hot Tub",
+    "style": "Brown Ale",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Inner Groove",
+    "name": "Gilded Cage",
+    "style": "Key Lime Pie Sour",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Inner Groove",
+    "name": "Mandarin Rain",
+    "style": "Mandarin Belgian Wheat",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Hop Farm Light",
+    "style": "Light Lager",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Pittsburgh Pale Ale",
+    "style": "American Pale Ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Let It Happen",
+    "style": "Thiolized NEIPA",
+    "abv": 7.6
+  },
+  {
+    "brewery": "Eleventh Hour Brewery",
+    "name": "Marvin",
+    "style": "Dry-Hopped Saison",
+    "abv": 5.25
+  },
+  {
+    "brewery": "Eleventh Hour Brewery",
+    "name": "Robojack",
+    "style": "NEIPA",
+    "abv": 7.1
+  },
+  {
+    "brewery": "Eleventh Hour Brewery",
+    "name": "Alternate Course #6",
+    "style": "Watermelon Raspberry Lemonade Sour",
+    "abv": 6.1
+  },
+  {
+    "brewery": "Eleventh Hour Brewery",
+    "name": "Eleven Eleven",
+    "style": "Lemon Shandy",
+    "abv": 4.3
+  },
+  {
+    "brewery": "Hazel Grove Brewing",
+    "name": "Saichuan",
+    "style": "Saison",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Hazel Grove Brewing",
+    "name": "Panda's Choice",
+    "style": "Belgian Tripel",
+    "abv": 9.8
+  },
+  {
+    "brewery": "Leaning Cask",
+    "name": "Zoomies 7th Anniversary",
+    "style": "West Coast IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Leaning Cask",
+    "name": "Pedigree Fruited Sour",
+    "style": "Raspberry Lemonade",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Leaning Cask",
+    "name": "Irish Wolfhound",
+    "style": "Stout",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "Dahl",
+    "style": "Peach Chipotle Saison",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "Rescue",
+    "style": "Kolsch Style Ale",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "3Day Weekend vol. 2",
+    "style": "Mango Wheat",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Altered Genius Brewing Co.",
+    "name": "Hoptruvian",
+    "style": "American IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Ovation",
+    "style": "Hazy IPA",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "White Rabbit",
+    "style": "Belgian-Style Witbier",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Out of Tune Blueberry Plum",
+    "style": "Fruited Sour",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Fermata Brewing Company",
+    "name": "Adagio",
+    "style": "Bourbon Barrel-Aged Imperial Stout",
+    "abv": 12.9
+  },
+  {
+    "brewery": "Pittsburgh Brewing Company",
+    "name": "Poolside",
+    "style": "Pineapple Shandy",
+    "abv": 4.2
+  },
+  {
+    "brewery": "Pittsburgh Brewing Company",
+    "name": "IC Light Mango",
+    "style": "Mango Light Lager",
+    "abv": 3.8
+  },
+  {
+    "brewery": "Pittsburgh Brewing Company",
+    "name": "Iron City Lager",
+    "style": "Lager",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Pittsburgh Brewing Company",
+    "name": "Evil Eye IPA",
+    "style": "IPA",
+    "abv": 7.2
+  },
+  {
+    "brewery": "Pittsburgh Brewing Company",
+    "name": "Red Eye Rye Pale Ale",
+    "style": "Pale Ale",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Threadbare Ciderhouse",
+    "name": "Farmhouse",
+    "style": "Hard Cider",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Threadbare Ciderhouse",
+    "name": "Bouquet de Rose",
+    "style": "Hard Cider",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Threadbare Ciderhouse",
+    "name": "Pineapple",
+    "style": "Hard Cider",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Threadbare Ciderhouse",
+    "name": "Guava",
+    "style": "Hard Cider",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Threadbare Ciderhouse",
+    "name": "Hopped Hard Ciders",
+    "style": "Hard Cider",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Threadbare Ciderhouse",
+    "name": "Sweet Mead",
+    "style": "Mead",
+    "abv": 14.0
+  },
+  {
+    "brewery": "Wigle Whiskey",
+    "name": "Maple Rye Old Fashioned",
+    "style": "Whiskey",
+    "abv": null
+  },
+  {
+    "brewery": "Allusion Brewing Co.",
+    "name": "Rock for Life",
+    "style": "Mexican Lager with Lime",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Allusion Brewing Co.",
+    "name": "Down on Duval",
+    "style": "Key Lime Pie Sour",
+    "abv": 3.5
+  },
+  {
+    "brewery": "Allusion Brewing Co.",
+    "name": "Alternate Ending",
+    "style": "Hazy IPA",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Dough Daddy Brewery",
+    "name": "Hopping Daddy",
+    "style": "Pale Ale",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Dough Daddy Brewery",
+    "name": "Dough Mommy Raspberry Seltzer",
+    "style": "Raspberry Seltzer",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Laurel Highlands Meadery",
+    "name": "Peach-Mango Sparkling Mead",
+    "style": "Sparkling Mead",
+    "abv": 7.5
+  },
+  {
+    "brewery": "Laurel Highlands Meadery",
+    "name": "Kolsch Style Sparkling Mead",
+    "style": "Sparkling Mead",
+    "abv": 9.0
+  },
+  {
+    "brewery": "Laurel Highlands Meadery",
+    "name": "Dragonfruit Sparkling Mead",
+    "style": "Sparkling Mead",
+    "abv": 7.5
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Satin in a Coffin",
+    "style": "Stout with Cacao Nibs",
+    "abv": 6.66
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Flowers Lean Toward the Sun",
+    "style": "Dry Hopped Saison",
+    "abv": 7.8
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Lazarus Taxon",
+    "style": "India Pale Ale",
+    "abv": 7.3
+  }
+]

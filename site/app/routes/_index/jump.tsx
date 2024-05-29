@@ -59,7 +59,7 @@ export function Jump({isVisible, setIsVisible, names}: Props) {
               {names.map((name) => (
                 <div
                   key={name}
-                  className="m-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#BE485C] text-white"
+                  className="m-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#7b9730] text-white"
                   onClick={handleJump(name)}
                 >
                   {name}
