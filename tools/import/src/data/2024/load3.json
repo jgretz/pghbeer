@@ -1,0 +1,74 @@
+[
+  {
+    "brewery": "Sobel's Obscure Brewery",
+    "name": "Meet the Millers",
+    "style": "Coffee Blonde Ale",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Sobel's Obscure Brewery",
+    "name": "Gunfighter's Ballad",
+    "style": "Grapefruit & Lime Ale",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Hazel Grove Brewing Company",
+    "name": "Saichuan",
+    "style": "Saison",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Blood Orange Wheat",
+    "style": "Fruit Beer",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Fashionably Late",
+    "style": "Hazy IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Common Man's Gold",
+    "style": "Coffee Stout",
+    "abv": 5.1
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Cucumber Falls",
+    "style": "Cucumber Wheat",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Noble Stein Brewing Company",
+    "name": "New Guinea Hijacked",
+    "style": "Coffee Porter",
+    "abv": 6.6
+  },
+  {
+    "brewery": "Noble Stein Brewing Company",
+    "name": "Thunder Chicken",
+    "style": "Hazy DIPA",
+    "abv": 7.6
+  },
+  {
+    "brewery": "Wye Beer Co.",
+    "name": "Beverly Haze 90210",
+    "style": "Imperial New England IPA",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Wye Beer Co.",
+    "name": "Where Eagles Dare",
+    "style": "American Lager",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Wye Beer Co.",
+    "name": "Wye Zen",
+    "style": "Blood Orange Hefeweizen",
+    "abv": 5.5
+  }
+]

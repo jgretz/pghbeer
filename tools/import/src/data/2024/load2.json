@@ -1,0 +1,50 @@
+[
+  {
+    "brewery": "Clarion River Brewing Company",
+    "name": "Horse Thief",
+    "style": "English mild",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Clarion River Brewing Company",
+    "name": "Margarita Gose-Inya",
+    "style": "Gose",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Monaca Brewing",
+    "name": "PennDot Orange",
+    "style": "Blood Orange Wheat",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Monaca Brewing",
+    "name": "Johnny Peppers",
+    "style": "Hot Honey Cider",
+    "abv": 4.7
+  },
+  {
+    "brewery": "Monaca Brewing",
+    "name": "Jelly Donut",
+    "style": "Blackberry Sour",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Full Pint Beer",
+    "name": "Blackberry White Lightning",
+    "style": "Witbier",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Full Pint Beer",
+    "name": "Lemon Refresher Shandy",
+    "style": "Shandy",
+    "abv": 5.9
+  },
+  {
+    "brewery": "Full Pint Beer",
+    "name": "Gold Rebellion",
+    "style": "Malt Liquor",
+    "abv": 10.0
+  }
+]
