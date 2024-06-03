@@ -1,0 +1,68 @@
+[
+  {
+    "brewery": "Athletic Brewing",
+    "name": "The Open Road",
+    "style": "Non-Alcoholic",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Mondays Brewing Company",
+    "name": "SMAH Sour #20: Prickly Pear and Peach",
+    "style": "Fruited Sour",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Mondays Brewing Company",
+    "name": "Shift Beer",
+    "style": "Amber Lager",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Conny Creek Brewing Co",
+    "name": "Take 2",
+    "style": "Hazy IPA",
+    "abv": 6.3
+  },
+  {
+    "brewery": "Conny Creek Brewing Co",
+    "name": "Helles",
+    "style": "Munich Style Lager",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Picket Bone Dry",
+    "style": "Cider",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Grierson's Ginger",
+    "style": "Cider",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Jump Run Gold Rush",
+    "style": "Cider",
+    "abv": 8.0
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Murray's Mead",
+    "style": "Mead",
+    "abv": 8.0
+  },
+  {
+    "brewery": "A Few Bad Apples Cider",
+    "name": "Dorothy Zbornak Rose",
+    "style": "Cider",
+    "abv": 6.0
+  },
+  {
+    "brewery": "A Few Bad Apples Cider",
+    "name": "Kveik Sec",
+    "style": "Cider",
+    "abv": 6.0
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "brewery": "Cellar Works Brewing",
+    "name": "Siberian Sky",
+    "style": "Russian Imperial Stout",
+    "abv": 12.0
+  },
+  {
+    "brewery": "Cellar Works Brewing",
+    "name": "Big Stream",
+    "style": "Kolsch",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Cellar Works Brewing",
+    "name": "Hundred Foot Robot",
+    "style": "Hazy IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Cellar Works Brewing",
+    "name": "Sex on the Beach Fruit Whip",
+    "style": "Smoothie Sour",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Four Seasons Brewing Company",
+    "name": "The Orchard",
+    "style": "Sour Ale with Blackberry and Lime",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Four Seasons Brewing Company",
+    "name": "Smackdown",
+    "style": "IPA",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Four Seasons Brewing Company",
+    "name": "Hall of Fame",
+    "style": "Hefeweizen Ale",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Tortured Souls Brewing",
+    "name": "Plumification",
+    "style": "Plum Sour",
+    "abv": 4.0
+  },
+  {
+    "brewery": "Tortured Souls Brewing",
+    "name": "Mango Fett",
+    "style": "Mango Blonde Ale",
+    "abv": 5.25
+  },
+  {
+    "brewery": "Golden Age Beer",
+    "name": "Sommer Pilsner",
+    "style": "Modern Pilsner",
+    "abv": 5.1
+  },
+  {
+    "brewery": "Golden Age Beer",
+    "name": "Maibock",
+    "style": "Heller Bock",
+    "abv": 6.0
+  }
+]
