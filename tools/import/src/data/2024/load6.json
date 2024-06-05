@@ -148,5 +148,11 @@
     "name": "Faust",
     "style": "Wild Ale",
     "abv": 9.3
+  },
+  {
+    "brewery": "Jackworth Ginger Beer",
+    "name": "Jackworth Ginger Beer Classic",
+    "style": "Non-Alcoholic Ginger Beer",
+    "abv": 0.0
   }
 ]
