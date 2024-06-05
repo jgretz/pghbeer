@@ -1,5 +1,5 @@
 import {PrismaClient, beers, breweries, styles} from '@prisma/client';
-import * as data from './data/2024/load5.json';
+import * as data from './data/2024/load6.json';
 
 interface LoadData {
   brewery: string;

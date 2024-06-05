@@ -1,0 +1,152 @@
+[
+  {
+    "brewery": "Recon Brewing",
+    "name": "Juice Head Baby",
+    "style": "Hazy IPA",
+    "abv": 6.3
+  },
+  {
+    "brewery": "Recon Brewing",
+    "name": "Nice & Crispy",
+    "style": "Kolsch",
+    "abv": 5.25
+  },
+  {
+    "brewery": "Burghers Brewing Company",
+    "name": "Deutschtown Pils",
+    "style": "Ger. Pilsner",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Burghers Brewing Company",
+    "name": "Lager",
+    "style": "American Lager",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Burghers Brewing Company",
+    "name": "Take Off Your Cool",
+    "style": "Cold IPA",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Burghers Brewing Company",
+    "name": "Lotus & Papyrus",
+    "style": "Hazy IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Moscow Mule",
+    "style": "Cocktail",
+    "abv": 11.5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Mojito",
+    "style": "Cocktail",
+    "abv": 13.0
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Gin & Juice",
+    "style": "Cocktail",
+    "abv": 10.5
+  },
+  {
+    "brewery": "Goodlander Cocktail Brewery",
+    "name": "Roselle",
+    "style": "Cocktail",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Funky Dory",
+    "style": "Barrel aged saison",
+    "abv": 4.0
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Screaming Tangerine",
+    "style": "Wheat ale with tangerine",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Smashing Watermelon",
+    "style": "Sour ale with watermelon",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Tartburst: Key Lime Pie",
+    "style": "Sour ale with key lime, vanilla, and graham cracker",
+    "abv": 6.9
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Double Hazedelic",
+    "style": "Double New England IPA",
+    "abv": 8.0
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Wheatin For the Weekend",
+    "style": "American Wheat Ale",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Kaboom Candy",
+    "style": "Blueberry Pomegranate Fruited Sour",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Picket Bone Dry",
+    "style": "Cider",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Grierson's Ginger",
+    "style": "Cider",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Jump Run Gold Rush",
+    "style": "Cider",
+    "abv": 8.0
+  },
+  {
+    "brewery": "Arsenal Cider House",
+    "name": "Murray's Mead",
+    "style": "Mead",
+    "abv": 8.4
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Glyphs",
+    "style": "Pale Ale",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Stark",
+    "style": "Heller Bock",
+    "abv": 6.2
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Summer Lupula",
+    "style": "IPA",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Faust",
+    "style": "Wild Ale",
+    "abv": 9.3
+  }
+]
