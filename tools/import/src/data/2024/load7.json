@@ -1,0 +1,32 @@
+[
+  {
+    "brewery": "Athletic Brewing Co.",
+    "name": "Cerveza Athletica",
+    "style": "Non-Alcoholic Beer",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Athletic Brewing Co.",
+    "name": "Free Wave Hazy IPA",
+    "style": "Non-Alcoholic Beer",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Athletic Brewing Co.",
+    "name": "LITE",
+    "style": "Non-Alcoholic Beer",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Athletic Brewing Co.",
+    "name": "Run Wild IPA",
+    "style": "Non-Alcoholic Beer",
+    "abv": 0.0
+  },
+  {
+    "brewery": "Athletic Brewing Co.",
+    "name": "Upside Dawn Golden Ale",
+    "style": "Non-Alcoholic Beer",
+    "abv": 0.0
+  }
+]
