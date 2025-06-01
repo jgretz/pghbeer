@@ -1,0 +1,578 @@
+[
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Lustra",
+    "style": "Hazy Pale",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Dancing Gnome",
+    "name": "Pilsner",
+    "style": "German Lager",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Cindi's Mango Bango Hard Mountain Tea",
+    "style": "Flavored Malt Beverage",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "West Coast Squish IPA",
+    "style": "IPA - American",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Cinderlands Beer Co.",
+    "name": "Douse Imperial Stout",
+    "style": "Stout - Imperial / Double",
+    "abv": 13.0
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Cubic Duck",
+    "style": "Hazy IPA",
+    "abv": 6.3
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Trail Run",
+    "style": "Lemon Ginger Radler",
+    "abv": null
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Unicorn Sidecar Raspberry Dragon",
+    "style": "Fruit Sour",
+    "abv": null
+  },
+  {
+    "brewery": "Velum Fermentation",
+    "name": "Milling A Round",
+    "style": "Amber Lager",
+    "abv": null
+  },
+  {
+    "brewery": "Helicon Brewing",
+    "name": "Session Hazy IPA / GABF Style 18",
+    "style": "Session India Pale Ale",
+    "abv": 4.7
+  },
+  {
+    "brewery": "Helicon Brewing",
+    "name": "Raspberry Wheat Ale / GABF Style 3",
+    "style": "Fruit Wheat Beer",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Firewhistle Brewing",
+    "name": "139 Engine",
+    "style": "Irish Red",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Firewhistle Brewing",
+    "name": "Firelight",
+    "style": "American Lager",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Desperation Kolsch",
+    "style": "Kolsch",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Blood Orange Wheat",
+    "style": "Fruit Wheat",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Desert Island Stout",
+    "style": "Coconut Stout",
+    "abv": 6.1
+  },
+  {
+    "brewery": "Rusty Gold Brewing",
+    "name": "Green Pipe Cleaners",
+    "style": "Spruce Pale Ale",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Dough Daddy Brewery",
+    "name": "Hazy Dough Dazy IPA",
+    "style": "IPA - New England / Hazy",
+    "abv": 5.9
+  },
+  {
+    "brewery": "Dough Daddy Brewery",
+    "name": "Traveling Wit",
+    "style": "Wheat Beer - Witbier / Blanche",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Dough Daddy Brewery",
+    "name": "Prickly Pear Sour",
+    "style": "Sour - Fruited",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Adjective + Noun",
+    "style": "IPA - New England / Hazy",
+    "abv": 7.9
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Margotberry",
+    "style": "Sour - Berliner Weisse",
+    "abv": 7.5
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Croquet Lawns, Village Greens",
+    "style": "ESB",
+    "abv": null
+  },
+  {
+    "brewery": "Hop Farm Brewing Company",
+    "name": "Perambulator",
+    "style": "Maibock",
+    "abv": null
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Reach Out Touch Haze",
+    "style": "Hazy IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Spoonwood Brewing Co.",
+    "name": "Que Suerte",
+    "style": "Salted Lime Lager",
+    "abv": 5.0
+  },
+  {
+    "brewery": "COBBLEHAUS BREWING CO",
+    "name": "Black Bear",
+    "style": "Black IPA",
+    "abv": 7.5
+  },
+  {
+    "brewery": "COBBLEHAUS BREWING CO",
+    "name": "Bugsy",
+    "style": "Blueberry Sour",
+    "abv": 4.3
+  },
+  {
+    "brewery": "COBBLEHAUS BREWING CO",
+    "name": "Lucky Me",
+    "style": "Belgian Tripel",
+    "abv": 9.9
+  },
+  {
+    "brewery": "COBBLEHAUS BREWING CO",
+    "name": "C-VIII",
+    "style": "Belgian Dubbel",
+    "abv": 7.1
+  },
+  {
+    "brewery": "Mondays Brewing",
+    "name": "Peach",
+    "style": "Sour",
+    "abv": null
+  },
+  {
+    "brewery": "Mondays Brewing",
+    "name": "Peach/Passionfruit Sour",
+    "style": "Sour",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Mondays Brewing",
+    "name": "Greenfield Lager",
+    "style": "Lager",
+    "abv": 5
+  },
+  {
+    "brewery": "Allusion Brewing Company",
+    "name": "Chasing Mavericks",
+    "style": "Double West Coast IPA ABV",
+    "abv": 8.5
+  },
+  {
+    "brewery": "Allusion Brewing Company",
+    "name": "Infinite Improbability",
+    "style": "English ESB ABV",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Allusion Brewing Company",
+    "name": "Phoenix Tears",
+    "style": "Blood Orange IPA ABV",
+    "abv": 6.74
+  },
+  {
+    "brewery": "Allusion Brewing Company",
+    "name": "First Day",
+    "style": "Vanilla Mocha White Stout",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Squatch Brewing",
+    "name": "One of These Haze",
+    "style": "Hazy NEIPA ABV",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Squatch Brewing",
+    "name": "Finns",
+    "style": "Irish Stout",
+    "abv": 4.1
+  },
+  {
+    "brewery": "Squatch Brewing",
+    "name": "Big Hazy Bastard",
+    "style": "Hazy NEIPA ABV",
+    "abv": 6.2
+  },
+  {
+    "brewery": "Squatch Brewing",
+    "name": "El Squatcho",
+    "style": "Mexican Lager ABV",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Squatch Brewing",
+    "name": "YDK Jack",
+    "style": "Czech Pils ABV",
+    "abv": 5.1
+  },
+  {
+    "brewery": "Squatch Brewing",
+    "name": "Howl at the Moon",
+    "style": "Helles ABV",
+    "abv": 5.2
+  },
+  {
+    "brewery": "Tortured Souls Brewing",
+    "name": "Lemon'nade",
+    "style": "Gose",
+    "abv": null
+  },
+  {
+    "brewery": "Tortured Souls Brewing",
+    "name": "Heretic's Muse",
+    "style": "Double IPA",
+    "abv": null
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Something Analog",
+    "style": "German Pilsner",
+    "abv": 4.5
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Lupulin Nouveau #005",
+    "style": "India Pale Ale with Motueka & Triumph Hops",
+    "abv": 6.9
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Nom De Guerre (collab w Day Bracey)",
+    "style": "Imperial Stout with honey & coffee",
+    "abv": 9.3
+  },
+  {
+    "brewery": "New France Brewing Company",
+    "name": "Joie De Vivre",
+    "style": "Belgian White Ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Cult Classic",
+    "style": " West Coast IPA",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Eleven Eleven",
+    "style": "Lemon Shandy",
+    "abv": 4.3
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Creekside Krush",
+    "style": "New England IPA",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Eleventh Hour Brewing",
+    "name": "Charlotte Street",
+    "style": "American Pilsner",
+    "abv": 4.4
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Ice Cream Sour [Pineapple Shortcake] (ICS v1.38)",
+    "style": "Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Ice Cream Cake Sour [Cherry] (ICCS v1.3)",
+    "style": "Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "Candied Sour [Blue Razz Slush/Strawberry/Blue Dream Terps] (CDS v1.44)",
+    "style": "Sour",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Abjuration Brewing",
+    "name": "India Pale Ale (IPA v6.38)",
+    "style": "IPA",
+    "abv": 6.9
+  },
+  {
+    "brewery": "CoStar Brewing",
+    "name": "Maibock",
+    "style": "Maibock",
+    "abv": 7.1
+  },
+  {
+    "brewery": "CoStar Brewing",
+    "name": "Cream Ale",
+    "style": "Cream Ale",
+    "abv": 5.0
+  },
+  {
+    "brewery": "CoStar Brewing",
+    "name": "Oatmeal Stout",
+    "style": "Oatmeal Stout",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Hazel Grove Brewing",
+    "name": "Pittsburgh Weather",
+    "style": "Hazy IPA",
+    "abv": 6.2
+  },
+  {
+    "brewery": "Hazel Grove Brewing",
+    "name": "Beech Vibes",
+    "style": "Smoked Porter",
+    "abv": 6.9
+  },
+  {
+    "brewery": "Local Remedy Brewing",
+    "name": "Seventh Street",
+    "style": "Hazy IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Local Remedy Brewing",
+    "name": "Hulton",
+    "style": "American Lager",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Local Remedy Brewing",
+    "name": "Sum of Parts",
+    "style": "West Coast Pilsner",
+    "abv": 5.6
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Jen's",
+    "style": "Porter",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Tilted Hurricane",
+    "style": "Cream Ale",
+    "abv": 4.3
+  },
+  {
+    "brewery": "Two Frays Brewery",
+    "name": "Mindful Rebel",
+    "style": "Non-Alc Kolsch",
+    "abv": 0.5
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "Slurrrrricane",
+    "style": "heavily fruited sour collaboration with FourScore Beer Co.",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "HAZY VIBES",
+    "style": "New England style IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "Lacto Kooler Green",
+    "style": "Sour Berliner weisse style ale",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "Crick Crusher Series",
+    "style": "American Wheat Ale ABV",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "Key Lime Kolsch",
+    "style": "Kolsch style ale",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Voodoo",
+    "name": "Oh Mama",
+    "style": "Golden American Lager",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Recon Brewing",
+    "name": "Higher Calling",
+    "style": "Hazy IPA",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Recon Brewing",
+    "name": "London Underground",
+    "style": "ESB",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Inner Groove Brewing",
+    "name": "Mental Freeze",
+    "style": "Hazy IPA",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Inner Groove Brewing",
+    "name": "Sleepy Eyes",
+    "style": "Blueberry Torte Sour",
+    "abv": 5.3
+  },
+  {
+    "brewery": "Inner Groove Brewing",
+    "name": "Lucifer is Lonely",
+    "style": "Helles Lage",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Prismatic",
+    "style": "IPA",
+    "abv": 7.0
+  },
+  {
+    "brewery": "Lolev Beer",
+    "name": "Vindobona",
+    "style": "Vienna Lager",
+    "abv": 6.3
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Tartburst: Mangoes and Cream",
+    "style": "Sour - Fruited",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Tartburst: Key Lime Pie",
+    "style": "Sour - Fruited",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Brewer's Tap: Plum and Date",
+    "style": "Sour - Other",
+    "abv": 5.8
+  },
+  {
+    "brewery": "Strange Roots Experimental Ales",
+    "name": "Brewer's Tap: Strawberry Vanilla",
+    "style": "Sour - Fruited",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Golden Age",
+    "name": "Italian Pils",
+    "style": "Dry Hopped Pilsner",
+    "abv": 4.7
+  },
+  {
+    "brewery": "Golden Age",
+    "name": "Maibock",
+    "style": "Heller Bock",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Penn Brewery",
+    "name": "Strawberry Funnel Cake Shandy",
+    "style": "Strawberry Cream Ale",
+    "abv": 6.32
+  },
+  {
+    "brewery": "Penn Brewery",
+    "name": "Penn Pilsner",
+    "style": "Lager",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Penn Brewery",
+    "name": "Sleigher Black IPA",
+    "style": "Black IPA",
+    "abv": 5.5
+  },
+  {
+    "brewery": "Penn Brewery",
+    "name": "Kaiser Pils",
+    "style": "N German Pils",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Shubrew",
+    "name": "Van ShuBrew Imperial IPA (10th Anniversary)",
+    "style": "Imperial IPA",
+    "abv": 8.0
+  },
+  {
+    "brewery": "Shubrew",
+    "name": "Shupacabra Lime",
+    "style": "Mexican Lager",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Shubrew",
+    "name": "Jumpman Pixelated",
+    "style": "Hazy IPA",
+    "abv": 6.0
+  },
+  {
+    "brewery": "Shubrew",
+    "name": "Just One More",
+    "style": "Belgian Single",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Shubrew",
+    "name": "Bubbly Theory",
+    "style": "Hard Seltzer",
+    "abv": 5.0
+  }
+]

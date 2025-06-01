@@ -1,5 +1,5 @@
 import {PrismaClient, beers, breweries, styles} from '@prisma/client';
-import * as data from './data/2024/load7.json';
+import * as data from './data/2025/load1.json';
 
 interface LoadData {
   brewery: string;
@@ -8,7 +8,7 @@ interface LoadData {
   abv: number;
 }
 
-const EVENT_ID = 6;
+const EVENT_ID = 7;
 const prisma = new PrismaClient();
 
 // breweries
