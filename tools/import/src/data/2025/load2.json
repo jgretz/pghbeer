@@ -1,0 +1,38 @@
+[
+  {
+    "brewery": "Chimera Brewing",
+    "name": "Persephone's Light",
+    "style": "Kölsch",
+    "abv": 4.8
+  },
+  {
+    "brewery": "Chimera Brewing",
+    "name": "Goddess of Hop",
+    "style": "IPA - American",
+    "abv": 6.5
+  },
+  {
+    "brewery": "Late Addition Brewing + Blending",
+    "name": "Lady Divine",
+    "style": "IPA - New England / Hazy",
+    "abv": 7.2
+  },
+  {
+    "brewery": "Late Addition Brewing + Blending",
+    "name": "Unser Dunkelbier",
+    "style": "Lager - Munich Dunkel",
+    "abv": 4.9
+  },
+  {
+    "brewery": "Late Addition Brewing + Blending",
+    "name": "May Day",
+    "style": "Bock - Hell / Maibock / Lentebock",
+    "abv": 7.7
+  },
+  {
+    "brewery": "Late Addition Brewing + Blending",
+    "name": "Late Hop",
+    "style": "IPA - Red",
+    "abv": 7.0
+  }
+]
