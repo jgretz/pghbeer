@@ -1,0 +1,80 @@
+[
+  {
+    "brewery": "Wye Beer Co.",
+    "name": "Mountain Peak Pale Ale",
+    "style": "Pale Ale - American",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Wye Beer Co.",
+    "name": "S&M Daydream",
+    "style": "Sour - Fruited",
+    "abv": 7.3
+  },
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "General Braddock's",
+    "style": "IPA - American",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "Albatross",
+    "style": "IPA - Imperial / Double",
+    "abv": 8.0
+  },
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "Pacific Rose",
+    "style": "IPA - American",
+    "abv": 6.9
+  },
+  {
+    "brewery": "Brew Gentlemen",
+    "name": "Royal Hawaiian",
+    "style": "IPA - American",
+    "abv": 7.1
+  },
+  {
+    "brewery": "Acrospire Brewing",
+    "name": "Hear No Evil",
+    "style": "Wheat Beer - Other",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Acrospire Brewing",
+    "name": "Dubbel Secret Probation",
+    "style": "Belgian Dubbel",
+    "abv": 7.8
+  },
+  {
+    "brewery": "Trace Brewing",
+    "name": "Pils",
+    "style": "Pilsner - German",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Trace Brewing",
+    "name": "Prism & Progress",
+    "style": "IPA - American",
+    "abv": 7.7
+  },
+  {
+    "brewery": "Conny Creek Brewing Co.",
+    "name": "Pat's Other Sister",
+    "style": "IPA - New England / Hazy",
+    "abv": 6.8
+  },
+  {
+    "brewery": "Conny Creek Brewing Co.",
+    "name": "Lime Lager",
+    "style": "Lager - American",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Conny Creek Brewing Co.",
+    "name": "Birdsfoot IPA",
+    "style": "IPA - American",
+    "abv": 5.5
+  }
+]
