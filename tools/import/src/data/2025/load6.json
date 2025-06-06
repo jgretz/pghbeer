@@ -1,0 +1,32 @@
+[
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Krispedelic",
+    "style": "Hopped Kolsch",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Pineapple Hazedelic",
+    "style": "NEIPA",
+    "abv": 6.4
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Kaboom Candy",
+    "style": "Fruited Sour",
+    "abv": 4.5
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "Zest Apeel",
+    "style": "Citrus Wheat",
+    "abv": 5.0
+  },
+  {
+    "brewery": "Grist House Craft Brewery",
+    "name": "11th Anniversary Reserve BA Stout",
+    "style": "Stout - Imperial / Double",
+    "abv": 12.3
+  }
+]
