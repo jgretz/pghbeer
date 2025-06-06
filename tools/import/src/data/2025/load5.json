@@ -1,0 +1,20 @@
+[
+  {
+    "brewery": "Old Thunder Brewing Company",
+    "name": "The Power of Ink",
+    "style": "Vienna-style Lager",
+    "abv": 4.6
+  },
+  {
+    "brewery": "Old Thunder Brewing Company",
+    "name": "Streetlight Stars",
+    "style": "Cream Ale",
+    "abv": 5.4
+  },
+  {
+    "brewery": "Old Thunder Brewing Company",
+    "name": "Riddles in your Eyes",
+    "style": "Hazy IPA",
+    "abv": 6.8
+  }
+]
