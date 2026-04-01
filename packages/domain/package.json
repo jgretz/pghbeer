@@ -1,0 +1,14 @@
+{
+  "name": "domain",
+  "private": true,
+  "type": "module",
+  "module": "src/index.ts",
+  "dependencies": {
+    "database": "workspace:*",
+    "drizzle-orm": "0.30.10",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}

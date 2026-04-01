@@ -1,0 +1,33 @@
+{
+  "name": "pghbeer",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "concurrently": "^9.1.2",
+    "drizzle-orm": "0.30.10",
+    "prettier": "^3.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "workspaces": [
+    "apps/api",
+    "apps/www",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently bun:dev:api bun:dev:www",
+    "dev:api": "bun run --cwd apps/api dev",
+    "dev:www": "bun run --cwd apps/www dev",
+    "build": "concurrently bun:build:*",
+    "build:www": "cd apps/www && bun run build",
+    "typecheck": "concurrently bun:typecheck:*",
+    "typecheck:www": "cd apps/www && bun run typecheck",
+    "db:generate": "bun run --cwd packages/database generate",
+    "db:migrate": "bun run --cwd packages/database migrate",
+    "import": "bun run scripts/import.ts",
+    "deploy:api": "fly deploy --config ./deploy/api/fly.toml --dockerfile ./deploy/api/Dockerfile",
+    "deploy:www": "fly deploy --config ./deploy/www/fly.toml --dockerfile ./deploy/www/Dockerfile"
+  }
+}
