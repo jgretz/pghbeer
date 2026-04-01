@@ -1,3 +1,38 @@
 node_modules
-# Keep environment variables out of version control
+dist
 .env
+.env.*
+!.env.example
+bun.lock
+
+# Build artifacts
+*.tsbuildinfo
+.vinxi
+.output
+
+# TanStack generated
+apps/www/src/routeTree.gen.ts
+
+# Claude
+CLAUDE-WORKING.md
+.mcp.json
+.worksite/
+.claude/hooks/
+.claude/settings.local.json
+.claude/rules/worksite-worker.md
+.claude/rules/worksite-verification.md
+.claude/rules/worksite-debugging.md
+.claude/rules/worksite-deduplication.md
+.claude/rules/worksite-reviewer.md
+.claude/rules/worksite-planner.md
+.claude/rules/worksite-planning.md
+.claude/rules/worksite-docs.md
+.claude/commands/worker-commit.md
+.claude/commands/review.md
+.claude/commands/night-shift.md
+.claude/commands/introspect.md
+.claude/commands/curate-ideas.md
+.claude/skills/planner-default.md
+.claude/skills/worker-default.md
+.claude/skills/reviewer-default.md
+.claude/reviews/
