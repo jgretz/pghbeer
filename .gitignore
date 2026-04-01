@@ -10,6 +10,10 @@ bun.lock
 .vinxi
 .output
 
+# Drizzle introspection artifacts
+packages/database/drizzle/schema.ts
+packages/database/drizzle/relations.ts
+
 # TanStack generated
 apps/www/src/routeTree.gen.ts
 

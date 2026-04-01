@@ -5,7 +5,8 @@
   "devDependencies": {
     "@types/bun": "latest",
     "concurrently": "^9.1.2",
-    "drizzle-orm": "0.30.10",
+    "dotenv": "^17.3.1",
+    "drizzle-orm": "^0.45.2",
     "prettier": "^3.3.0"
   },
   "peerDependencies": {
@@ -24,8 +25,9 @@
     "build:www": "cd apps/www && bun run build",
     "typecheck": "concurrently bun:typecheck:*",
     "typecheck:www": "cd apps/www && bun run typecheck",
-    "db:generate": "bun run --cwd packages/database generate",
-    "db:migrate": "bun run --cwd packages/database migrate",
+    "db:generate": "source .env && bun run --cwd packages/database generate",
+    "db:migrate": "source .env && bun run --cwd packages/database migrate",
+    "db:pull": "source .env && bun run --cwd packages/database pull",
     "import": "bun run scripts/import.ts",
     "deploy:api": "fly deploy --config ./deploy/api/fly.toml --dockerfile ./deploy/api/Dockerfile",
     "deploy:www": "fly deploy --config ./deploy/www/fly.toml --dockerfile ./deploy/www/Dockerfile"

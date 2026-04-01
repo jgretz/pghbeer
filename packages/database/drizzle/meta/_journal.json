@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1775073516218,
+      "tag": "0000_fluffy_orphan",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1775073724172,
+      "tag": "0001_add-beverage-type-and-is-na",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775073828403,
+      "tag": "0002_make-beverage-type-and-is-na-not-null",
+      "breakpoints": true
+    }
+  ]
+}
