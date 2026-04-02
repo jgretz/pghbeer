@@ -11,10 +11,22 @@ export interface Style {
   name: string;
 }
 
+export type BeverageType =
+  | 'beer'
+  | 'wine'
+  | 'mead'
+  | 'cocktail'
+  | 'cider'
+  | 'seltzer'
+  | 'hard_tea'
+  | 'na';
+
 export interface Beer {
   id: number;
   name: string;
   abv: number | null;
+  beverageType: BeverageType;
+  isNA: boolean;
   brewery: Brewery;
   style: Style;
 }

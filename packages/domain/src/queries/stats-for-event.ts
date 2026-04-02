@@ -15,6 +15,8 @@ export async function statsForEvent(eventId: number): Promise<StatItem[]> {
       beerId: beers.id,
       beerName: beers.name,
       abv: beers.abv,
+      beverageType: beers.beverageType,
+      isNa: beers.isNa,
       breweryId: breweries.id,
       breweryName: breweries.name,
       styleName: styles.name,
@@ -33,6 +35,8 @@ export async function statsForEvent(eventId: number): Promise<StatItem[]> {
       id: row.beerId,
       name: row.beerName,
       abv: row.abv,
+      beverageType: row.beverageType,
+      isNA: row.isNa,
       brewery: {
         id: row.breweryId,
         name: row.breweryName,
