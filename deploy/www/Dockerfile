@@ -30,6 +30,7 @@ COPY --from=build /app/packages /app/packages
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/apps/www/node_modules /app/apps/www/node_modules
 COPY --from=build /app/apps/www/package.json /app/apps/www/package.json
+COPY --from=build /app/apps/www/server.ts /app/apps/www/server.ts
 COPY --from=build /app/apps/www/dist /app/apps/www/dist
 
 WORKDIR /app/apps/www
