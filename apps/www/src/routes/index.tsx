@@ -156,7 +156,7 @@ function IndexPage() {
         />
       )}
 
-      <JumpFab onClick={() => setJumpOpen(true)} />
+      {!jumpOpen && <JumpFab onClick={() => setJumpOpen(true)} />}
 
       {jumpOpen && (
         <JumpSheet
