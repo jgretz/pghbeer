@@ -23,7 +23,7 @@ export function JumpSheet({breweries, onSelect, onClose}: JumpSheetProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[430px] rounded-t-[20px] bg-surface px-4 pb-9 pt-5 shadow-[0_-4px_20px_var(--color-shadow)]"
+        className="w-full max-w-[600px] rounded-t-[20px] bg-surface px-4 pb-9 pt-5 shadow-[0_-4px_20px_var(--color-shadow)]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mx-auto mb-4 h-1 w-9 rounded-full bg-border" />

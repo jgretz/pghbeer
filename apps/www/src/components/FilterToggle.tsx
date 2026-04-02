@@ -1,6 +1,6 @@
 interface FilterToggleProps {
   label: string;
-  icon: string;
+  icon?: string;
   active: boolean;
   onClick: () => void;
   variant: 'na' | 'tried';
@@ -21,7 +21,7 @@ export function FilterToggle({label, icon, active, onClick, variant}: FilterTogg
           : 'border-[1.5px] border-border bg-surface text-text-secondary'
       }`}
     >
-      <span className="text-[13px]">{icon}</span> {label}
+      {icon && <span className="text-[13px]">{icon}</span>}{label}
     </button>
   );
 }

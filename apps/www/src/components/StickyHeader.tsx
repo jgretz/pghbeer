@@ -6,6 +6,7 @@ import type {Theme} from '../lib/theme';
 interface StickyHeaderProps {
   theme: Theme;
   onToggleTheme: () => void;
+  eventDate?: string;
   tried: number;
   total: number;
   filtersVisible: boolean;
@@ -15,9 +16,16 @@ interface StickyHeaderProps {
   onScrollToTop: () => void;
 }
 
+function formatEventDate(dateStr?: string): string {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+}
+
 export function StickyHeader({
   theme,
   onToggleTheme,
+  eventDate,
   tried,
   total,
   filtersVisible,
@@ -32,8 +40,14 @@ export function StickyHeader({
         <img
           src="/assets/botb-logo.jpg"
           alt="Beers of the Burgh"
-          className="h-[38px] object-contain"
+          className="h-[38px] rounded-full object-contain"
         />
+        <div className="flex flex-col items-center">
+          <span className="font-display text-sm font-bold leading-tight text-text">Beers of the Burgh</span>
+          {eventDate && (
+            <span className="text-[11px] leading-tight text-text-secondary">{formatEventDate(eventDate)}</span>
+          )}
+        </div>
         <button
           onClick={onToggleTheme}
           className="flex h-[42px] w-[42px] items-center justify-center rounded-xl border-[1.5px] border-border bg-bg text-lg transition-all"

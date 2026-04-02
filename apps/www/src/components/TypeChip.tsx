@@ -1,11 +1,10 @@
 interface TypeChipProps {
   label: string;
-  icon?: string;
   active: boolean;
   onClick: () => void;
 }
 
-export function TypeChip({label, icon, active, onClick}: TypeChipProps) {
+export function TypeChip({label, active, onClick}: TypeChipProps) {
   return (
     <button
       onClick={onClick}
@@ -15,7 +14,6 @@ export function TypeChip({label, icon, active, onClick}: TypeChipProps) {
           : 'border-[1.5px] border-border bg-surface text-text-secondary'
       }`}
     >
-      {icon && <span className="text-[13px]">{icon}</span>}
       {label}
     </button>
   );

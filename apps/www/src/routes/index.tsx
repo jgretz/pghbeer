@@ -23,7 +23,9 @@ export const Route = createFileRoute('/')({
 
 function IndexPage() {
   const {theme, toggle: toggleTheme} = useTheme();
-  const {data: breweries, isLoading} = useEventData();
+  const {data, isLoading} = useEventData();
+  const breweries = data?.breweries;
+  const eventInfo = data?.event;
   const {tried, toggle: toggleTried} = useTriedSet();
   const [jumpOpen, setJumpOpen] = useState(false);
 
@@ -87,7 +89,7 @@ function IndexPage() {
 
   if (isLoading && !breweries) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-[430px] items-center justify-center bg-bg">
+      <div className="mx-auto flex min-h-screen max-w-[600px] items-center justify-center bg-bg">
         <div className="text-center text-text-secondary">
           <div className="mb-2 font-display text-lg font-bold text-gold">PghBeer</div>
           Loading...
@@ -97,12 +99,13 @@ function IndexPage() {
   }
 
   return (
-    <div className="relative mx-auto min-h-screen max-w-[430px] bg-bg text-text transition-colors">
+    <div className="relative mx-auto min-h-screen max-w-[600px] bg-bg text-text transition-colors">
       <div ref={topRef} />
 
       <StickyHeader
         theme={theme}
         onToggleTheme={toggleTheme}
+        eventDate={eventInfo?.date}
         tried={tried.size}
         total={totalBeers}
         filtersVisible={filtersVisible}

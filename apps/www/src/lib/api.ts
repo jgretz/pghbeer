@@ -1,5 +1,5 @@
 import {API_URL, EVENT_ID} from './constants';
-import type {Beer, BeverageType, EventBeerItem} from './types';
+import type {Beer, BeverageType, EventBeerItem, EventInfo} from './types';
 
 interface RawBeer {
   id: number;
@@ -23,13 +23,26 @@ function normalizeBeer(raw: RawBeer): Beer {
   };
 }
 
-export async function fetchEventData(): Promise<EventBeerItem[]> {
+export interface EventDataResponse {
+  event: EventInfo;
+  beers: EventBeerItem[];
+}
+
+export async function fetchEventData(): Promise<EventDataResponse> {
   const res = await fetch(`${API_URL}/dataforevent?event_id=${EVENT_ID}`);
   if (!res.ok) {
     throw new Error(`Failed to fetch event data: ${res.status} ${res.statusText}`);
   }
-  const raw: {beer: RawBeer}[] = await res.json();
-  return raw.map((item) => ({beer: normalizeBeer(item.beer)}));
+  const raw = await res.json();
+
+  // Handle both old (flat array) and new ({event, beers}) API shapes
+  const beerList: {beer: RawBeer}[] = Array.isArray(raw) ? raw : raw.beers;
+  const event: EventInfo = raw.event ?? {name: '', date: ''};
+
+  return {
+    event,
+    beers: beerList.map((item) => ({beer: normalizeBeer(item.beer)})),
+  };
 }
 
 export async function postStats(params: {

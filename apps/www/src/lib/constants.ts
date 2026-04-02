@@ -5,7 +5,7 @@ export const STORAGE_KEYS = {
   theme: 'pghbeer-theme',
   tried: 'pghbeer-tried-2026',
   userId: 'pghbeer-user-id',
-  queryCache: 'pghbeer-query-cache',
+  queryCache: 'pghbeer-query-cache-v2',
 } as const;
 
 export const BEVERAGE_ICONS: Record<string, string> = {
