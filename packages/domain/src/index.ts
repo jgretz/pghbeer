@@ -9,5 +9,5 @@ export {updateStats} from './commands/update-stats';
 export {findOrCreateUser} from './commands/find-or-create-user';
 
 // types
-export type {Beer, Brewery, Style, EventBeerItem, StatItem, UpdateStatsInput} from './types';
+export type {Beer, Brewery, Style, EventInfo, EventBeerItem, EventData, StatItem, UpdateStatsInput} from './types';
 export {StatOpinion, updateStatsSchema} from './types';

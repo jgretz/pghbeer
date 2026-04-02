@@ -31,8 +31,18 @@ export interface Beer {
   style: Style;
 }
 
+export interface EventInfo {
+  name: string;
+  date: string;
+}
+
 export interface EventBeerItem {
   beer: Beer;
+}
+
+export interface EventData {
+  event: EventInfo;
+  beers: EventBeerItem[];
 }
 
 export interface StatItem {
