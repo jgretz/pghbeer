@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {HeadContent, Outlet, Scripts, createRootRoute} from '@tanstack/react-router';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister';
+import type {Persister} from '@tanstack/react-query-persist-client';
 import {STORAGE_KEYS} from '../lib/constants';
 import '../globals.css';
 
@@ -71,14 +72,16 @@ function RootComponent() {
       }),
   );
 
-  const [persister] = useState(() =>
-    typeof window !== 'undefined'
-      ? createSyncStoragePersister({
-          storage: window.localStorage,
-          key: STORAGE_KEYS.queryCache,
-        })
-      : null,
-  );
+  // Create persister after mount to avoid hydration mismatch
+  const [persister, setPersister] = useState<Persister | null>(null);
+  useEffect(() => {
+    setPersister(
+      createSyncStoragePersister({
+        storage: window.localStorage,
+        key: STORAGE_KEYS.queryCache,
+      }),
+    );
+  }, []);
 
   // Inline script to set theme before React hydrates — prevents flash
   const themeInitScript = `
@@ -87,6 +90,8 @@ function RootComponent() {
       document.documentElement.setAttribute('data-theme', t);
     })();
   `;
+
+  const content = <Outlet />;
 
   return (
     <html lang="en">
@@ -97,11 +102,11 @@ function RootComponent() {
         <script dangerouslySetInnerHTML={{__html: themeInitScript}} />
         {persister ? (
           <PersistQueryClientProvider client={queryClient} persistOptions={{persister}}>
-            <Outlet />
+            {content}
           </PersistQueryClientProvider>
         ) : (
           <QueryClientProvider client={queryClient}>
-            <Outlet />
+            {content}
           </QueryClientProvider>
         )}
         <Scripts />
