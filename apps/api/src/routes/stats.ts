@@ -1,11 +1,19 @@
 import {Hono} from 'hono';
-import {statsForEvent, updateStats, updateStatsSchema} from '@domain';
+import {dashboardStats, statsForEvent, updateStats, updateStatsSchema} from '@domain';
 import {authMiddleware} from '../middleware/auth';
 import {env} from '../index';
 
 export const statsRoutes = new Hono();
 
 const auth = authMiddleware(() => env.API_KEY);
+
+statsRoutes.get('/stats/dashboard', async (c) => {
+  const eventId = Number(c.req.query('event_id'));
+  if (!eventId) return c.json({error: 'event_id is required'}, 400);
+
+  const data = await dashboardStats(eventId);
+  return c.json(data);
+});
 
 statsRoutes.get('/stats', async (c) => {
   const eventId = Number(c.req.query('event_id'));

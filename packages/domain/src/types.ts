@@ -66,3 +66,58 @@ export const updateStatsSchema = z.object({
 });
 
 export type UpdateStatsInput = z.infer<typeof updateStatsSchema>;
+
+export interface VelocityBucket {
+  bucket: string;
+  total: number;
+  na: number;
+}
+
+export interface TopBeer {
+  name: string;
+  breweryName: string;
+  count: number;
+  recentCount: number;
+}
+
+export interface TopBrewery {
+  name: string;
+  count: number;
+  beerCount: number;
+}
+
+export interface TypeCount {
+  type: string;
+  count: number;
+}
+
+export interface StyleTrendBucket {
+  bucket: string;
+  [style: string]: string | number;
+}
+
+export interface DistributionBucket {
+  bucket: string;
+  count: number;
+}
+
+export interface ColdSpots {
+  totalBreweries: number;
+  avgCheckins: number;
+  breweries: {name: string; count: number; beerCount: number}[];
+}
+
+export interface DashboardStats {
+  totalCheckins: number;
+  activeUsers: number;
+  uniqueUsers: number;
+  naCheckins: number;
+  velocity: VelocityBucket[];
+  topBeers: TopBeer[];
+  topBreweries: TopBrewery[];
+  byType: TypeCount[];
+  styleTrends: StyleTrendBucket[];
+  beersPerPerson: DistributionBucket[];
+  coldSpots: ColdSpots;
+  generatedAt: string;
+}
