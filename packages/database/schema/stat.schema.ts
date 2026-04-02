@@ -1,4 +1,4 @@
-import {foreignKey, integer, pgTable, timestamp} from 'drizzle-orm/pg-core';
+import {foreignKey, index, integer, pgTable, timestamp} from 'drizzle-orm/pg-core';
 import {sql} from 'drizzle-orm';
 
 import {beers} from './beer.schema';
@@ -42,5 +42,8 @@ export const stats = pgTable(
     })
       .onUpdate('cascade')
       .onDelete('restrict'),
+    index('stats_event_id_date_idx').on(table.eventId, table.date),
+    index('stats_event_id_user_id_idx').on(table.eventId, table.userId),
+    index('stats_event_id_beer_id_idx').on(table.eventId, table.beerId),
   ],
 );
