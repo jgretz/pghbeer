@@ -10,8 +10,11 @@ import {statsRoutes} from './routes/stats';
 const envSchema = z.object({
   PORT: z.string().default('3001'),
   DATABASE_URL: z.string(),
+  API_KEY: z.string(),
 });
 const env = parseEnv(envSchema);
+
+export {env};
 
 initDomain(env.DATABASE_URL);
 

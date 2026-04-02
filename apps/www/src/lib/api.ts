@@ -1,4 +1,4 @@
-import {API_URL, EVENT_ID} from './constants';
+import {API_KEY, API_URL, EVENT_ID} from './constants';
 import type {Beer, BeverageType, EventBeerItem, EventInfo} from './types';
 
 interface RawBeer {
@@ -51,9 +51,14 @@ export async function postStats(params: {
   userId: string;
   tasted: boolean;
 }): Promise<void> {
+  const headers: Record<string, string> = {'Content-Type': 'application/json'};
+  if (API_KEY) {
+    headers['Authorization'] = `Bearer ${API_KEY}`;
+  }
+
   const res = await fetch(`${API_URL}/stats`, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers,
     body: JSON.stringify(params),
   });
   if (!res.ok) {

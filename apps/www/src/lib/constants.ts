@@ -1,4 +1,5 @@
 export const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001';
+export const API_KEY = import.meta.env.VITE_API_KEY ?? '';
 export const EVENT_ID = import.meta.env.VITE_EVENT_ID ?? '6';
 
 export const STORAGE_KEYS = {
