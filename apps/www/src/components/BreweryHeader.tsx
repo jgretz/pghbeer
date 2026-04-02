@@ -4,17 +4,17 @@ import type {Beer} from '../lib/types';
 interface BreweryHeaderProps {
   name: string;
   beers: Beer[];
-  filtersVisible: boolean;
+  stickyTop: number;
 }
 
-export function BreweryHeader({name, beers, filtersVisible}: BreweryHeaderProps) {
+export function BreweryHeader({name, beers, stickyTop}: BreweryHeaderProps) {
   const allNA = beers.every((b) => b.isNA);
   const someNA = !allNA && beers.some((b) => b.isNA);
 
   return (
     <div
       className="sticky z-10 flex items-center gap-2 border-b border-t border-border-light bg-surface-alt px-4 py-2.5 transition-all"
-      style={{top: filtersVisible ? 86 : 120}}
+      style={{top: stickyTop}}
     >
       <div className="min-w-0 flex-1 truncate font-display text-[15px] font-semibold uppercase tracking-wide text-text dark:text-gold">
         {name}

@@ -1,4 +1,4 @@
-import {useState, useRef, useCallback, useMemo} from 'react';
+import {useState, useRef, useCallback, useMemo, useEffect} from 'react';
 import {createFileRoute} from '@tanstack/react-router';
 import {StickyHeader} from '../components/StickyHeader';
 import {FilterControls} from '../components/FilterControls';
@@ -31,8 +31,20 @@ function IndexPage() {
 
   const filterSentinelRef = useRef<HTMLDivElement | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
   const breweryRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const filtersVisible = useFiltersVisible(filterSentinelRef);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      setHeaderHeight(entry.contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Derive available types from data
   const availableTypes = useMemo<BeverageType[]>(() => {
@@ -103,6 +115,7 @@ function IndexPage() {
       <div ref={topRef} />
 
       <StickyHeader
+        ref={headerRef}
         theme={theme}
         onToggleTheme={toggleTheme}
         eventDate={eventInfo?.date}
@@ -138,7 +151,7 @@ function IndexPage() {
           breweries={filtered}
           tried={tried}
           onToggleTried={toggleTried}
-          filtersVisible={filtersVisible}
+          headerHeight={headerHeight}
           breweryRefs={breweryRefs}
         />
       )}

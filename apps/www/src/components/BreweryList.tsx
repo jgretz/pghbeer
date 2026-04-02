@@ -7,7 +7,7 @@ interface BreweryListProps {
   breweries: BreweryGroup[];
   tried: Set<string>;
   onToggleTried: (key: string, beerId: number) => void;
-  filtersVisible: boolean;
+  headerHeight: number;
   breweryRefs: RefObject<Record<string, HTMLDivElement | null>>;
 }
 
@@ -15,7 +15,7 @@ export function BreweryList({
   breweries,
   tried,
   onToggleTried,
-  filtersVisible,
+  headerHeight,
   breweryRefs,
 }: BreweryListProps) {
   return (
@@ -32,7 +32,7 @@ export function BreweryList({
           <BreweryHeader
             name={brewery.name}
             beers={brewery.beers}
-            filtersVisible={filtersVisible}
+            stickyTop={headerHeight}
           />
           {brewery.beers.map((beer) => {
             const key = `${brewery.name}::${beer.name}`;

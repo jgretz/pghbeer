@@ -1,3 +1,4 @@
+import {forwardRef} from 'react';
 import {ProgressBar} from './ProgressBar';
 import {FilterSummary} from './FilterSummary';
 import type {FilterState} from '../lib/types';
@@ -22,7 +23,7 @@ function formatEventDate(dateStr?: string): string {
   return d.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
 }
 
-export function StickyHeader({
+export const StickyHeader = forwardRef<HTMLDivElement, StickyHeaderProps>(function StickyHeader({
   theme,
   onToggleTheme,
   eventDate,
@@ -33,9 +34,9 @@ export function StickyHeader({
   hasAnyFilter,
   filteredCount,
   onScrollToTop,
-}: StickyHeaderProps) {
+}, ref) {
   return (
-    <div className="sticky top-0 z-[100] border-b border-border bg-surface transition-colors">
+    <div ref={ref} className="sticky top-0 z-[100] border-b border-border bg-surface transition-colors">
       <div className="flex items-center justify-between px-4 pb-2 pt-2.5">
         <img
           src="/assets/botb-logo.jpg"
@@ -69,4 +70,4 @@ export function StickyHeader({
       )}
     </div>
   );
-}
+});
