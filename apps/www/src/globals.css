@@ -36,6 +36,8 @@
     --color-shadow: rgba(0,0,0,0.12);
     --color-overlay: rgba(0,0,0,0.25);
     --color-progress-track: #E8E6E6;
+    --color-red: #E74C3C;
+    --color-chart-grid: #F0F0F0;
   }
 
   [data-theme='dark'] {
@@ -59,5 +61,7 @@
     --color-shadow: rgba(0,0,0,0.5);
     --color-overlay: rgba(0,0,0,0.6);
     --color-progress-track: #333333;
+    --color-red: #E74C3C;
+    --color-chart-grid: #2A2A2A;
   }
 }

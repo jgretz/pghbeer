@@ -30,6 +30,8 @@ export default {
         shadow: 'var(--color-shadow)',
         overlay: 'var(--color-overlay)',
         'progress-track': 'var(--color-progress-track)',
+        red: 'var(--color-red)',
+        'chart-grid': 'var(--color-chart-grid)',
       },
     },
   },
