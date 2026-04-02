@@ -6,7 +6,28 @@ import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister
 import {STORAGE_KEYS} from '../lib/constants';
 import '../globals.css';
 
+function NotFound() {
+  return (
+    <div className="mx-auto flex min-h-screen max-w-[600px] flex-col items-center justify-center bg-bg px-4 text-center">
+      <div className="font-display text-[72px] font-bold leading-none text-gold">404</div>
+      <div className="mt-2 font-display text-lg font-semibold text-text">
+        Nothing on tap here.
+      </div>
+      <p className="mt-2 text-sm text-text-secondary">
+        This page must have been someone&apos;s last pour.
+      </p>
+      <a
+        href="/"
+        className="mt-6 rounded-xl bg-gold px-6 py-2.5 font-semibold text-check-fg transition-colors"
+      >
+        Back to the list
+      </a>
+    </div>
+  );
+}
+
 export const Route = createRootRoute({
+  notFoundComponent: NotFound,
   head: () => ({
     meta: [
       {charSet: 'utf-8'},
