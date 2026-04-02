@@ -17,6 +17,8 @@ COPY --link apps/www ./apps/www
 
 RUN if [ -f ./apps/www/.env ]; then rm ./apps/www/.env; fi
 
+RUN mkdir -p apps/api && echo '{"name":"api","version":"0.0.0"}' > apps/api/package.json
+
 RUN bun install
 
 RUN cd apps/www && bun run build

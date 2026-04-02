@@ -17,6 +17,8 @@ COPY --link apps/api ./apps/api
 
 RUN if [ -f ./apps/api/.env ]; then rm ./apps/api/.env; fi
 
+RUN mkdir -p apps/www && echo '{"name":"www","version":"0.0.0"}' > apps/www/package.json
+
 RUN bun install
 
 FROM base
