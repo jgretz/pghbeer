@@ -6,6 +6,7 @@ import {BreweryList} from '../components/BreweryList';
 import {EmptyState} from '../components/EmptyState';
 import {JumpFab} from '../components/JumpFab';
 import {JumpSheet} from '../components/JumpSheet';
+import {WelcomeModal} from '../components/WelcomeModal';
 import {useTheme} from '../hooks/useTheme';
 import {useEventData} from '../hooks/useEventData';
 import {useTriedSet} from '../hooks/useTriedSet';
@@ -112,6 +113,7 @@ function IndexPage() {
 
   return (
     <div className="relative mx-auto min-h-screen max-w-[600px] bg-bg text-text transition-colors">
+      <WelcomeModal eventName={eventInfo?.name} eventDate={eventInfo?.date} />
       <div ref={topRef} />
 
       <StickyHeader
