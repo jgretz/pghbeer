@@ -33,7 +33,7 @@ type Editing = Brewery | 'new' | null;
 function BreweriesPage() {
   const queryClient = useQueryClient();
 
-  const {data: breweries = [], isLoading} = useQuery({
+  const {data: breweries = [], isLoading, isError} = useQuery({
     queryKey: QUERY_KEY,
     queryFn: () => listBreweries(),
   });
@@ -137,6 +137,8 @@ function BreweriesPage() {
 
       {isLoading ? (
         <p className="text-sm text-text-secondary">Loading…</p>
+      ) : isError ? (
+        <p className="text-sm text-red">Couldn’t load breweries. Try refreshing.</p>
       ) : (
         <DataTable
           columns={COLUMNS}
