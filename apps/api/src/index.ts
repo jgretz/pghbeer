@@ -6,6 +6,7 @@ import {init as initDomain} from '@domain';
 import {healthRoutes} from './routes/health';
 import {dataForEventRoutes} from './routes/dataforevent';
 import {statsRoutes} from './routes/stats';
+import {adminRoutes} from './routes/admin';
 
 const envSchema = z.object({
   PORT: z.string().default('3001'),
@@ -25,6 +26,7 @@ app.use('/*', cors());
 app.route('/', healthRoutes);
 app.route('/', dataForEventRoutes);
 app.route('/', statsRoutes);
+app.route('/admin', adminRoutes);
 
 app.onError((err, c) => {
   const message = err instanceof Error ? err.message : 'Internal server error';

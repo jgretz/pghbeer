@@ -6,9 +6,11 @@
     "google-sheets": "workspace:*"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.2.17",
     "@types/bun": "latest",
     "concurrently": "^9.1.2",
     "dotenv": "^17.3.1",
+    "drizzle-kit": "^0.31.10",
     "drizzle-orm": "^0.45.2",
     "prettier": "^3.3.0",
     "zod": "^3.23.8"
@@ -29,6 +31,8 @@
     "build:www": "cd apps/www && bun run build",
     "typecheck": "concurrently bun:typecheck:*",
     "typecheck:www": "cd apps/www && bun run typecheck",
+    "typecheck:api": "cd apps/api && tsc --noEmit",
+    "typecheck:domain": "cd packages/domain && tsc --noEmit",
     "typecheck:google-sheets": "cd packages/google-sheets && bun run typecheck",
     "typecheck:scripts": "tsc --noEmit -p tsconfig.scripts.json",
     "test": "bun test",
