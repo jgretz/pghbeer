@@ -2,6 +2,9 @@
   "name": "pghbeer",
   "type": "module",
   "private": true,
+  "dependencies": {
+    "google-sheets": "workspace:*"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "concurrently": "^9.1.2",
@@ -30,6 +33,7 @@
     "db:migrate": "source .env && bun run --cwd packages/database migrate",
     "db:pull": "source .env && bun run --cwd packages/database pull",
     "import": "bun run scripts/import.ts",
+    "test:sheet-access": "bun run scripts/test-sheet-access.ts",
     "deploy:api": "fly deploy --config ./deploy/api/fly.toml --dockerfile ./deploy/api/Dockerfile",
     "deploy:www": "fly deploy --config ./deploy/www/fly.toml --dockerfile ./deploy/www/Dockerfile",
     "sync-secrets:api": "./scripts/sync-fly-secrets.sh apps/api pghbeer-api",
