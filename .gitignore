@@ -40,3 +40,14 @@ CLAUDE-WORKING.md
 .claude/skills/worker-default.md
 .claude/skills/reviewer-default.md
 .claude/reviews/
+
+# Creds
+scripts/creds/*
+
+# Sheet importer (local state, runway scratch, review output)
+scripts/.import-tmp/
+scripts/.import-state.json
+scripts/.import-report.json
+
+# neonctl local context
+.neon
