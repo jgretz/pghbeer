@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {createFileRoute} from '@tanstack/react-router';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import type {BeerListItem} from '@domain';
+import type {BeerListItem, CreateBeerInput} from '@domain';
 
 import {DataTable} from '../../components/admin/DataTable';
 import type {Column, RowAction} from '../../components/admin/DataTable';
@@ -92,13 +92,10 @@ function BeersAdmin() {
   }
 
   const saveMutation = useMutation({
-    mutationFn: async () => {
-      const payload = toBeerPayload(values);
-      if (!payload) throw new Error('Name, type, brewery, and style are required.');
-      return editing
+    mutationFn: (payload: CreateBeerInput) =>
+      editing
         ? updateBeer({data: {id: editing.id, data: payload}})
-        : createBeer({data: payload});
-    },
+        : createBeer({data: payload}),
     onSuccess: async () => {
       await invalidateBeers();
       closeForm();
@@ -152,12 +149,13 @@ function BeersAdmin() {
   }
 
   function handleSubmit() {
-    if (!toBeerPayload(values)) {
+    const payload = toBeerPayload(values);
+    if (!payload) {
       setFormError('Name, type, brewery, and style are required.');
       return;
     }
     setFormError(null);
-    saveMutation.mutate();
+    saveMutation.mutate(payload);
   }
 
   const fields: FieldDef[] = [
@@ -234,8 +232,12 @@ function BeersAdmin() {
       )}
 
       {formOpen ? (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+          <h2 className="font-display text-lg font-bold text-text">
+            {editing ? 'Edit beer' : 'New beer'}
+          </h2>
           <EntityForm
+            as="inline"
             fields={fields}
             values={values}
             onChange={(name, value) =>
@@ -259,6 +261,11 @@ function BeersAdmin() {
       <ConfirmDelete
         open={deleting !== null}
         title="Delete this beer?"
+        message={
+          deleteMutation.error instanceof Error
+            ? deleteMutation.error.message
+            : undefined
+        }
         dependents={blockedDependents}
         confirming={deleteMutation.isPending}
         onConfirm={() => deleting && deleteMutation.mutate(deleting.id)}
