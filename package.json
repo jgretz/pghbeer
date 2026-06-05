@@ -25,6 +25,7 @@
     "build:www": "cd apps/www && bun run build",
     "typecheck": "concurrently bun:typecheck:*",
     "typecheck:www": "cd apps/www && bun run typecheck",
+    "typecheck:google-sheets": "cd packages/google-sheets && bun run typecheck",
     "db:generate": "source .env && bun run --cwd packages/database generate",
     "db:migrate": "source .env && bun run --cwd packages/database migrate",
     "db:pull": "source .env && bun run --cwd packages/database pull",

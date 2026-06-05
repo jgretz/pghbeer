@@ -32,7 +32,8 @@
 
       "env": ["./packages/env/src/index.ts"],
       "database": ["./packages/database/index.ts"],
-      "@domain": ["./packages/domain/src/index.ts"]
+      "@domain": ["./packages/domain/src/index.ts"],
+      "google-sheets": ["./packages/google-sheets/src/index.ts"]
     }
   },
   "exclude": ["api", "site", "apps/site-legacy"]

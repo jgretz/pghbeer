@@ -1,0 +1,17 @@
+{
+  "name": "google-sheets",
+  "private": true,
+  "type": "module",
+  "module": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "env": "workspace:*",
+    "google-auth-library": "^9",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}

@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-export function parseEnv<T extends z.ZodRawShape>(schema: z.ZodObject<T>) {
+export function parseEnv<T>(schema: z.ZodType<T>): T {
   const env = process.env;
   const result = schema.safeParse(env);
   if (!result.success) {
