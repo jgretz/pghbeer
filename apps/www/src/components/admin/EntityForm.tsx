@@ -74,7 +74,11 @@ export function EntityForm({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4"
+      role="dialog"
+      aria-modal="true"
+    >
       <div className="w-full max-w-md rounded-xl border border-border bg-surface p-6 shadow-lg">
         {form}
       </div>

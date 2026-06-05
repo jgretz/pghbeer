@@ -78,6 +78,10 @@ describe('formatDependents', function () {
     expect(formatDependents({beers: 2, events: 0})).toBe('used by 2 beers');
   });
 
+  it('should singularize an "-ies" plural for a count of one', function () {
+    expect(formatDependents({breweries: 1})).toBe('used by 1 brewery');
+  });
+
   it('should return an empty string when nothing depends on the entity', function () {
     expect(formatDependents({beers: 0})).toBe('');
   });
