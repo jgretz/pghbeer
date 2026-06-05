@@ -65,6 +65,7 @@ describe('readSheetValues', function () {
       message = (error as Error).message;
     }
 
+    // message stays '' if the call unexpectedly resolves, failing both asserts.
     expect(message).toContain('403');
     expect(message).toContain('permission denied');
   });

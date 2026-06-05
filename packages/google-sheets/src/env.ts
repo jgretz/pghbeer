@@ -3,23 +3,21 @@ import {z} from 'zod';
 
 import type {GoogleAuthConfig} from './types.ts';
 
-const baseSchema = z.object({
-  GOOGLE_SERVICE_ACCOUNT_EMAIL: z.string().min(1).optional(),
-  GOOGLE_PRIVATE_KEY: z.string().min(1).optional(),
-  GOOGLE_APPLICATION_CREDENTIALS: z.string().min(1).optional(),
-});
-
-type GoogleAuthEnv = z.infer<typeof baseSchema>;
-
-const schema = baseSchema.refine(
-  (env) =>
-    Boolean(env.GOOGLE_APPLICATION_CREDENTIALS) ||
-    Boolean(env.GOOGLE_SERVICE_ACCOUNT_EMAIL && env.GOOGLE_PRIVATE_KEY),
-  {
-    message:
-      'provide either GOOGLE_APPLICATION_CREDENTIALS (key-file path) or both GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_PRIVATE_KEY',
-  },
-);
+const schema = z
+  .object({
+    GOOGLE_SERVICE_ACCOUNT_EMAIL: z.string().min(1).optional(),
+    GOOGLE_PRIVATE_KEY: z.string().min(1).optional(),
+    GOOGLE_APPLICATION_CREDENTIALS: z.string().min(1).optional(),
+  })
+  .refine(
+    (env) =>
+      Boolean(env.GOOGLE_APPLICATION_CREDENTIALS) ||
+      Boolean(env.GOOGLE_SERVICE_ACCOUNT_EMAIL && env.GOOGLE_PRIVATE_KEY),
+    {
+      message:
+        'provide either GOOGLE_APPLICATION_CREDENTIALS (key-file path) or both GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_PRIVATE_KEY',
+    },
+  );
 
 /**
  * Build a normalized {@link GoogleAuthConfig} from the environment, surfacing a
@@ -29,10 +27,7 @@ const schema = baseSchema.refine(
  * single-line).
  */
 export function loadGoogleAuthConfig(): GoogleAuthConfig {
-  // parseEnv is typed for ZodObject; the cross-field .refine() yields a
-  // ZodEffects whose runtime safeParse still validates. Cast at this single
-  // boundary, then restore the inferred shape.
-  const env = parseEnv(schema as unknown as z.ZodObject<z.ZodRawShape>) as GoogleAuthEnv;
+  const env = parseEnv(schema);
 
   if (env.GOOGLE_SERVICE_ACCOUNT_EMAIL && env.GOOGLE_PRIVATE_KEY) {
     return {
@@ -41,5 +36,10 @@ export function loadGoogleAuthConfig(): GoogleAuthConfig {
     };
   }
 
-  return {keyFile: env.GOOGLE_APPLICATION_CREDENTIALS as string};
+  if (env.GOOGLE_APPLICATION_CREDENTIALS) {
+    return {keyFile: env.GOOGLE_APPLICATION_CREDENTIALS};
+  }
+
+  // Unreachable: the schema's .refine() guarantees one credential shape is present.
+  throw new Error('Invalid environment variables: missing Google service-account credentials');
 }
