@@ -21,14 +21,17 @@ function resolveApiKey(): string {
   return process.env.ADMIN_API_KEY ?? process.env.API_KEY ?? '';
 }
 
-export async function adminFetch(
+// Non-throwing variant: returns the raw Response so callers can branch on
+// status without adminFetch's throw-on-non-OK behavior (e.g. the 409
+// blocked-delete path, which carries a `dependents` payload to surface).
+export async function adminFetchRaw(
   path: string,
   init: RequestInit = {},
 ): Promise<Response> {
   const url = `${resolveBaseUrl()}${path}`;
   const key = resolveApiKey();
 
-  const res = await fetch(url, {
+  return fetch(url, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
@@ -36,6 +39,13 @@ export async function adminFetch(
       ...init.headers,
     },
   });
+}
+
+export async function adminFetch(
+  path: string,
+  init: RequestInit = {},
+): Promise<Response> {
+  const res = await adminFetchRaw(path, init);
 
   if (!res.ok) {
     const body = await res.text().catch(() => '');
