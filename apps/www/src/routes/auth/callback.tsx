@@ -20,8 +20,8 @@ const processOAuthCode = createServerFn({method: 'POST'})
       await createSession(userInfo.email);
       return {error: null};
     } catch (error) {
-      // Don't swallow: log the upstream cause before returning the sentinel.
-      console.warn('OAuth callback failed', new Error('auth_failed', {cause: error}));
+      // Don't swallow: log the original error before returning the sentinel.
+      console.warn('OAuth callback failed:', error);
       return {error: 'auth_failed'};
     }
   });

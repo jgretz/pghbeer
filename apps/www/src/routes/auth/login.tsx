@@ -6,6 +6,14 @@ const getGoogleAuthUrl = createServerFn({method: 'GET'}).handler(async () => {
   return buildGoogleAuthUrl();
 });
 
+// Only an allowlist rejection means "not authorized" — every other code is a
+// transient or aborted sign-in and must not be misreported as an authz failure.
+function errorMessage(error: string): string {
+  return error === 'unauthorized_email'
+    ? "That account isn't authorized."
+    : 'Sign-in failed. Please try again.';
+}
+
 export const Route = createFileRoute('/auth/login')({
   validateSearch: (search: Record<string, unknown>) => ({
     error: search.error as string | undefined,
@@ -36,7 +44,7 @@ function LoginPage() {
         <p className="text-sm text-text-secondary">Sign in to manage the festival.</p>
         {error ? (
           <p className="rounded-lg bg-surface px-4 py-3 text-sm text-text">
-            That account isn&apos;t authorized.
+            {errorMessage(error)}
           </p>
         ) : null}
         <a
