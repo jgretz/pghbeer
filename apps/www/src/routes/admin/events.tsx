@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useId, useMemo, useState} from 'react';
 import {createFileRoute} from '@tanstack/react-router';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
@@ -249,6 +249,7 @@ type BeerManagerProps = {
 };
 
 function BeerManager({event, onClose}: BeerManagerProps) {
+  const titleId = useId();
   const queryClient = useQueryClient();
   const linkedKey = useMemo(() => ['admin', 'events', event.id, 'beers'], [event.id]);
 
@@ -304,13 +305,14 @@ function BeerManager({event, onClose}: BeerManagerProps) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={titleId}
     >
       <div
         className="flex max-h-[85vh] w-full max-w-2xl flex-col gap-4 overflow-y-auto rounded-xl border border-border bg-surface p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-lg font-bold text-text">
+          <h2 id={titleId} className="font-display text-lg font-bold text-text">
             Beers — {event.name}
           </h2>
           <button
