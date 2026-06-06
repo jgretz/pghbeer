@@ -21,9 +21,9 @@ function resolveApiKey(): string {
   return process.env.ADMIN_API_KEY ?? process.env.API_KEY ?? '';
 }
 
-// Non-throwing variant: returns the raw Response so callers can branch on
-// status without adminFetch's throw-on-non-OK behavior (e.g. the 409
-// blocked-delete path, which carries a `dependents` payload to surface).
+// Authed fetch that returns the raw Response WITHOUT throwing on non-2xx.
+// Entity delete handlers use this to branch on a 409 "has dependents" body
+// (which adminFetch would otherwise collapse into an opaque thrown Error).
 export async function adminFetchRaw(
   path: string,
   init: RequestInit = {},
