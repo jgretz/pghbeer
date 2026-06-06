@@ -27,4 +27,10 @@ describe('parseDeleteResponse', function () {
   it('should fall back to empty dependents for an empty 409 body', function () {
     expect(parseDeleteResponse(409, null)).toEqual({ok: false, dependents: {}});
   });
+
+  it('should throw on a non-409 error status rather than masking it', function () {
+    expect(() => parseDeleteResponse(500, {error: 'boom'})).toThrow(
+      'Delete failed: 500',
+    );
+  });
 });

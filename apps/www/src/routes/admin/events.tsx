@@ -88,22 +88,49 @@ function AdminEvents() {
     },
   });
 
+  const resetFormErrors = useCallback(() => {
+    createMutation.reset();
+    updateMutation.reset();
+  }, [createMutation, updateMutation]);
+
   const openCreate = useCallback(() => {
+    resetFormErrors();
     setValues({name: '', date: ''});
     setFormMode('create');
-  }, []);
+  }, [resetFormErrors]);
 
-  const openEdit = useCallback((row: EventRow) => {
-    setValues({name: row.name, date: row.date});
-    setFormMode({edit: row});
-  }, []);
+  const openEdit = useCallback(
+    (row: EventRow) => {
+      resetFormErrors();
+      setValues({name: row.name, date: row.date});
+      setFormMode({edit: row});
+    },
+    [resetFormErrors],
+  );
 
   const openManage = useCallback((row: EventRow) => setManaging(row), []);
 
-  const openDelete = useCallback((row: EventRow) => {
+  const openDelete = useCallback(
+    (row: EventRow) => {
+      deleteMutation.reset();
+      setDependents(undefined);
+      setDeleteTarget(row);
+    },
+    [deleteMutation],
+  );
+
+  const closeForm = useCallback(() => {
+    resetFormErrors();
+    setFormMode(null);
+  }, [resetFormErrors]);
+
+  const closeDelete = useCallback(() => {
+    deleteMutation.reset();
+    setDeleteTarget(null);
     setDependents(undefined);
-    setDeleteTarget(row);
-  }, []);
+  }, [deleteMutation]);
+
+  const formError = createMutation.error ?? updateMutation.error;
 
   const handleFieldChange = useCallback((name: string, value: FieldValue) => {
     setValues((prev) => ({...prev, [name]: value}));
@@ -161,14 +188,17 @@ function AdminEvents() {
       )}
 
       {formMode ? (
-        <EntityForm
-          fields={eventFields}
-          values={values}
-          onChange={handleFieldChange}
-          onSubmit={handleSubmit}
-          onCancel={() => setFormMode(null)}
-          submitLabel={formMode === 'create' ? 'Create' : 'Save'}
-        />
+        <>
+          <EntityForm
+            fields={eventFields}
+            values={values}
+            onChange={handleFieldChange}
+            onSubmit={handleSubmit}
+            onCancel={closeForm}
+            submitLabel={formMode === 'create' ? 'Create' : 'Save'}
+          />
+          <ErrorBanner error={formError} />
+        </>
       ) : null}
 
       <ConfirmDelete
@@ -177,11 +207,9 @@ function AdminEvents() {
         dependents={dependents}
         confirming={deleteMutation.isPending}
         onConfirm={handleConfirmDelete}
-        onCancel={() => {
-          setDeleteTarget(null);
-          setDependents(undefined);
-        }}
+        onCancel={closeDelete}
       />
+      {deleteTarget ? <ErrorBanner error={deleteMutation.error} /> : null}
 
       {managing ? (
         <BeerManager event={managing} onClose={() => setManaging(null)} />
@@ -190,10 +218,29 @@ function AdminEvents() {
   );
 }
 
+// Surfaces a failed write mutation. Rendered above modal overlays (z-[60]) so
+// the message is visible even while a form/confirm dialog is open.
+function ErrorBanner({error}: {error: unknown}) {
+  if (!error) return null;
+  const message = error instanceof Error ? error.message : 'Something went wrong.';
+  return (
+    <div
+      role="alert"
+      className="fixed left-1/2 top-4 z-[60] max-w-md -translate-x-1/2 rounded-lg border border-red bg-surface px-4 py-2 text-center text-sm text-red shadow-lg"
+    >
+      {message}
+    </div>
+  );
+}
+
 const linkedColumns: Column<AdminBeer>[] = [
   {id: 'name', header: 'Name', accessor: (row) => row.name},
   {id: 'brewery', header: 'Brewery', accessor: (row) => row.brewery.name},
   {id: 'style', header: 'Style', accessor: (row) => row.style.name},
+];
+
+const pickerColumns: Column<AdminBeer>[] = [
+  {id: 'name', header: 'Name', accessor: (row) => row.name},
 ];
 
 type BeerManagerProps = {
@@ -277,6 +324,9 @@ function BeerManager({event, onClose}: BeerManagerProps) {
 
         <section className="flex flex-col gap-2">
           <h3 className="text-sm font-semibold text-text-secondary">Linked beers</h3>
+          {removeMutation.isError ? (
+            <p className="text-sm text-red">Failed to remove beer.</p>
+          ) : null}
           {linked.isLoading ? (
             <p className="text-sm text-text-secondary">Loading…</p>
           ) : linked.isError ? (
@@ -295,6 +345,9 @@ function BeerManager({event, onClose}: BeerManagerProps) {
 
         <section className="flex flex-col gap-2">
           <h3 className="text-sm font-semibold text-text-secondary">Add a beer</h3>
+          {addMutation.isError ? (
+            <p className="text-sm text-red">Failed to add beer.</p>
+          ) : null}
           <input
             type="text"
             value={pickerQuery}
@@ -340,7 +393,3 @@ function BeerManager({event, onClose}: BeerManagerProps) {
     </div>
   );
 }
-
-const pickerColumns: Column<AdminBeer>[] = [
-  {id: 'name', header: 'Name', accessor: (row) => row.name},
-];

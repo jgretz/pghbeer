@@ -31,13 +31,20 @@ export type DeleteEventResult =
   | {ok: false; dependents: Record<string, number>};
 
 // Pure, exported for unit testing without the Start runtime. Maps a delete
-// response (status + parsed body) to the typed result. Any 2xx is success; a
-// non-2xx carries the dependents map if present, else an empty map.
+// response (status + parsed body) to the typed result. Any 2xx is success; 409
+// is the dependents-block case (carrying its map if present, else empty). Any
+// other status is a genuine error — throw rather than masquerade it as a benign
+// empty-dependents block, which the UI would render as a silent no-op.
 export function parseDeleteResponse(
   status: number,
   body: unknown,
 ): DeleteEventResult {
   if (status >= 200 && status < 300) return {ok: true};
+
+  if (status !== 409) {
+    const detail = typeof body === 'string' ? body : JSON.stringify(body);
+    throw new Error(`Delete failed: ${status}${detail ? ` — ${detail}` : ''}`);
+  }
 
   const dependents =
     body !== null &&
