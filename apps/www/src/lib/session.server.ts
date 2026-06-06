@@ -3,6 +3,7 @@
 // createServerFn handlers only.
 import {getCookie, setCookie} from '@tanstack/react-start/server';
 import {getEnv} from './env.server';
+import {signPayload, verifyPayload} from './session-crypto';
 
 const SESSION_COOKIE = 'pghbeer_session';
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
@@ -18,33 +19,11 @@ type SessionPayload = {
   sig: string;
 };
 
-async function importKey(usage: 'sign' | 'verify'): Promise<CryptoKey> {
-  return crypto.subtle.importKey(
-    'raw',
-    new TextEncoder().encode(getEnv().SESSION_SECRET),
-    {name: 'HMAC', hash: 'SHA-256'},
-    false,
-    [usage],
-  );
-}
-
-async function sign(value: string): Promise<string> {
-  const key = await importKey('sign');
-  const signature = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(value));
-  return btoa(String.fromCharCode(...new Uint8Array(signature)));
-}
-
-async function verify(value: string, signature: string): Promise<boolean> {
-  const key = await importKey('verify');
-  const sigBytes = Uint8Array.from(atob(signature), (c) => c.charCodeAt(0));
-  return crypto.subtle.verify('HMAC', key, sigBytes, new TextEncoder().encode(value));
-}
-
 export async function createSession(email: string): Promise<void> {
   const data: SessionData = {email, authenticated: true};
   const expires = Date.now() + MAX_AGE * 1000;
   const payload = JSON.stringify({data, expires});
-  const sig = await sign(payload);
+  const sig = await signPayload(payload, getEnv().SESSION_SECRET);
   const cookie: SessionPayload = {data, expires, sig};
 
   setCookie(SESSION_COOKIE, btoa(JSON.stringify(cookie)), {
@@ -65,7 +44,7 @@ export async function getSession(): Promise<SessionData | null> {
     if (Date.now() > cookie.expires) return null;
 
     const payload = JSON.stringify({data: cookie.data, expires: cookie.expires});
-    const valid = await verify(payload, cookie.sig);
+    const valid = await verifyPayload(payload, cookie.sig, getEnv().SESSION_SECRET);
     if (!valid) return null;
 
     return cookie.data;
