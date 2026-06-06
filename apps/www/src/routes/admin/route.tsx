@@ -1,10 +1,12 @@
-import {createFileRoute, Link, Outlet} from '@tanstack/react-router';
+import {createFileRoute, Link, Outlet, redirect} from '@tanstack/react-router';
 import {NAV_ITEMS} from '../../components/admin/nav';
 
 export const Route = createFileRoute('/admin')({
-  // AUTH PLACEHOLDER — the auth task replaces this with a real session check;
-  // do not add logic here now. Returning nothing allows everyone through.
-  beforeLoad: () => {},
+  beforeLoad: ({context}) => {
+    if (!context.auth.authenticated) {
+      throw redirect({to: '/auth/login', search: {error: undefined}});
+    }
+  },
   component: AdminLayout,
 });
 
