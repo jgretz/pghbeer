@@ -5,6 +5,7 @@ import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister';
 import type {Persister} from '@tanstack/react-query-persist-client';
 import {STORAGE_KEYS} from '../lib/constants';
+import {getAuthState} from '../lib/session-actions';
 import '../globals.css';
 
 function NotFound() {
@@ -29,6 +30,7 @@ function NotFound() {
 
 export const Route = createRootRoute({
   notFoundComponent: NotFound,
+  beforeLoad: async () => ({auth: await getAuthState()}),
   head: () => ({
     meta: [
       {charSet: 'utf-8'},
