@@ -21,14 +21,17 @@ function resolveApiKey(): string {
   return process.env.ADMIN_API_KEY ?? process.env.API_KEY ?? '';
 }
 
-export async function adminFetch(
+// Authed fetch that returns the raw Response WITHOUT throwing on non-2xx.
+// Entity delete handlers use this to branch on a 409 "has dependents" body
+// (which adminFetch would otherwise collapse into an opaque thrown Error).
+export async function adminFetchRaw(
   path: string,
   init: RequestInit = {},
 ): Promise<Response> {
   const url = `${resolveBaseUrl()}${path}`;
   const key = resolveApiKey();
 
-  const res = await fetch(url, {
+  return fetch(url, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
@@ -36,6 +39,13 @@ export async function adminFetch(
       ...init.headers,
     },
   });
+}
+
+export async function adminFetch(
+  path: string,
+  init: RequestInit = {},
+): Promise<Response> {
+  const res = await adminFetchRaw(path, init);
 
   if (!res.ok) {
     const body = await res.text().catch(() => '');
