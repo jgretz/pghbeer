@@ -1,0 +1,1 @@
+ALTER TABLE "beers" ADD COLUMN "locked" boolean DEFAULT false NOT NULL;

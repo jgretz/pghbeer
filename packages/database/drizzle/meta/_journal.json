@@ -29,6 +29,13 @@
       "when": 1775145401239,
       "tag": "0003_add-stats-dashboard-indexes",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780947176505,
+      "tag": "0004_add-beer-locked",
+      "breakpoints": true
     }
   ]
 }

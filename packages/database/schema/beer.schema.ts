@@ -16,6 +16,9 @@ export const beers = pgTable(
     abv: doublePrecision('abv'),
     beverageType: beverageTypeEnum('beverage_type').notNull().default('beer'),
     isNa: boolean('is_na').notNull().default(false),
+    // Set by any admin write; tells the sheet importer to leave this beer's
+    // importer-managed fields (abv/style/isNa/beverageType) alone on re-import.
+    locked: boolean('locked').notNull().default(false),
     breweryId: integer('brewery_id').notNull(),
     styleId: integer('style_id').notNull(),
     ...dates,
