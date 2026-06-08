@@ -4,7 +4,7 @@ config({path: '.env'});
 import {createDatabase, beers, styles} from 'database';
 import {eq, sql} from 'drizzle-orm';
 
-import {classifyStyle} from './lib/classify.ts';
+import {buildHistory, loadStyleSeed, matchStyle} from './lib/classify.ts';
 
 const DATABASE_URL = process.env.DATABASE_URL;
 if (!DATABASE_URL) throw new Error('DATABASE_URL is required');
@@ -12,6 +12,10 @@ if (!DATABASE_URL) throw new Error('DATABASE_URL is required');
 const db = createDatabase(DATABASE_URL);
 
 async function main() {
+  // Offline backfill: history-match only (the seed + keywords), no LLM fallback.
+  const seed = await loadStyleSeed();
+  const history = buildHistory(seed.exact);
+
   // Get all beers with their style names
   const rows = await db
     .select({
@@ -26,7 +30,10 @@ async function main() {
   const summary: Record<string, number> = {};
 
   for (const row of rows) {
-    const {type, isNa} = classifyStyle(row.styleName);
+    const {type, isNa} = matchStyle(row.styleName, history, seed.keywords) ?? {
+      type: 'beer' as const,
+      isNa: false,
+    };
     const key = isNa ? `${type} (NA)` : type;
     summary[key] = (summary[key] ?? 0) + 1;
 

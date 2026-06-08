@@ -1,0 +1,30 @@
+{
+  "_comment": "Historical style -> beverage-type lookups for the import classifier. 'exact' matches a full normalized style name; 'keywords' match as substrings, in order, and must stay narrow (broad keywords collide with beer styles, e.g. 'wine' -> barleywine, 'whiskey' -> whiskey-barrel-aged stout). Anything unmatched here goes to the LLM classify batch and its answer is cached into the import ledger.",
+  "exact": {
+    "cabernet sauvignon": {"type": "wine"},
+    "dry red": {"type": "wine"},
+    "dry rose": {"type": "wine"},
+    "dry rose'": {"type": "wine"},
+    "dry white": {"type": "wine"},
+    "malbec": {"type": "wine"},
+    "rose": {"type": "wine"},
+    "sauvignon blanc": {"type": "wine"},
+    "semi dry white": {"type": "wine"},
+    "semi-dry white": {"type": "wine"},
+    "sweet fruit": {"type": "wine"},
+    "whiskey": {"type": "cocktail"}
+  },
+  "keywords": [
+    {"includes": "non-alc", "type": "beer", "isNa": true},
+    {"includes": "non alc", "type": "beer", "isNa": true},
+    {"includes": "alcohol-free", "type": "beer", "isNa": true},
+    {"includes": "alcohol free", "type": "beer", "isNa": true},
+    {"includes": "cocktail", "type": "cocktail"},
+    {"includes": "spirit", "type": "cocktail"},
+    {"includes": "cider", "type": "cider"},
+    {"includes": "seltzer", "type": "seltzer"},
+    {"includes": "mead", "type": "mead"},
+    {"includes": "hard tea", "type": "hard_tea"},
+    {"includes": "iced tea", "type": "hard_tea"}
+  ]
+}

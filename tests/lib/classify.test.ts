@@ -1,22 +1,82 @@
 import {describe, expect, it} from 'bun:test';
 
-import {classifyStyle, detectNa} from '../../scripts/lib/classify.ts';
+import {
+  buildHistory,
+  detectNa,
+  loadStyleSeed,
+  matchStyle,
+  normalizeStyle,
+  type StyleSeed,
+} from '../../scripts/lib/classify.ts';
 
-describe('classifyStyle', () => {
-  it('should classify an NA style by exact match', () => {
-    expect(classifyStyle('non-alcoholic')).toEqual({type: 'beer', isNa: true});
+const seed: StyleSeed = {
+  exact: {
+    malbec: {type: 'wine'},
+    whiskey: {type: 'cocktail'},
+  },
+  keywords: [
+    {includes: 'non-alc', type: 'beer', isNa: true},
+    {includes: 'cocktail', type: 'cocktail'},
+    {includes: 'cider', type: 'cider'},
+    {includes: 'seltzer', type: 'seltzer'},
+    {includes: 'mead', type: 'mead'},
+    {includes: 'hard tea', type: 'hard_tea'},
+  ],
+};
+
+const history = buildHistory(seed.exact);
+
+describe('normalizeStyle', () => {
+  it('should lowercase, trim, and collapse whitespace', () => {
+    expect(normalizeStyle('  Hard   Cider ')).toBe('hard cider');
+  });
+});
+
+describe('matchStyle', () => {
+  it('should hit the exact history map regardless of case/spacing', () => {
+    expect(matchStyle('  Malbec ', history, seed.keywords)).toEqual({type: 'wine', isNa: false});
+    expect(matchStyle('Whiskey', history, seed.keywords)).toEqual({type: 'cocktail', isNa: false});
   });
 
-  it('should classify wine / cider / seltzer / hard_tea styles', () => {
-    expect(classifyStyle('Malbec')).toEqual({type: 'wine', isNa: false});
-    expect(classifyStyle('Hard Cider')).toEqual({type: 'cider', isNa: false});
-    expect(classifyStyle('Hard Seltzer')).toEqual({type: 'seltzer', isNa: false});
-    expect(classifyStyle('Hard Tea')).toEqual({type: 'hard_tea', isNa: false});
+  it('should match phrasing variants by substring keyword', () => {
+    expect(matchStyle('Ready-to-Drink Cocktail', history, seed.keywords)).toEqual({
+      type: 'cocktail',
+      isNa: false,
+    });
+    expect(matchStyle('Hard Apple Cider', history, seed.keywords)).toEqual({
+      type: 'cider',
+      isNa: false,
+    });
   });
 
-  it('should default unknown styles to beer', () => {
-    expect(classifyStyle('Hazy IPA')).toEqual({type: 'beer', isNa: false});
-    expect(classifyStyle('Unknown')).toEqual({type: 'beer', isNa: false});
+  it('should carry isNa from a keyword rule', () => {
+    expect(matchStyle('Non-Alcoholic Ginger Beer', history, seed.keywords)).toEqual({
+      type: 'beer',
+      isNa: true,
+    });
+  });
+
+  it('should return null (→ LLM) for styles with no safe match', () => {
+    expect(matchStyle('Barleywine', history, seed.keywords)).toBeNull();
+    expect(matchStyle('Whiskey Barrel-Aged Imperial Stout', history, seed.keywords)).toBeNull();
+    expect(matchStyle('West Coast IPA', history, seed.keywords)).toBeNull();
+  });
+
+  it('should let a ledger cache entry override the seed for the same style', () => {
+    const withCache = buildHistory(seed.exact, {'west coast ipa': {type: 'beer'}});
+    expect(matchStyle('West Coast IPA', withCache, seed.keywords)).toEqual({
+      type: 'beer',
+      isNa: false,
+    });
+  });
+});
+
+describe('loadStyleSeed', () => {
+  it('should load the checked-in seed and drop the comment field', async () => {
+    const loaded = await loadStyleSeed();
+    expect(loaded.exact['malbec']).toEqual({type: 'wine'});
+    expect(loaded.keywords.some((k) => k.includes === 'cocktail')).toBe(true);
+    expect((loaded as unknown as {_comment?: string})._comment).toBeUndefined();
   });
 });
 
