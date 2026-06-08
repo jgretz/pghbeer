@@ -1,76 +1,69 @@
+import {join} from 'node:path';
+
 import type {BeverageType} from 'database';
 
-// Style name → beverage type, matched exactly (lowercased/trimmed). Extracted
-// verbatim from backfill-beverage-type.ts so that script's behavior is unchanged.
-const wineStyles = [
-  'cabernet sauvignon',
-  'dry red',
-  'dry rose',
-  "dry rose'",
-  'dry white',
-  'malbec',
-  'rose',
-  'sauvignon blanc',
-  'semi dry white',
-  'semi-dry white',
-  'sweet fruit',
-];
+export type Classification = {type: BeverageType; isNa: boolean};
 
-const meadStyles = ['mead', 'sparkling mead'];
+type SeedEntry = {type: BeverageType; isNa?: boolean};
 
-const cocktailStyles = ['cocktail', 'whiskey'];
+/** The checked-in historical lookup table (scripts/data/style-types.json). */
+export type StyleSeed = {
+  exact: Record<string, SeedEntry>;
+  keywords: Array<{includes: string} & SeedEntry>;
+};
 
-const ciderStyles = [
-  'cider',
-  'cider ale',
-  'hard cider',
-  'hot honey cider',
-  'off dry hard apple cider',
-  'semi sweet hard apple cider with fresh celery seed',
-];
+const SEED_PATH = join(import.meta.dir, '../data/style-types.json');
 
-const seltzerStyles = [
-  'hard seltzer',
-  'grape lemonade fruited hard seltzer',
-  'raspberry seltzer',
-  'smoothie seltzer',
-];
+/** Load the historical style→type seed. Kept as data so it can grow without code changes. */
+export async function loadStyleSeed(path: string = SEED_PATH): Promise<StyleSeed> {
+  const raw = (await Bun.file(path).json()) as StyleSeed & {_comment?: string};
+  return {exact: raw.exact, keywords: raw.keywords};
+}
 
-const hardTeaStyles = [
-  'hard tea',
-  'hard iced tea with a hint of citrus for yinz. steam-brewed and fizz-free!',
-];
+/** Lowercase, trim, collapse internal whitespace — the canonical key for a style name. */
+export function normalizeStyle(style: string): string {
+  return style.toLowerCase().trim().replace(/\s+/g, ' ');
+}
 
-const naStyles = [
-  'non-alc kolsch',
-  'non-alcoholic',
-  'non-alcoholic beer',
-  'non-alcoholic ginger beer',
-  'non-alcoholic mango guava wheat',
-];
+function toClassification(e: SeedEntry): Classification {
+  return {type: e.type, isNa: e.isNa ?? false};
+}
 
 /**
- * Classify a style name into a beverage type + NA flag by exact-match lists.
- * Behavior is identical to the original in backfill-beverage-type.ts; the only
- * change is the return `type` is narrowed to {@link BeverageType}.
+ * Build the exact-match history map from the seed plus any accumulated cache
+ * (ledger entries override seed entries for the same normalized style).
  */
-export function classifyStyle(styleName: string): {type: BeverageType; isNa: boolean} {
-  const lower = styleName.toLowerCase().trim();
+export function buildHistory(
+  exact: Record<string, SeedEntry>,
+  cache: Record<string, SeedEntry> = {},
+): Map<string, Classification> {
+  const map = new Map<string, Classification>();
+  for (const [k, v] of Object.entries(exact)) map.set(normalizeStyle(k), toClassification(v));
+  for (const [k, v] of Object.entries(cache)) map.set(normalizeStyle(k), toClassification(v));
+  return map;
+}
 
-  if (naStyles.includes(lower)) return {type: 'beer', isNa: true};
-  if (wineStyles.includes(lower)) return {type: 'wine', isNa: false};
-  if (meadStyles.includes(lower)) return {type: 'mead', isNa: false};
-  if (cocktailStyles.includes(lower)) return {type: 'cocktail', isNa: false};
-  if (ciderStyles.includes(lower)) return {type: 'cider', isNa: false};
-  if (seltzerStyles.includes(lower)) return {type: 'seltzer', isNa: false};
-  if (hardTeaStyles.includes(lower)) return {type: 'hard_tea', isNa: false};
-
-  return {type: 'beer', isNa: false};
+/**
+ * Match a style against the exact history first, then the ordered substring
+ * keywords. Returns null when nothing matches — the caller falls back to the
+ * LLM classify batch.
+ */
+export function matchStyle(
+  style: string,
+  history: Map<string, Classification>,
+  keywords: StyleSeed['keywords'],
+): Classification | null {
+  const norm = normalizeStyle(style);
+  const exact = history.get(norm);
+  if (exact) return exact;
+  for (const kw of keywords) {
+    if (norm.includes(normalizeStyle(kw.includes))) return toClassification(kw);
+  }
+  return null;
 }
 
 // Free-text NA markers for the sheet importer — brewers write NA beers as
-// "Free For All NA IPA", "<0.5%", "Non-Alc ...", "seltzer water", etc. Kept
-// separate from classifyStyle so the backfill script's exact-match stays intact.
+// "Free For All NA IPA", "<0.5%", "Non-Alc ...", "seltzer water", etc.
 const naMarker =
   /\b(n\.?\/?a|non[ -]?alc(?:oholic)?|0\.0\s*%?|<\s*0\.5|alcohol[ -]?free|seltzer water|hop water|sparkling\b[^,;]*\bwater)\b/i;
 

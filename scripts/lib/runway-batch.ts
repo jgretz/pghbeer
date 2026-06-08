@@ -1,6 +1,9 @@
 import {z} from 'zod';
 
+import {beverageTypeEnum, type BeverageType} from 'database';
+
 import type {ParsedBeer} from './parse-beers.ts';
+import type {Classification} from './classify.ts';
 
 const DEFAULT_CLI =
   process.env.OTTER_RUNWAY_CLI ?? '/Users/joshgretz/Development/Gretz/otter/apps/runway/src/cli.ts';
@@ -246,4 +249,42 @@ export async function enrichBatch(
       `Write a single JSON object {"results": [ ...one object per input item... ]} to EXACTLY ` +
       `this path, and nothing else:\n${outPath}\n`,
   });
+}
+
+const BEVERAGE_TYPES = beverageTypeEnum.enumValues as [BeverageType, ...BeverageType[]];
+
+const classifyItemSchema = z.object({
+  key: z.string().min(1),
+  type: z.enum(BEVERAGE_TYPES),
+  isNa: z.boolean().catch(false),
+});
+
+export type ClassifyBatchItem = {key: string; style: string};
+
+/** Classify each distinct style name into a beverage type (the LLM fallback for history misses). */
+export async function classifyBatch(
+  deps: RunwayDeps,
+  items: ClassifyBatchItem[],
+): Promise<Map<string, Classification>> {
+  const map = await runBatch(deps, {
+    kind: 'classify',
+    items,
+    itemSchema: classifyItemSchema,
+    buildPrompt: (inPath, outPath) =>
+      `You are classifying festival drink styles into a fixed set of beverage types.\n\n` +
+      `Read the JSON array of items from this file:\n${inPath}\n\n` +
+      `Each item is {"key": string, "style": string}. For EACH item, choose the single best ` +
+      `beverage type for that style from EXACTLY this set:\n${BEVERAGE_TYPES.join(', ')}\n\n` +
+      `Produce {"key": <the item's key>, "type": <one of the set>, "isNa": boolean}.\n\n` +
+      `Rules:\n` +
+      `- "hard_tea" = hard/spiked iced teas; "seltzer" = hard seltzers; "cider" = ciders; ` +
+      `"mead" = meads; "cocktail" = cocktails, ready-to-drink (RTD) cocktails, and spirits ` +
+      `(whiskey, gin, vodka, rum); "wine" = wines.\n` +
+      `- Otherwise "beer" — the DEFAULT for all ales, lagers, IPAs, stouts, sours, ` +
+      `including barrel-aged beers (a "whiskey barrel-aged stout" is beer, not cocktail).\n` +
+      `- "isNa" true ONLY for explicitly non-alcoholic / 0.0% styles.\n\n` +
+      `Write a single JSON object {"results": [ ...one object per input item... ]} to EXACTLY ` +
+      `this path, and nothing else:\n${outPath}\n`,
+  });
+  return new Map([...map].map(([key, v]) => [key, {type: v.type, isNa: v.isNa}]));
 }

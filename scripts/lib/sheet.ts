@@ -2,16 +2,34 @@ import {getAccessToken, readSheetValues} from 'google-sheets';
 
 const SHEETS_API_BASE = 'https://sheets.googleapis.com/v4/spreadsheets';
 
-// Fixed column indices in the festival form's "Form Responses 1" tab.
-const COL = {timestamp: 0, brewery: 1, beerList: 10, na: 12, special: 13} as const;
+/** Zero-based column indices for a form's beer-bearing cells (layout varies per form). */
+export type ColumnMap = {
+  timestamp: number;
+  brewery: number;
+  beerList: number;
+  na: number;
+  special: number;
+};
+
+/** A single Google Form's response sheet, with its layout and ledger namespace. */
+export type SheetSource = {
+  name: string; // logging label
+  spreadsheetId: string;
+  gid: number;
+  columns: ColumnMap;
+  range: string; // e.g. 'A1:N1000' — column span depends on the form's layout
+  header: {brewery: string; beer: string}; // expected lowercase header substrings (drift guard)
+  keyPrefix: string; // ledger-key namespace ('' for the original sheet → preserves its ledger)
+};
 
 export type SheetRow = {
   rowIndex: number; // 1-based sheet row (header = 1)
-  timestamp: string; // col A
-  brewery: string; // col B
-  beerListRaw: string; // col K
-  naRaw: string; // col M
-  specialRaw: string; // col N
+  timestamp: string; // timestamp column
+  brewery: string; // brewery/vendor column
+  beerListRaw: string; // beer-list column
+  naRaw: string; // NA column
+  specialRaw: string; // special-requests column
+  keyPrefix?: string; // ledger-key namespace, inherited from the source
 };
 
 type SheetsPropertiesResponse = {
@@ -38,44 +56,45 @@ async function resolveTitleForGid(spreadsheetId: string, gid: number): Promise<s
   return title;
 }
 
-/** Guard against silent column drift before trusting the fixed indices. */
-function assertHeader(header: string[]): void {
-  const b = (header[COL.brewery] ?? '').toLowerCase();
-  const k = (header[COL.beerList] ?? '').toLowerCase();
-  if (!b.includes('brewery') || !k.includes('beer')) {
+/** Guard against silent column drift before trusting the configured indices. */
+function assertHeader(source: SheetSource, header: string[]): void {
+  const {columns, header: want} = source;
+  const b = (header[columns.brewery] ?? '').toLowerCase();
+  const k = (header[columns.beerList] ?? '').toLowerCase();
+  if (!b.includes(want.brewery) || !k.includes(want.beer)) {
     throw new Error(
-      `unexpected sheet header — col B="${header[COL.brewery]}", col K="${header[COL.beerList]}". ` +
-        'The form columns may have changed; update scripts/lib/sheet.ts COL indices.',
+      `unexpected header for "${source.name}" — brewery col="${header[columns.brewery]}", ` +
+        `beer col="${header[columns.beerList]}". The form columns may have changed; ` +
+        'update the source columns in scripts/import-from-sheet.ts.',
     );
   }
 }
 
-/** Read the festival form responses into typed rows (header row excluded). */
-export async function fetchFormRows(deps: {
-  spreadsheetId: string;
-  gid: number;
-}): Promise<SheetRow[]> {
-  const title = await resolveTitleForGid(deps.spreadsheetId, deps.gid);
+/** Read one form's responses into typed rows (header row excluded). */
+export async function fetchFormRows(source: SheetSource): Promise<SheetRow[]> {
+  const title = await resolveTitleForGid(source.spreadsheetId, source.gid);
   const values = await readSheetValues({
-    spreadsheetId: deps.spreadsheetId,
-    range: `${title}!A1:N1000`,
+    spreadsheetId: source.spreadsheetId,
+    range: `${title}!${source.range}`,
   });
   if (values.length === 0) return [];
 
-  assertHeader(values[0]!);
+  assertHeader(source, values[0]!);
 
+  const {columns} = source;
   return values.slice(1).flatMap((row, i): SheetRow[] => {
     const at = (idx: number) => (row[idx] ?? '').trim();
-    const brewery = at(COL.brewery);
+    const brewery = at(columns.brewery);
     if (!brewery) return []; // skip blank trailing rows
     return [
       {
         rowIndex: i + 2, // +1 header, +1 to 1-base
-        timestamp: at(COL.timestamp),
+        timestamp: at(columns.timestamp),
         brewery,
-        beerListRaw: at(COL.beerList),
-        naRaw: at(COL.na),
-        specialRaw: at(COL.special),
+        beerListRaw: at(columns.beerList),
+        naRaw: at(columns.na),
+        specialRaw: at(columns.special),
+        keyPrefix: source.keyPrefix,
       },
     ];
   });

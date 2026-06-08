@@ -70,10 +70,10 @@ describe('loadLedger / saveLedger', () => {
 
   it('should return an empty ledger when the file is absent', async () => {
     const led = await loadLedger(tmpPath());
-    expect(led).toEqual({rows: {}, enrichment: {}});
+    expect(led).toEqual({rows: {}, enrichment: {}, classification: {}});
   });
 
-  it('should round-trip rows and enrichment', async () => {
+  it('should round-trip rows, enrichment, and classification', async () => {
     const path = tmpPath();
     const led: Ledger = {
       rows: {
@@ -85,6 +85,7 @@ describe('loadLedger / saveLedger', () => {
         },
       },
       enrichment: {bk1: {style: 'Stout', abv: 7, isNa: false, sources: ['https://x'], at: 'now'}},
+      classification: {'ready-to-drink cocktail': {type: 'cocktail', isNa: false, at: 'now'}},
     };
     await saveLedger(path, led);
     expect(await loadLedger(path)).toEqual(led);
