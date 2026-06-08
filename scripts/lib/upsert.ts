@@ -156,7 +156,9 @@ export async function upsertEventBeer(
   let beerId: number;
   if (existing) {
     beerId = existing.id;
-    if (beerNeedsUpdate(existing, next)) {
+    if (existing.locked) {
+      console.log(`= beer (locked): ${name}`); // admin-corrected; importer skips its fields
+    } else if (beerNeedsUpdate(existing, next)) {
       await deps.db
         .update(beers)
         .set({...next, updateDate: new Date()})
