@@ -40,6 +40,12 @@ const columns: Column<BeerListItem>[] = [
     accessor: (row) => row.isNa,
     cell: (row) => (row.isNa ? '✓' : ''),
   },
+  {
+    id: 'locked',
+    header: '🔒',
+    accessor: (row) => row.locked,
+    cell: (row) => (row.locked ? '🔒' : ''),
+  },
 ];
 
 function emptyValues(): Record<string, FieldValue> {
@@ -100,6 +106,12 @@ function BeersAdmin() {
       await invalidateBeers();
       closeForm();
     },
+  });
+
+  const lockMutation = useMutation({
+    mutationFn: ({id, locked}: {id: number; locked: boolean}) =>
+      updateBeer({data: {id, data: {locked}}}),
+    onSuccess: () => invalidateBeers(),
   });
 
   const deleteMutation = useMutation({
@@ -191,8 +203,12 @@ function BeersAdmin() {
     },
   ];
 
-  const rowActions = (): RowAction<BeerListItem>[] => [
+  const rowActions = (beer: BeerListItem): RowAction<BeerListItem>[] => [
     {label: 'Edit', onClick: openEdit},
+    {
+      label: beer.locked ? 'Unlock' : 'Lock',
+      onClick: (b) => lockMutation.mutate({id: b.id, locked: !b.locked}),
+    },
     {label: 'Delete', onClick: openDelete, variant: 'danger'},
   ];
 
