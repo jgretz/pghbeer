@@ -13,6 +13,7 @@ export const beerListColumns = {
   abv: beers.abv,
   beverageType: beers.beverageType,
   isNa: beers.isNa,
+  locked: beers.locked,
   breweryId: breweries.id,
   breweryName: breweries.name,
   styleId: styles.id,
@@ -25,6 +26,7 @@ type BeerListRow = {
   abv: number | null;
   beverageType: BeerListItem['beverageType'];
   isNa: boolean;
+  locked: boolean;
   breweryId: number;
   breweryName: string;
   styleId: number;
@@ -38,6 +40,7 @@ export function toBeerListItem(row: BeerListRow): BeerListItem {
     abv: row.abv,
     beverageType: row.beverageType,
     isNa: row.isNa,
+    locked: row.locked,
     brewery: {id: row.breweryId, name: row.breweryName},
     style: {id: row.styleId, name: row.styleName},
   };

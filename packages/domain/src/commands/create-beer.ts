@@ -16,6 +16,7 @@ export async function createBeer(input: CreateBeerInput): Promise<BeerListItem> 
       isNa: input.isNa,
       breweryId: input.breweryId,
       styleId: input.styleId,
+      locked: true, // admin-created beers are protected from importer overwrites
       createDate: now,
       updateDate: now,
     })

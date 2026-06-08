@@ -95,6 +95,7 @@ export interface BeerListItem {
   abv: number | null;
   beverageType: BeverageType;
   isNa: boolean;
+  locked: boolean;
   brewery: {id: number; name: string};
   style: {id: number; name: string};
 }
@@ -130,7 +131,9 @@ export const createBeerSchema = z.object({
   breweryId: z.number().int(),
   styleId: z.number().int(),
 });
-export const updateBeerSchema = createBeerSchema.partial();
+export const updateBeerSchema = createBeerSchema
+  .partial()
+  .extend({locked: z.boolean().optional()});
 export type CreateBeerInput = z.infer<typeof createBeerSchema>;
 export type UpdateBeerInput = z.infer<typeof updateBeerSchema>;
 

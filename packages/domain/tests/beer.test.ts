@@ -42,6 +42,7 @@ describe('createBeer', function () {
       abv: 7.2,
       beverageType: 'beer',
       isNa: false,
+      locked: true,
       brewery: {id: brewery.id, name: 'East End Brewing'},
       style: {id: style.id, name: 'Amber Ale'},
     });

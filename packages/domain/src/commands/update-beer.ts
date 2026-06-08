@@ -13,7 +13,9 @@ export async function updateBeer(
 
   const [updated] = await db
     .update(beers)
-    .set({...input, updateDate: new Date()})
+    // Any admin edit locks the beer against importer overwrites; the Unlock
+    // toggle passes locked:false explicitly to hand it back to the importer.
+    .set({...input, locked: input.locked ?? true, updateDate: new Date()})
     .where(eq(beers.id, id))
     .returning({id: beers.id});
 
