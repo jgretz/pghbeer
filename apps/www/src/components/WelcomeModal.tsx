@@ -51,7 +51,7 @@ export function WelcomeModal({eventName, eventDate}: WelcomeModalProps) {
           {eventName || `Beers of the Burgh ${eventYear ?? ''}`}
         </h2>
         <p className="mb-5 text-sm leading-relaxed text-text-secondary">
-          The list is incomplete and will be filled out over the coming weeks as breweries confirm
+          The list is still being worked on and will be updated over this week as breweries confirm
           their pours.
         </p>
         <button
