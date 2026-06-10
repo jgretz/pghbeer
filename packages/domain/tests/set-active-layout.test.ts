@@ -14,7 +14,7 @@ import {setupTestDb} from './helpers/test-db';
 type SlotOverrides = {kind?: 'table' | 'zone'; breweryId?: number | null};
 
 async function addSlot(layoutId: number, label: string, o: SlotOverrides = {}) {
-  return upsertSlot(layoutId, {
+  const slot = await upsertSlot(layoutId, {
     label,
     kind: o.kind ?? 'table',
     x: 0,
@@ -25,6 +25,8 @@ async function addSlot(layoutId: number, label: string, o: SlotOverrides = {}) {
     locked: false,
     breweryId: o.breweryId ?? null,
   });
+  if (!slot) throw new Error(`failed to create slot ${label}`);
+  return slot;
 }
 
 beforeEach(async function () {
@@ -40,7 +42,7 @@ describe('setActiveLayout', function () {
     await setActiveLayout(event.id, l1.id);
     const result = await setActiveLayout(event.id, l2.id);
 
-    expect(result.activeLayout?.id).toBe(l2.id);
+    expect(result?.activeLayout?.id).toBe(l2.id);
 
     const summaries = await listLayouts(event.id);
     expect(summaries.find((s) => s.id === l1.id)?.isActive).toBe(false);
@@ -61,7 +63,7 @@ describe('setActiveLayout', function () {
 
     const result = await setActiveLayout(event.id, l2.id);
 
-    const carried = result.activeLayout?.slots.find((s) => s.label === 'T1');
+    const carried = result?.activeLayout?.slots.find((s) => s.label === 'T1');
     expect(carried?.breweryId).toBe(brewery.id);
   });
 
@@ -81,7 +83,7 @@ describe('setActiveLayout', function () {
 
     const result = await setActiveLayout(event.id, l2.id);
 
-    const target = result.activeLayout?.slots.find((s) => s.label === 'T1');
+    const target = result?.activeLayout?.slots.find((s) => s.label === 'T1');
     expect(target?.breweryId).toBe(b.id);
   });
 
@@ -101,7 +103,7 @@ describe('setActiveLayout', function () {
     await addSlot(l2.id, 'T1');
 
     const result = await setActiveLayout(event.id, l2.id);
-    const slots = result.activeLayout?.slots ?? [];
+    const slots = result?.activeLayout?.slots ?? [];
 
     expect(slots.map((s) => s.label)).toEqual(['T1']);
     expect(slots[0]?.breweryId).toBe(a.id);
@@ -119,7 +121,28 @@ describe('setActiveLayout', function () {
 
     const result = await setActiveLayout(event.id, l1.id);
 
-    const slot = result.activeLayout?.slots.find((s) => s.label === 'T1');
+    const slot = result?.activeLayout?.slots.find((s) => s.label === 'T1');
     expect(slot?.breweryId).toBe(brewery.id);
+  });
+
+  it('should return null for a layout id that does not exist', async function () {
+    const event = await createEvent({name: 'BOTB', date: '2026-04-18'});
+
+    expect(await setActiveLayout(event.id, 99999)).toBeNull();
+  });
+
+  it('should return null and not touch state for a layout belonging to another event', async function () {
+    const eventA = await createEvent({name: 'A', date: '2026-04-18'});
+    const eventB = await createEvent({name: 'B', date: '2026-09-01'});
+    const a1 = await createLayout(eventA.id, {name: 'A1'});
+    const b1 = await createLayout(eventB.id, {name: 'B1'});
+    await setActiveLayout(eventA.id, a1.id);
+
+    const result = await setActiveLayout(eventA.id, b1.id);
+
+    expect(result).toBeNull();
+    // eventA's active layout is untouched — not silently blanked.
+    const summaries = await listLayouts(eventA.id);
+    expect(summaries.find((s) => s.id === a1.id)?.isActive).toBe(true);
   });
 });

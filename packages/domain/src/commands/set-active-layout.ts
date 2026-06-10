@@ -1,5 +1,5 @@
 import {mapLayouts, mapSlots} from 'database';
-import {and, eq} from 'drizzle-orm';
+import {and, eq, inArray, isNull, sql} from 'drizzle-orm';
 
 import {getDb} from '../db';
 import {getEventMap} from '../queries/get-event-map';
@@ -8,12 +8,22 @@ import type {EventMap} from '../types';
 // Makes `layoutId` the single active layout for the event and carries brewery
 // assignments over from the previously-active layout by matching slot label
 // (only into target tables that are currently empty). Runs in one transaction
-// so the public map never observes a half-switched state.
+// so the public map never observes a half-switched state. Returns null when the
+// layout does not exist or belongs to another event — without this guard a bad
+// id would deactivate the current layout and activate nothing, silently blanking
+// the public map.
 export async function setActiveLayout(
   eventId: number,
   layoutId: number,
-): Promise<EventMap> {
+): Promise<EventMap | null> {
   const db = getDb();
+
+  const [target] = await db
+    .select({id: mapLayouts.id})
+    .from(mapLayouts)
+    .where(and(eq(mapLayouts.id, layoutId), eq(mapLayouts.eventId, eventId)))
+    .limit(1);
+  if (!target) return null;
 
   await db.transaction(async (tx) => {
     const [current] = await tx
@@ -44,25 +54,29 @@ export async function setActiveLayout(
       .set({isActive: true, updateDate: now})
       .where(eq(mapLayouts.id, layoutId));
 
+    // Carry assignments into matching, currently-empty target tables in one
+    // statement (label -> breweryId via CASE) instead of an UPDATE per table.
+    // inArray restricts to carried labels; isNull leaves occupied targets alone.
     if (assignments.size > 0) {
-      const targetTables = await tx
-        .select({
-          id: mapSlots.id,
-          label: mapSlots.label,
-          breweryId: mapSlots.breweryId,
+      const labels = [...assignments.keys()];
+      const cases = sql.join(
+        labels.map((l) => sql`when ${l} then ${assignments.get(l)!}::int`),
+        sql` `,
+      );
+      await tx
+        .update(mapSlots)
+        .set({
+          breweryId: sql`case ${mapSlots.label} ${cases} end`,
+          updateDate: now,
         })
-        .from(mapSlots)
-        .where(and(eq(mapSlots.layoutId, layoutId), eq(mapSlots.kind, 'table')));
-
-      for (const t of targetTables) {
-        const incoming = assignments.get(t.label);
-        if (incoming != null && t.breweryId == null) {
-          await tx
-            .update(mapSlots)
-            .set({breweryId: incoming, updateDate: now})
-            .where(eq(mapSlots.id, t.id));
-        }
-      }
+        .where(
+          and(
+            eq(mapSlots.layoutId, layoutId),
+            eq(mapSlots.kind, 'table'),
+            isNull(mapSlots.breweryId),
+            inArray(mapSlots.label, labels),
+          ),
+        );
     }
   });
 

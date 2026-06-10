@@ -12,7 +12,7 @@ import {
 import {setupTestDb} from './helpers/test-db';
 
 async function addTable(layoutId: number, label: string) {
-  return upsertSlot(layoutId, {
+  const slot = await upsertSlot(layoutId, {
     label,
     kind: 'table',
     x: 0,
@@ -23,6 +23,8 @@ async function addTable(layoutId: number, label: string) {
     locked: false,
     breweryId: null,
   });
+  if (!slot) throw new Error(`failed to create slot ${label}`);
+  return slot;
 }
 
 beforeEach(async function () {
@@ -52,7 +54,7 @@ describe('previewLayoutSwitch', function () {
     expect(preview).toEqual({carried: 0, unmatchedLabels: [], droppedBreweries: []});
   });
 
-  it('should count assignments whose label exists in the target as carried', async function () {
+  it('should count assignments carried into empty target tables with the same label', async function () {
     const event = await createEvent({name: 'BOTB', date: '2026-04-18'});
     const a = await createBrewery({name: 'Brewery A'});
     const b = await createBrewery({name: 'Brewery B'});
@@ -93,6 +95,28 @@ describe('previewLayoutSwitch', function () {
     expect(preview.carried).toBe(1);
     expect(preview.unmatchedLabels).toEqual(['T2']);
     expect(preview.droppedBreweries).toEqual([{id: b.id, name: 'Brewery B'}]);
+  });
+
+  it('should drop (not carry) an assignment whose target table is already occupied', async function () {
+    const event = await createEvent({name: 'BOTB', date: '2026-04-18'});
+    const a = await createBrewery({name: 'Brewery A'});
+    const b = await createBrewery({name: 'Brewery B'});
+
+    const l1 = await createLayout(event.id, {name: 'L1'});
+    const t1 = await addTable(l1.id, 'T1');
+    await setActiveLayout(event.id, l1.id);
+    await assignBreweryToSlot(t1.id, a.id);
+
+    const l2 = await createLayout(event.id, {name: 'L2'});
+    const t1b = await addTable(l2.id, 'T1');
+    await assignBreweryToSlot(t1b.id, b.id); // target T1 already taken
+
+    const preview = await previewLayoutSwitch(event.id, l2.id);
+
+    // matches setActiveLayout: occupied target won't be overwritten, so A drops
+    expect(preview.carried).toBe(0);
+    expect(preview.unmatchedLabels).toEqual([]);
+    expect(preview.droppedBreweries).toEqual([{id: a.id, name: 'Brewery A'}]);
   });
 
   it('should ignore unassigned tables', async function () {
