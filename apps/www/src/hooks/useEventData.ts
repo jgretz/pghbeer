@@ -13,7 +13,7 @@ function groupByBrewery(items: EventBeerItem[]): BreweryGroup[] {
     if (group) {
       group.beers.push(item.beer);
     } else {
-      map.set(name, {name, beers: [item.beer]});
+      map.set(name, {breweryId: item.beer.brewery.id, name, beers: [item.beer]});
     }
   }
 

@@ -1,5 +1,12 @@
 import {API_KEY, API_URL, EVENT_ID} from './constants';
-import type {Beer, BeverageType, DashboardStats, EventBeerItem, EventInfo} from './types';
+import type {
+  Beer,
+  BeverageType,
+  DashboardStats,
+  EventBeerItem,
+  EventInfo,
+  EventMap,
+} from './types';
 
 interface RawBeer {
   id: number;
@@ -43,6 +50,14 @@ export async function fetchEventData(): Promise<EventDataResponse> {
     event,
     beers: beerList.map((item) => ({beer: normalizeBeer(item.beer)})),
   };
+}
+
+export async function fetchEventMap(): Promise<EventMap> {
+  const res = await fetch(`${API_URL}/eventmap?event_id=${EVENT_ID}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch event map: ${res.status} ${res.statusText}`);
+  }
+  return res.json();
 }
 
 export async function fetchDashboardStats(): Promise<DashboardStats> {
