@@ -67,7 +67,7 @@ export type EventBrewery = {id: number; name: string};
 // --- Visibility flag (read via the public endpoint; no key required) ---
 
 export const fetchEventEnabled = createServerFn({method: 'GET'})
-  .inputValidator((input: {eventId: number}) => input)
+  .validator((input: {eventId: number}) => input)
   .handler(async ({data}): Promise<{enabled: boolean}> => {
     const base =
       process.env.API_URL ?? process.env.VITE_API_URL ?? 'http://localhost:3001';
@@ -78,7 +78,7 @@ export const fetchEventEnabled = createServerFn({method: 'GET'})
   });
 
 export const setMapEnabled = createServerFn({method: 'POST'})
-  .inputValidator((input: {eventId: number; enabled: boolean}) => input)
+  .validator((input: {eventId: number; enabled: boolean}) => input)
   .handler(
     async ({data}): Promise<{enabled: boolean}> =>
       (
@@ -92,21 +92,21 @@ export const setMapEnabled = createServerFn({method: 'POST'})
 // --- Layouts ---
 
 export const listLayouts = createServerFn({method: 'GET'})
-  .inputValidator((input: {eventId: number}) => input)
+  .validator((input: {eventId: number}) => input)
   .handler(
     async ({data}): Promise<AdminMapLayoutSummary[]> =>
       (await adminFetch(`/admin/maps/events/${data.eventId}/layouts`)).json(),
   );
 
 export const getLayout = createServerFn({method: 'GET'})
-  .inputValidator((input: {layoutId: number}) => input)
+  .validator((input: {layoutId: number}) => input)
   .handler(
     async ({data}): Promise<AdminMapLayout> =>
       (await adminFetch(`/admin/maps/layouts/${data.layoutId}`)).json(),
   );
 
 export const createLayout = createServerFn({method: 'POST'})
-  .inputValidator((input: {eventId: number; name: string; width?: number; height?: number}) => input)
+  .validator((input: {eventId: number; name: string; width?: number; height?: number}) => input)
   .handler(
     async ({data}): Promise<AdminMapLayout> =>
       (
@@ -118,7 +118,7 @@ export const createLayout = createServerFn({method: 'POST'})
   );
 
 export const duplicateLayout = createServerFn({method: 'POST'})
-  .inputValidator((input: {layoutId: number; name: string}) => input)
+  .validator((input: {layoutId: number; name: string}) => input)
   .handler(
     async ({data}): Promise<AdminMapLayout> =>
       (
@@ -130,7 +130,7 @@ export const duplicateLayout = createServerFn({method: 'POST'})
   );
 
 export const renameLayout = createServerFn({method: 'POST'})
-  .inputValidator((input: {layoutId: number; name: string}) => input)
+  .validator((input: {layoutId: number; name: string}) => input)
   .handler(
     async ({data}): Promise<AdminMapLayout> =>
       (
@@ -142,7 +142,7 @@ export const renameLayout = createServerFn({method: 'POST'})
   );
 
 export const deleteLayout = createServerFn({method: 'POST'})
-  .inputValidator((input: {layoutId: number}) => input)
+  .validator((input: {layoutId: number}) => input)
   .handler(async ({data}): Promise<DeleteEventResult> => {
     const res = await adminFetchRaw(`/admin/maps/layouts/${data.layoutId}`, {
       method: 'DELETE',
@@ -152,7 +152,7 @@ export const deleteLayout = createServerFn({method: 'POST'})
   });
 
 export const previewLayoutSwitch = createServerFn({method: 'GET'})
-  .inputValidator((input: {eventId: number; layoutId: number}) => input)
+  .validator((input: {eventId: number; layoutId: number}) => input)
   .handler(
     async ({data}): Promise<LayoutSwitchPreview> =>
       (
@@ -163,7 +163,7 @@ export const previewLayoutSwitch = createServerFn({method: 'GET'})
   );
 
 export const setActiveLayout = createServerFn({method: 'POST'})
-  .inputValidator((input: {eventId: number; layoutId: number}) => input)
+  .validator((input: {eventId: number; layoutId: number}) => input)
   .handler(
     async ({data}): Promise<AdminEventMap> =>
       (
@@ -177,7 +177,7 @@ export const setActiveLayout = createServerFn({method: 'POST'})
 // --- Slots ---
 
 export const createSlot = createServerFn({method: 'POST'})
-  .inputValidator((input: {layoutId: number; slot: SlotInput}) => input)
+  .validator((input: {layoutId: number; slot: SlotInput}) => input)
   .handler(
     async ({data}): Promise<AdminMapSlot> =>
       (
@@ -189,7 +189,7 @@ export const createSlot = createServerFn({method: 'POST'})
   );
 
 export const updateSlot = createServerFn({method: 'POST'})
-  .inputValidator((input: {layoutId: number; slotId: number; slot: SlotInput}) => input)
+  .validator((input: {layoutId: number; slotId: number; slot: SlotInput}) => input)
   .handler(
     async ({data}): Promise<AdminMapSlot> =>
       (
@@ -201,14 +201,14 @@ export const updateSlot = createServerFn({method: 'POST'})
   );
 
 export const deleteSlot = createServerFn({method: 'POST'})
-  .inputValidator((input: {slotId: number}) => input)
+  .validator((input: {slotId: number}) => input)
   .handler(async ({data}): Promise<{ok: true}> => {
     await adminFetch(`/admin/maps/slots/${data.slotId}`, {method: 'DELETE'});
     return {ok: true};
   });
 
 export const assignBrewery = createServerFn({method: 'POST'})
-  .inputValidator((input: {slotId: number; breweryId: number | null}) => input)
+  .validator((input: {slotId: number; breweryId: number | null}) => input)
   .handler(
     async ({data}): Promise<AdminMapSlot> =>
       (
@@ -222,7 +222,7 @@ export const assignBrewery = createServerFn({method: 'POST'})
 // --- Event brewery roster (breweries that have beers on the event) ---
 
 export const listEventBreweries = createServerFn({method: 'GET'})
-  .inputValidator((input: {eventId: number}) => input)
+  .validator((input: {eventId: number}) => input)
   .handler(async ({data}): Promise<EventBrewery[]> => {
     const beers: {brewery: {id: number; name: string}}[] = await (
       await adminFetch(`/admin/events/${data.eventId}/beers`)

@@ -2,7 +2,7 @@ import {createFileRoute, redirect} from '@tanstack/react-router';
 import {createServerFn} from '@tanstack/react-start';
 
 const processOAuthCode = createServerFn({method: 'POST'})
-  .inputValidator((code: string) => code)
+  .validator((code: string) => code)
   .handler(async ({data: code}) => {
     try {
       const {exchangeCodeForTokens, fetchGoogleUserInfo, isAllowedEmail} = await import(

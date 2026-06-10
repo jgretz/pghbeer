@@ -63,7 +63,7 @@ export const listEvents = createServerFn({method: 'GET'}).handler(
 );
 
 export const createEvent = createServerFn({method: 'POST'})
-  .inputValidator((input: {name: string; date: string}) => input)
+  .validator((input: {name: string; date: string}) => input)
   .handler(
     async ({data}): Promise<EventRow> =>
       (
@@ -76,7 +76,7 @@ export const createEvent = createServerFn({method: 'POST'})
 
 export const updateEvent = createServerFn({method: 'POST'})
   // Schema rejects partial updates — always send both name and date.
-  .inputValidator((input: {id: number; name: string; date: string}) => input)
+  .validator((input: {id: number; name: string; date: string}) => input)
   .handler(
     async ({data}): Promise<EventRow> =>
       (
@@ -91,7 +91,7 @@ export const updateEvent = createServerFn({method: 'POST'})
 // the structured 409 dependents payload. Replicate the ~2 lines of env
 // resolution inline and branch via parseDeleteResponse.
 export const deleteEvent = createServerFn({method: 'POST'})
-  .inputValidator((input: {id: number}) => input)
+  .validator((input: {id: number}) => input)
   .handler(async ({data}): Promise<DeleteEventResult> => {
     const baseUrl =
       process.env.API_URL ??
@@ -112,14 +112,14 @@ export const deleteEvent = createServerFn({method: 'POST'})
   });
 
 export const listBeersForEvent = createServerFn({method: 'GET'})
-  .inputValidator((input: {eventId: number}) => input)
+  .validator((input: {eventId: number}) => input)
   .handler(
     async ({data}): Promise<AdminBeer[]> =>
       (await adminFetch(`/admin/events/${data.eventId}/beers`)).json(),
   );
 
 export const addBeerToEvent = createServerFn({method: 'POST'})
-  .inputValidator((input: {eventId: number; beerId: number}) => input)
+  .validator((input: {eventId: number; beerId: number}) => input)
   .handler(async ({data}): Promise<{ok: true}> => {
     await adminFetch(`/admin/events/${data.eventId}/beers`, {
       method: 'POST',
@@ -129,7 +129,7 @@ export const addBeerToEvent = createServerFn({method: 'POST'})
   });
 
 export const removeBeerFromEvent = createServerFn({method: 'POST'})
-  .inputValidator((input: {eventId: number; beerId: number}) => input)
+  .validator((input: {eventId: number; beerId: number}) => input)
   .handler(async ({data}): Promise<{ok: true}> => {
     await adminFetch(`/admin/events/${data.eventId}/beers/${data.beerId}`, {
       method: 'DELETE',

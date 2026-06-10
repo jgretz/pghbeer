@@ -101,7 +101,7 @@ export const listStyles = createServerFn({method: 'GET'}).handler(
 );
 
 export const createBeer = createServerFn({method: 'POST'})
-  .inputValidator((data: CreateBeerInput) => data)
+  .validator((data: CreateBeerInput) => data)
   .handler(
     async ({data}) =>
       (
@@ -113,7 +113,7 @@ export const createBeer = createServerFn({method: 'POST'})
   );
 
 export const updateBeer = createServerFn({method: 'POST'})
-  .inputValidator((input: {id: number; data: UpdateBeerInput}) => input)
+  .validator((input: {id: number; data: UpdateBeerInput}) => input)
   .handler(
     async ({data: {id, data}}) =>
       (
@@ -125,7 +125,7 @@ export const updateBeer = createServerFn({method: 'POST'})
   );
 
 export const deleteBeer = createServerFn({method: 'POST'})
-  .inputValidator((id: number) => id)
+  .validator((id: number) => id)
   .handler(async ({data: id}): Promise<DeleteBeerResult> => {
     const res = await adminFetchRaw(`/admin/beers/${id}`, {method: 'DELETE'});
     if (res.ok) return {ok: true};

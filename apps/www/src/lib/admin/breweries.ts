@@ -28,7 +28,7 @@ export const listBreweries = createServerFn({method: 'GET'}).handler(async () =>
 });
 
 export const createBrewery = createServerFn({method: 'POST'})
-  .inputValidator((d: {name: string}) => d)
+  .validator((d: {name: string}) => d)
   .handler(async ({data}) => {
     const res = await adminFetch('/admin/breweries', {
       method: 'POST',
@@ -38,7 +38,7 @@ export const createBrewery = createServerFn({method: 'POST'})
   });
 
 export const updateBrewery = createServerFn({method: 'POST'})
-  .inputValidator((d: {id: number; name: string}) => d)
+  .validator((d: {id: number; name: string}) => d)
   .handler(async ({data}) => {
     const res = await adminFetch(`/admin/breweries/${data.id}`, {
       method: 'PATCH',
@@ -51,7 +51,7 @@ export const updateBrewery = createServerFn({method: 'POST'})
 // `dependents` payload survives as data for ConfirmDelete. Env resolution mirrors
 // server-fn.ts; the ~handful of duplicated lines keep that shared file untouched.
 export const deleteBrewery = createServerFn({method: 'POST'})
-  .inputValidator((d: {id: number}) => d)
+  .validator((d: {id: number}) => d)
   .handler(async ({data}): Promise<DeleteResult> => {
     const baseUrl = process.env.API_URL ?? process.env.VITE_API_URL ?? 'http://localhost:3001';
     const key = process.env.ADMIN_API_KEY ?? process.env.API_KEY ?? '';

@@ -37,7 +37,7 @@ export const listStyles = createServerFn({method: 'GET'}).handler(
 );
 
 export const createStyle = createServerFn({method: 'POST'})
-  .inputValidator((data: {name: string}) => data)
+  .validator((data: {name: string}) => data)
   .handler(
     async ({data}) =>
       (
@@ -49,7 +49,7 @@ export const createStyle = createServerFn({method: 'POST'})
   );
 
 export const updateStyle = createServerFn({method: 'POST'})
-  .inputValidator((data: {id: number; name: string}) => data)
+  .validator((data: {id: number; name: string}) => data)
   .handler(
     async ({data}) =>
       (
@@ -61,7 +61,7 @@ export const updateStyle = createServerFn({method: 'POST'})
   );
 
 export const deleteStyle = createServerFn({method: 'POST'})
-  .inputValidator((data: {id: number}) => data)
+  .validator((data: {id: number}) => data)
   .handler(async ({data}): Promise<DeleteResult> => {
     const res = await adminFetchRaw(`/admin/styles/${data.id}`, {
       method: 'DELETE',
