@@ -4,6 +4,7 @@ import {
   foreignKey,
   integer,
   pgTable,
+  uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core';
 import {sql} from 'drizzle-orm';
@@ -41,6 +42,11 @@ export const mapSlots = pgTable(
     ...dates,
   },
   (table) => [
+    // Table labels are the carry-over match key when switching layouts, so they
+    // must be unique within a layout. Partial — zones may repeat labels freely.
+    uniqueIndex('map_slots_layout_table_label_unq')
+      .on(table.layoutId, table.label)
+      .where(sql`${table.kind} = 'table'`),
     foreignKey({
       columns: [table.layoutId],
       foreignColumns: [mapLayouts.id],

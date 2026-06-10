@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "map_slots_layout_table_label_unq" ON "map_slots" USING btree ("layout_id","label") WHERE "map_slots"."kind" = 'table';
