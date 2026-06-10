@@ -3,7 +3,7 @@
 // app does not depend on @domain).
 
 import {createServerFn} from '@tanstack/react-start';
-import {adminFetch} from './server-fn';
+import {adminFetch, adminFetchRaw} from './server-fn';
 import {parseDeleteResponse, type DeleteEventResult} from './events';
 
 export type AdminMapSlotKind = 'table' | 'zone';
@@ -144,12 +144,8 @@ export const renameLayout = createServerFn({method: 'POST'})
 export const deleteLayout = createServerFn({method: 'POST'})
   .inputValidator((input: {layoutId: number}) => input)
   .handler(async ({data}): Promise<DeleteEventResult> => {
-    const base =
-      process.env.API_URL ?? process.env.VITE_API_URL ?? 'http://localhost:3001';
-    const key = process.env.ADMIN_API_KEY ?? process.env.API_KEY ?? '';
-    const res = await fetch(`${base}/admin/maps/layouts/${data.layoutId}`, {
+    const res = await adminFetchRaw(`/admin/maps/layouts/${data.layoutId}`, {
       method: 'DELETE',
-      headers: {'Content-Type': 'application/json', Authorization: `Bearer ${key}`},
     });
     const body = await res.json().catch(() => null);
     return parseDeleteResponse(res.status, body);

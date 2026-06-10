@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from 'react';
+import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {MapSlot} from '../../map/MapSlot';
 import {usePanZoom} from '../../../hooks/usePanZoom';
 import type {DraftSlot} from '../../../lib/admin/mapDraft';
@@ -82,7 +82,7 @@ function overlaps(s: DraftSlot, box: {minX: number; minY: number; maxX: number; 
   );
 }
 
-export function AdminMapCanvas({
+function AdminMapCanvasImpl({
   width,
   height,
   slots,
@@ -96,11 +96,14 @@ export function AdminMapCanvas({
   onAssignTap,
   onBackgroundTap,
 }: AdminMapCanvasProps) {
-  const {containerRef, size, view, fit, fitView, setView, zoomBy, bind} = usePanZoom({
+  const {containerRef, groupRef, size, view, transform, fit, zoomBy, bind} = usePanZoom({
     width,
     height,
   });
   const didInit = useRef(false);
+
+  const zoomIn = useCallback(() => zoomBy(1.25), [zoomBy]);
+  const zoomOut = useCallback(() => zoomBy(0.8), [zoomBy]);
 
   const drag = useRef<{
     pointerId: number;
@@ -143,9 +146,9 @@ export function AdminMapCanvas({
 
   useEffect(() => {
     if (!size.w || !size.h || didInit.current) return;
-    setView(fitView());
+    fit();
     didInit.current = true;
-  }, [size, setView, fitView]);
+  }, [size, fit]);
 
   const toWorld = (clientX: number, clientY: number) => {
     const rect = containerRef.current?.getBoundingClientRect();
@@ -293,7 +296,7 @@ export function AdminMapCanvas({
           onPointerUp={onBgPointerUp}
           onPointerCancel={onBgPointerUp}
         >
-          <g transform={`translate(${view.tx} ${view.ty}) scale(${view.scale})`}>
+          <g ref={groupRef} transform={transform}>
             {ordered.map((slot) => {
               const selectable = mode === 'layout' || slot.kind === 'table';
               const draggable = mode === 'layout' && !slot.locked;
@@ -414,15 +417,20 @@ export function AdminMapCanvas({
       </div>
 
       <div className="absolute bottom-3 right-3 flex flex-col gap-2">
-        <CanvasButton label="+" onClick={() => zoomBy(1.25)} />
-        <CanvasButton label="−" onClick={() => zoomBy(0.8)} />
+        <CanvasButton label="+" onClick={zoomIn} />
+        <CanvasButton label="−" onClick={zoomOut} />
         <CanvasButton label="⤢" title="Fit" onClick={fit} />
       </div>
     </div>
   );
 }
 
-function CanvasButton({
+// Re-render only when props change — the parent dispatches draft updates on
+// every drag pointermove, so an unmemoized canvas would reconcile the full slot
+// tree each frame.
+export const AdminMapCanvas = memo(AdminMapCanvasImpl);
+
+const CanvasButton = memo(function CanvasButton({
   label,
   title,
   onClick,
@@ -441,4 +449,4 @@ function CanvasButton({
       {label}
     </button>
   );
-}
+});

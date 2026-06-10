@@ -1,3 +1,5 @@
+import {useId} from 'react';
+
 import type {DraftSlot} from '../../../lib/admin/mapDraft';
 import type {AlignKind} from '../../../lib/admin/mapAlign';
 
@@ -158,11 +160,14 @@ function Stepper({
   min?: number;
   onChange: (v: number) => void;
 }) {
+  const id = useId();
   const clamp = (v: number) => (min != null ? Math.max(min, v) : v);
   const mixed = value === null;
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs text-text-secondary">{label}</span>
+      <label htmlFor={id} className="text-xs text-text-secondary">
+        {label}
+      </label>
       <div className="flex items-stretch">
         <button
           type="button"
@@ -173,6 +178,7 @@ function Stepper({
           −
         </button>
         <input
+          id={id}
           type="number"
           value={mixed ? '' : Math.round(value)}
           placeholder={mixed ? 'Many' : undefined}
