@@ -1,6 +1,8 @@
-import {and, eq} from 'drizzle-orm';
+import {and, eq, sql} from 'drizzle-orm';
 import {beers, breweries, eventbeerlist, styles} from 'database';
 import type {BeverageType, Database} from 'database';
+
+import {canonicalBreweryName} from './brewery-aliases';
 
 export type UpsertDeps = {db: Database};
 
@@ -9,11 +11,13 @@ const NAME_MAX = 80;
 const cap = (s: string): string => s.trim().slice(0, NAME_MAX);
 
 export async function findOrCreateBrewery(deps: UpsertDeps, name: string) {
-  const trimmed = cap(name);
+  // Apply known aliases, then match case-insensitively so "SPOONWOOD BREWING
+  // CO" reuses "Spoonwood Brewing Co" instead of creating a duplicate.
+  const trimmed = cap(canonicalBreweryName(name));
   const [existing] = await deps.db
     .select()
     .from(breweries)
-    .where(eq(breweries.name, trimmed))
+    .where(sql`lower(${breweries.name}) = ${trimmed.toLowerCase()}`)
     .limit(1);
 
   if (existing) return existing;
@@ -30,7 +34,11 @@ export async function findOrCreateBrewery(deps: UpsertDeps, name: string) {
 
 export async function findOrCreateStyle(deps: UpsertDeps, name: string) {
   const trimmed = cap(name);
-  const [existing] = await deps.db.select().from(styles).where(eq(styles.name, trimmed)).limit(1);
+  const [existing] = await deps.db
+    .select()
+    .from(styles)
+    .where(sql`lower(${styles.name}) = ${trimmed.toLowerCase()}`)
+    .limit(1);
 
   if (existing) return existing;
 
