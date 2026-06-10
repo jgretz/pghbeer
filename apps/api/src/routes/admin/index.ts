@@ -6,6 +6,7 @@ import {styleRoutes} from './styles';
 import {beerRoutes} from './beers';
 import {eventRoutes} from './events';
 import {eventBeerRoutes} from './event-beers';
+import {mapRoutes} from './maps';
 
 export const adminRoutes = new Hono();
 
@@ -18,3 +19,4 @@ adminRoutes.route('/styles', styleRoutes);
 adminRoutes.route('/beers', beerRoutes);
 adminRoutes.route('/events', eventRoutes);
 adminRoutes.route('/events', eventBeerRoutes);
+adminRoutes.route('/maps', mapRoutes);

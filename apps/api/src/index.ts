@@ -5,6 +5,7 @@ import {parseEnv} from 'env';
 import {init as initDomain} from '@domain';
 import {healthRoutes} from './routes/health';
 import {dataForEventRoutes} from './routes/dataforevent';
+import {eventMapRoutes} from './routes/eventmap';
 import {statsRoutes} from './routes/stats';
 import {adminRoutes} from './routes/admin';
 
@@ -25,6 +26,7 @@ app.use('/*', cors());
 
 app.route('/', healthRoutes);
 app.route('/', dataForEventRoutes);
+app.route('/', eventMapRoutes);
 app.route('/', statsRoutes);
 app.route('/admin', adminRoutes);
 
