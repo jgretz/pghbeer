@@ -8,6 +8,7 @@ import type {Column, RowAction} from '../../components/admin/DataTable';
 import {EntityForm} from '../../components/admin/EntityForm';
 import type {FieldDef, FieldValue} from '../../components/admin/EntityForm';
 import {ConfirmDelete} from '../../components/admin/ConfirmDelete';
+import {ModalOverlay} from '../../components/admin/ModalOverlay';
 import {
   BEVERAGE_TYPES,
   createBeer,
@@ -248,30 +249,32 @@ function BeersAdmin() {
       )}
 
       {formOpen ? (
-        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
-          <h2 className="font-display text-lg font-bold text-text">
-            {editing ? 'Edit beer' : 'New beer'}
-          </h2>
-          <EntityForm
-            as="inline"
-            fields={fields}
-            values={values}
-            onChange={(name, value) =>
-              setValues((prev) => ({...prev, [name]: value}))
-            }
-            onSubmit={handleSubmit}
-            onCancel={closeForm}
-            submitLabel={editing ? 'Save changes' : 'Create beer'}
-          />
-          {formError || saveMutation.error ? (
-            <p className="text-sm text-red">
-              {formError ??
-                (saveMutation.error instanceof Error
-                  ? saveMutation.error.message
-                  : 'Save failed.')}
-            </p>
-          ) : null}
-        </div>
+        <ModalOverlay onClose={closeForm}>
+          <div className="flex w-full max-w-md flex-col gap-3 rounded-xl border border-border bg-surface p-6 shadow-lg">
+            <h2 className="font-display text-lg font-bold text-text">
+              {editing ? 'Edit beer' : 'New beer'}
+            </h2>
+            <EntityForm
+              as="inline"
+              fields={fields}
+              values={values}
+              onChange={(name, value) =>
+                setValues((prev) => ({...prev, [name]: value}))
+              }
+              onSubmit={handleSubmit}
+              onCancel={closeForm}
+              submitLabel={editing ? 'Save changes' : 'Create beer'}
+            />
+            {formError || saveMutation.error ? (
+              <p className="text-sm text-red">
+                {formError ??
+                  (saveMutation.error instanceof Error
+                    ? saveMutation.error.message
+                    : 'Save failed.')}
+              </p>
+            ) : null}
+          </div>
+        </ModalOverlay>
       ) : null}
 
       <ConfirmDelete

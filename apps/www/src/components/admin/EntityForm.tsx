@@ -1,6 +1,8 @@
 import {useId} from 'react';
 import type {FormEvent} from 'react';
 
+import {ModalOverlay} from './ModalOverlay';
+
 type FieldBase = {
   name: string;
   label: string;
@@ -74,15 +76,11 @@ export function EntityForm({
   }
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4"
-      role="dialog"
-      aria-modal="true"
-    >
+    <ModalOverlay onClose={onCancel}>
       <div className="w-full max-w-md rounded-xl border border-border bg-surface p-6 shadow-lg">
         {form}
       </div>
-    </div>
+    </ModalOverlay>
   );
 }
 

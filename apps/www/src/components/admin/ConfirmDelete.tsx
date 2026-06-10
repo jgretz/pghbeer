@@ -1,5 +1,7 @@
 import {useId} from 'react';
 
+import {ModalOverlay} from './ModalOverlay';
+
 export type ConfirmDeleteProps = {
   open: boolean;
   title?: string;
@@ -56,17 +58,8 @@ export function ConfirmDelete({
   const blocked = blockedText !== '';
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4"
-      onClick={onCancel}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={titleId}
-    >
-      <div
-        className="w-full max-w-sm rounded-xl border border-border bg-surface p-6 shadow-lg"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <ModalOverlay onClose={onCancel} labelledBy={titleId}>
+      <div className="w-full max-w-sm rounded-xl border border-border bg-surface p-6 shadow-lg">
         <h2 id={titleId} className="font-display text-lg font-bold text-text">
           {title}
         </h2>
@@ -93,6 +86,6 @@ export function ConfirmDelete({
           )}
         </div>
       </div>
-    </div>
+    </ModalOverlay>
   );
 }
