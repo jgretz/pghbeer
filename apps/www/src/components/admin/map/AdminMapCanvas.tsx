@@ -96,7 +96,7 @@ function AdminMapCanvasImpl({
   onAssignTap,
   onBackgroundTap,
 }: AdminMapCanvasProps) {
-  const {containerRef, groupRef, size, view, transform, fit, zoomBy, bind} = usePanZoom({
+  const {containerRef, groupRef, size, view, fit, zoomBy, bind} = usePanZoom({
     width,
     height,
   });
@@ -296,7 +296,8 @@ function AdminMapCanvasImpl({
           onPointerUp={onBgPointerUp}
           onPointerCancel={onBgPointerUp}
         >
-          <g ref={groupRef} transform={transform}>
+          {/* transform is owned by usePanZoom (imperative); no prop here. */}
+          <g ref={groupRef}>
             {ordered.map((slot) => {
               const selectable = mode === 'layout' || slot.kind === 'table';
               const draggable = mode === 'layout' && !slot.locked;

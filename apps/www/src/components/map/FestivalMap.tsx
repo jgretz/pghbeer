@@ -12,7 +12,7 @@ interface FestivalMapProps {
 // highlight is pure props — a slot is always an addressable node, so no cached
 // image to re-export.
 export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
-  const {containerRef, groupRef, size, transform, fit, centerOnRect, zoomBy, bind} =
+  const {containerRef, groupRef, size, fit, centerOnRect, zoomBy, bind} =
     usePanZoom({width: layout.width, height: layout.height});
   const didInit = useRef(false);
 
@@ -54,7 +54,8 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
         {...bind}
       >
         <svg width="100%" height="100%">
-          <g ref={groupRef} transform={transform}>
+          {/* transform is owned by usePanZoom (imperative); no prop here. */}
+          <g ref={groupRef}>
             {ordered.map((slot) => (
               <MapSlot
                 key={slot.id}

@@ -60,6 +60,16 @@ export function usePanZoom(world: {width: number; height: number}) {
     if (rafId.current != null) cancelAnimationFrame(rafId.current);
   }, []);
 
+  // The hook owns the <g> transform attribute outright — the consumer renders
+  // <g ref={groupRef}> with NO transform prop. If it were a controlled prop, a
+  // re-render mid-gesture (e.g. a React Query focus-refetch) would reapply the
+  // stale committed value and clobber the live imperative writes. Writing it
+  // here (on committed change) and in applyLive (during a gesture) keeps a
+  // single writer that React reconciliation never touches.
+  useEffect(() => {
+    groupRef.current?.setAttribute('transform', transformStr(view));
+  }, [view]);
+
   // Commit to React state (re-renders) and keep the live ref in sync. For
   // discrete actions: buttons, fit, wheel, pointer-up.
   const commit = useCallback((v: PanZoomView) => {
@@ -202,7 +212,6 @@ export function usePanZoom(world: {width: number; height: number}) {
     groupRef,
     size,
     view,
-    transform: transformStr(view),
     fit,
     fitView,
     centerOnRect,
