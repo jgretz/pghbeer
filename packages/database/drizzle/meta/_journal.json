@@ -36,6 +36,27 @@
       "when": 1780947176505,
       "tag": "0004_add-beer-locked",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1781019591944,
+      "tag": "0005_add-festival-map",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1781036557103,
+      "tag": "0006_add-map-slot-locked",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1781105822441,
+      "tag": "0007_map-slot-unique-table-label",
+      "breakpoints": true
     }
   ]
 }

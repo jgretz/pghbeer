@@ -151,6 +151,95 @@ export type UpdateEventInput = z.infer<typeof updateEventSchema>;
 export const addBeerToEventSchema = z.object({beerId: z.number().int()});
 export type AddBeerToEventInput = z.infer<typeof addBeerToEventSchema>;
 
+// --- Festival map ---
+// A layout holds positioned elements ("slots"). A slot is either an assignable
+// brewery `table` or a decorative `zone` (Inside / Outside / Entrance) used for
+// orientation; both share geometry.
+
+export type MapSlotKind = 'table' | 'zone';
+
+export interface MapSlot {
+  id: number;
+  label: string;
+  kind: MapSlotKind;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation: number;
+  locked: boolean;
+  breweryId: number | null;
+  breweryName: string | null;
+}
+
+export interface MapLayout {
+  id: number;
+  eventId: number;
+  name: string;
+  isActive: boolean;
+  width: number;
+  height: number;
+  slots: MapSlot[];
+}
+
+export interface MapLayoutSummary {
+  id: number;
+  name: string;
+  isActive: boolean;
+}
+
+// Public read shape: the active layout plus the per-event visibility flag.
+export interface EventMap {
+  enabled: boolean;
+  activeLayout: MapLayout | null;
+}
+
+// Returned before committing a layout switch so the confirm dialog can warn
+// which assignments carry over (by matching slot label) and which are dropped.
+export interface LayoutSwitchPreview {
+  carried: number;
+  unmatchedLabels: string[];
+  droppedBreweries: {id: number; name: string}[];
+}
+
+export const mapSlotKindSchema = z.enum(['table', 'zone']);
+
+export const createLayoutSchema = z.object({
+  name: z.string().min(1),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
+});
+export const updateLayoutSchema = z.object({
+  name: z.string().min(1).optional(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
+});
+export const duplicateLayoutSchema = z.object({name: z.string().min(1)});
+export const setActiveLayoutSchema = z.object({layoutId: z.number().int()});
+export const setMapEnabledSchema = z.object({enabled: z.boolean()});
+
+// id present = update an existing slot; absent = create.
+export const upsertSlotSchema = z.object({
+  id: z.number().int().optional(),
+  label: z.string().min(1).max(24),
+  kind: mapSlotKindSchema.default('table'),
+  x: z.number(),
+  y: z.number(),
+  width: z.number().positive(),
+  height: z.number().positive(),
+  rotation: z.number().default(0),
+  locked: z.boolean().default(false),
+  breweryId: z.number().int().nullable().optional(),
+});
+
+export const assignBrewerySchema = z.object({
+  breweryId: z.number().int().nullable(),
+});
+
+export type CreateLayoutInput = z.infer<typeof createLayoutSchema>;
+export type UpdateLayoutInput = z.infer<typeof updateLayoutSchema>;
+export type UpsertSlotInput = z.infer<typeof upsertSlotSchema>;
+
 export interface VelocityBucket {
   bucket: string;
   total: number;

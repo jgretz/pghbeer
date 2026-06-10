@@ -62,3 +62,21 @@ export const usersIdSeq = pgSequence('users_id_seq', {
   cache: 1,
   cycle: false,
 });
+
+export const mapLayoutsIdSeq = pgSequence('map_layouts_id_seq', {
+  startWith: 1,
+  increment: 1,
+  minValue: 1,
+  maxValue: '9223372036854775807',
+  cache: 1,
+  cycle: false,
+});
+
+export const mapSlotsIdSeq = pgSequence('map_slots_id_seq', {
+  startWith: 1,
+  increment: 1,
+  minValue: 1,
+  maxValue: '9223372036854775807',
+  cache: 1,
+  cycle: false,
+});

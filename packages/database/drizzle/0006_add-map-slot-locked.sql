@@ -1,0 +1,1 @@
+ALTER TABLE "map_slots" ADD COLUMN "locked" boolean DEFAULT false NOT NULL;

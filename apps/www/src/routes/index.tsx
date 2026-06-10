@@ -9,6 +9,8 @@ import {JumpSheet} from '../components/JumpSheet';
 import {WelcomeModal} from '../components/WelcomeModal';
 import {useTheme} from '../hooks/useTheme';
 import {useEventData} from '../hooks/useEventData';
+import {useEventMap} from '../hooks/useEventMap';
+import {isMapVisible} from '../lib/mapFlag';
 import {useTriedSet} from '../hooks/useTriedSet';
 import {useFilterState} from '../hooks/useFilterState';
 import {useFilteredData} from '../hooks/useFilteredData';
@@ -25,6 +27,8 @@ export const Route = createFileRoute('/')({
 function IndexPage() {
   const {theme, toggle: toggleTheme} = useTheme();
   const {data, isLoading} = useEventData();
+  const {data: eventMap} = useEventMap();
+  const mapVisible = isMapVisible(eventMap?.enabled);
   const breweries = data?.breweries;
   const eventInfo = data?.event;
   const {tried, toggle: toggleTried} = useTriedSet();
@@ -120,6 +124,7 @@ function IndexPage() {
         ref={headerRef}
         theme={theme}
         onToggleTheme={toggleTheme}
+        mapVisible={mapVisible}
         eventDate={eventInfo?.date}
         tried={tried.size}
         total={totalBeers}
@@ -155,6 +160,7 @@ function IndexPage() {
           onToggleTried={toggleTried}
           headerHeight={headerHeight}
           breweryRefs={breweryRefs}
+          mapVisible={mapVisible}
         />
       )}
 

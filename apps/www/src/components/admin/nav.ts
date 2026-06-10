@@ -14,4 +14,5 @@ export const NAV_ITEMS: NavItem[] = [
   {label: 'Styles', to: '/admin/styles'},
   {label: 'Beers', to: '/admin/beers'},
   {label: 'Events', to: '/admin/events'},
+  {label: 'Map', to: '/admin/map'},
 ];

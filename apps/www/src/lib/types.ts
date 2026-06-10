@@ -37,8 +37,40 @@ export interface EventBeerItem {
 }
 
 export interface BreweryGroup {
+  breweryId: number;
   name: string;
   beers: Beer[];
+}
+
+export type MapSlotKind = 'table' | 'zone';
+
+export interface MapSlot {
+  id: number;
+  label: string;
+  kind: MapSlotKind;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation: number;
+  locked: boolean;
+  breweryId: number | null;
+  breweryName: string | null;
+}
+
+export interface MapLayout {
+  id: number;
+  eventId: number;
+  name: string;
+  isActive: boolean;
+  width: number;
+  height: number;
+  slots: MapSlot[];
+}
+
+export interface EventMap {
+  enabled: boolean;
+  activeLayout: MapLayout | null;
 }
 
 export interface FilterState {

@@ -9,6 +9,7 @@ interface BreweryListProps {
   onToggleTried: (key: string, beerId: number) => void;
   headerHeight: number;
   breweryRefs: RefObject<Record<string, HTMLDivElement | null>>;
+  mapVisible: boolean;
 }
 
 export function BreweryList({
@@ -17,6 +18,7 @@ export function BreweryList({
   onToggleTried,
   headerHeight,
   breweryRefs,
+  mapVisible,
 }: BreweryListProps) {
   return (
     <div className="pb-24">
@@ -30,9 +32,11 @@ export function BreweryList({
           }}
         >
           <BreweryHeader
+            breweryId={brewery.breweryId}
             name={brewery.name}
             beers={brewery.beers}
             stickyTop={headerHeight}
+            mapVisible={mapVisible}
           />
           {brewery.beers.map((beer) => {
             const key = `${brewery.name}::${beer.name}`;
