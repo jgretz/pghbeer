@@ -331,6 +331,20 @@ function AdminMapCanvasImpl({
                   }}
                 >
                   <MapSlot slot={slot} />
+                  {slot.kind === 'table' && (
+                    <text
+                      x={slot.x + 3}
+                      y={slot.y + 3}
+                      textAnchor="start"
+                      dominantBaseline="hanging"
+                      fontSize={Math.max(7, Math.min(slot.width, slot.height) * 0.22)}
+                      fontWeight={700}
+                      fill="var(--color-text-secondary)"
+                      pointerEvents="none"
+                    >
+                      {slot.label}
+                    </text>
+                  )}
                   {slot.locked && (
                     <text
                       x={slot.x + slot.width - lockGlyph * 0.6}
