@@ -110,7 +110,10 @@ mapRoutes.post('/events/:eventId/active', async (c) => {
   const parsed = setActiveLayoutSchema.safeParse(await c.req.json());
   if (!parsed.success) return c.json({error: parsed.error.flatten()}, 400);
 
-  return c.json(await setActiveLayout(eventId, parsed.data.layoutId));
+  const result = await setActiveLayout(eventId, parsed.data.layoutId);
+  if (!result) return c.json({error: 'not found'}, 404);
+
+  return c.json(result);
 });
 
 mapRoutes.patch('/events/:eventId/enabled', async (c) => {
@@ -120,7 +123,10 @@ mapRoutes.patch('/events/:eventId/enabled', async (c) => {
   const parsed = setMapEnabledSchema.safeParse(await c.req.json());
   if (!parsed.success) return c.json({error: parsed.error.flatten()}, 400);
 
-  return c.json(await setMapEnabled(eventId, parsed.data.enabled));
+  const result = await setMapEnabled(eventId, parsed.data.enabled);
+  if (!result) return c.json({error: 'not found'}, 404);
+
+  return c.json(result);
 });
 
 // --- Slots ---
@@ -146,7 +152,10 @@ mapRoutes.patch('/layouts/:layoutId/slots/:slotId', async (c) => {
   const parsed = upsertSlotSchema.safeParse(await c.req.json());
   if (!parsed.success) return c.json({error: parsed.error.flatten()}, 400);
 
-  return c.json(await upsertSlot(layoutId, {...parsed.data, id: slotId}));
+  const updated = await upsertSlot(layoutId, {...parsed.data, id: slotId});
+  if (!updated) return c.json({error: 'not found'}, 404);
+
+  return c.json(updated);
 });
 
 mapRoutes.delete('/slots/:slotId', async (c) => {
