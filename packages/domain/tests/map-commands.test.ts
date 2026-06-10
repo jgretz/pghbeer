@@ -56,6 +56,24 @@ describe('upsertSlot', function () {
     expect(result).toBeNull();
   });
 
+  it('should reject a duplicate table label within the same layout', async function () {
+    const event = await createEvent({name: 'BOTB', date: '2026-04-18'});
+    const layout = await createLayout(event.id, {name: 'L1'});
+    await addSlot(layout.id, 'T1');
+
+    expect(addSlot(layout.id, 'T1')).rejects.toThrow();
+  });
+
+  it('should allow zones to share a label within a layout', async function () {
+    const event = await createEvent({name: 'BOTB', date: '2026-04-18'});
+    const layout = await createLayout(event.id, {name: 'L1'});
+    await addSlot(layout.id, 'Inside', {kind: 'zone'});
+
+    // The unique index is partial (kind='table'), so zones may repeat.
+    const second = await addSlot(layout.id, 'Inside', {kind: 'zone'});
+    expect(second.label).toBe('Inside');
+  });
+
   it('should never assign a brewery to a zone slot', async function () {
     const event = await createEvent({name: 'BOTB', date: '2026-04-18'});
     const brewery = await createBrewery({name: 'Dancing Gnome'});
