@@ -11,12 +11,15 @@ interface MapSlotProps {
 // Rendered with a live SVG so a slot is always an addressable node — the
 // "find me" highlight is pure props, no cached image to re-export.
 function MapSlotImpl({slot, highlighted}: MapSlotProps) {
-  const {x, y, width, height, rotation, label, kind} = slot;
+  const {x, y, width, height, rotation, kind} = slot;
   const cx = x + width / 2;
   const cy = y + height / 2;
   const transform = rotation ? `rotate(${rotation} ${cx} ${cy})` : undefined;
 
   if (kind === 'zone') {
+    // Zones are an unlabeled background region for now — every zone's label is
+    // still the "Zone" placeholder, so printing it is noise. Drop the text
+    // until zone labeling is a real feature.
     return (
       <g transform={transform} style={{pointerEvents: 'none'}}>
         <rect
@@ -31,24 +34,15 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
           strokeWidth={1}
           strokeDasharray="6 4"
         />
-        <text
-          x={cx}
-          y={y + 16}
-          textAnchor="middle"
-          fontSize={14}
-          fontWeight={700}
-          fill="var(--color-text-secondary)"
-          style={{textTransform: 'uppercase', letterSpacing: '0.08em'}}
-        >
-          {label}
-        </text>
       </g>
     );
   }
 
   const filled = slot.breweryId != null;
-  const labelSize = Math.max(8, Math.min(width, height) * 0.32);
-  const nameSize = Math.max(6, Math.min(width, height) * 0.18);
+  // Table numbers are arbitrary, so a filled table gives its whole area to the
+  // wrapped brewery name (a foreignObject — SVG <text> can't wrap). Empty tables
+  // are just a box.
+  const nameSize = Math.max(8, Math.min(width, height) * 0.2);
 
   return (
     <g transform={transform} data-slot-id={slot.id}>
@@ -76,28 +70,30 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
         strokeWidth={1}
         strokeDasharray={filled ? undefined : '4 3'}
       />
-      <text
-        x={cx}
-        y={filled ? cy - height * 0.06 : cy}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontSize={labelSize}
-        fontWeight={700}
-        fill={filled ? 'var(--color-text)' : 'var(--color-text-muted)'}
-      >
-        {label}
-      </text>
       {filled && slot.breweryName && (
-        <text
-          x={cx}
-          y={cy + height * 0.26}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize={nameSize}
-          fill="var(--color-text-secondary)"
-        >
-          {slot.breweryName}
-        </text>
+        <foreignObject x={x} y={y} width={width} height={height}>
+          <div
+            style={{
+              display: 'flex',
+              boxSizing: 'border-box',
+              width: '100%',
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 3,
+              overflow: 'hidden',
+              textAlign: 'center',
+              lineHeight: 1.05,
+              fontSize: nameSize,
+              fontWeight: 700,
+              color: 'var(--color-text)',
+              overflowWrap: 'anywhere',
+              hyphens: 'auto',
+            }}
+          >
+            {slot.breweryName}
+          </div>
+        </foreignObject>
       )}
     </g>
   );
