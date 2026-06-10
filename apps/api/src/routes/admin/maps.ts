@@ -139,7 +139,10 @@ mapRoutes.post('/layouts/:layoutId/slots', async (c) => {
   if (!parsed.success) return c.json({error: parsed.error.flatten()}, 400);
 
   // POST always creates — ignore any id in the body.
-  return c.json(await upsertSlot(layoutId, {...parsed.data, id: undefined}), 201);
+  const created = await upsertSlot(layoutId, {...parsed.data, id: undefined});
+  if (!created) return c.json({error: 'failed to create slot'}, 500);
+
+  return c.json(created, 201);
 });
 
 mapRoutes.patch('/layouts/:layoutId/slots/:slotId', async (c) => {
