@@ -5,7 +5,6 @@ import {useTheme} from '../hooks/useTheme';
 import {useEventMap} from '../hooks/useEventMap';
 import {useOrientation} from '../hooks/useOrientation';
 import {useDismissibleFlag} from '../hooks/useDismissibleFlag';
-import {isMapVisible} from '../lib/mapFlag';
 
 interface MapSearch {
   brewery?: number;
@@ -66,7 +65,6 @@ function MapPage() {
   const {dismissed: nudgeDismissed, dismiss: dismissNudge} =
     useDismissibleFlag('map-rotate-nudge');
 
-  const visible = isMapVisible(data?.enabled);
   const portrait = orientation === 'portrait';
   const showNudge = portrait && !nudgeDismissed;
 
@@ -105,8 +103,6 @@ function MapPage() {
         <CenteredMessage>
           Couldn't load the map — check your connection and try again.
         </CenteredMessage>
-      ) : !visible ? (
-        <CenteredMessage>The festival map isn't available yet.</CenteredMessage>
       ) : !data?.activeLayout ? (
         <CenteredMessage>The map hasn't been set up for this event yet.</CenteredMessage>
       ) : (
