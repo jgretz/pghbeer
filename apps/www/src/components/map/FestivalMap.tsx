@@ -1,6 +1,6 @@
 import {memo, useCallback, useEffect, useMemo, useRef} from 'react';
 import {MapSlot} from './MapSlot';
-import {usePanZoom} from '../../hooks/usePanZoom';
+import {usePanZoom, type Rect} from '../../hooks/usePanZoom';
 import type {MapLayout, MapSlot as MapSlotType} from '../../lib/types';
 
 interface FestivalMapProps {
@@ -11,9 +11,41 @@ interface FestivalMapProps {
 // Live, pannable/zoomable SVG of a layout for public display. The "find me"
 // highlight is pure props — a slot is always an addressable node, so no cached
 // image to re-export.
+//
+// The world is derived from the slots' actual bounding box, not the stored
+// canvas dims — slots overflow the nominal canvas, so the box is the source of
+// truth for fit. A leading translate shifts the box origin to (0,0), and
+// `toWorldRect` maps a slot's box into that world space for "find me" centering.
+// Wide layouts read poorly in portrait; the /map route nudges the user to turn
+// the phone to landscape rather than fighting it with an SVG rotation.
 export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
-  const {containerRef, groupRef, size, fit, centerOnRect, zoomBy, bind} =
-    usePanZoom({width: layout.width, height: layout.height});
+  const {world, worldTransform, toWorldRect} = useMemo(() => {
+    const {slots} = layout;
+    if (slots.length === 0) {
+      return {
+        world: {width: layout.width, height: layout.height},
+        worldTransform: undefined as string | undefined,
+        toWorldRect: (r: Rect): Rect => r,
+      };
+    }
+    const minX = Math.min(...slots.map((s) => s.x));
+    const minY = Math.min(...slots.map((s) => s.y));
+    const maxX = Math.max(...slots.map((s) => s.x + s.width));
+    const maxY = Math.max(...slots.map((s) => s.y + s.height));
+
+    return {
+      world: {width: maxX - minX, height: maxY - minY},
+      worldTransform: `translate(${-minX} ${-minY})`,
+      toWorldRect: (r: Rect): Rect => ({
+        x: r.x - minX,
+        y: r.y - minY,
+        width: r.width,
+        height: r.height,
+      }),
+    };
+  }, [layout]);
+
+  const {containerRef, groupRef, size, fit, centerOnRect, zoomBy, bind} = usePanZoom(world);
   const didInit = useRef(false);
 
   const zoomIn = useCallback(() => zoomBy(1.25), [zoomBy]);
@@ -33,17 +65,23 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
     );
   }, [layout.slots, highlightBreweryId]);
 
+  // The highlight's box has to be expressed in world space for centering.
+  const highlightRect = useMemo(
+    () => (highlightSlot ? toWorldRect(highlightSlot) : undefined),
+    [highlightSlot, toWorldRect],
+  );
+
   // Fit once the container is measured; re-center when the highlight changes.
   useEffect(() => {
     if (!size.w || !size.h) return;
-    if (highlightSlot) {
-      centerOnRect(highlightSlot);
+    if (highlightRect) {
+      centerOnRect(highlightRect);
       didInit.current = true;
     } else if (!didInit.current) {
       fit();
       didInit.current = true;
     }
-  }, [size, highlightSlot, centerOnRect, fit]);
+  }, [size, highlightRect, centerOnRect, fit]);
 
   return (
     <div className="relative flex-1 overflow-hidden bg-bg">
@@ -54,15 +92,18 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
         {...bind}
       >
         <svg width="100%" height="100%">
-          {/* transform is owned by usePanZoom (imperative); no prop here. */}
+          {/* transform is owned by usePanZoom (imperative); no prop here. The
+              inner <g> applies the static landscape rotation under it. */}
           <g ref={groupRef}>
-            {ordered.map((slot) => (
-              <MapSlot
-                key={slot.id}
-                slot={slot}
-                highlighted={highlightSlot?.id === slot.id}
-              />
-            ))}
+            <g transform={worldTransform}>
+              {ordered.map((slot) => (
+                <MapSlot
+                  key={slot.id}
+                  slot={slot}
+                  highlighted={highlightSlot?.id === slot.id}
+                />
+              ))}
+            </g>
           </g>
         </svg>
       </div>
