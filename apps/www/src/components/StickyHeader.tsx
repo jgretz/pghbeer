@@ -1,5 +1,6 @@
 import {forwardRef} from 'react';
 import {Link} from '@tanstack/react-router';
+import {Map, Moon, Sun} from 'lucide-react';
 import {ProgressBar} from './ProgressBar';
 import {FilterSummary} from './FilterSummary';
 import type {FilterState} from '../lib/types';
@@ -59,7 +60,7 @@ export const StickyHeader = forwardRef<HTMLDivElement, StickyHeaderProps>(functi
               className="flex h-[42px] w-[42px] items-center justify-center rounded-xl border-[1.5px] border-border bg-bg text-lg transition-all"
               aria-label="Festival map"
             >
-              {'\u{1F5FA}\uFE0F'}
+              <Map size={20} className="text-text" aria-hidden="true" />
             </Link>
           )}
           <button
@@ -67,7 +68,11 @@ export const StickyHeader = forwardRef<HTMLDivElement, StickyHeaderProps>(functi
             className="flex h-[42px] w-[42px] items-center justify-center rounded-xl border-[1.5px] border-border bg-bg text-lg transition-all"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {theme === 'dark' ? '\u2600\uFE0F' : '\u{1F319}'}
+            {theme === 'dark' ? (
+              <Sun size={20} className="text-text" aria-hidden="true" />
+            ) : (
+              <Moon size={20} className="text-text" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>

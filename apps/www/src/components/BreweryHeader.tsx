@@ -1,4 +1,5 @@
 import {Link} from '@tanstack/react-router';
+import {Signpost} from 'lucide-react';
 import {NABadge} from './NABadge';
 import type {Beer} from '../lib/types';
 
@@ -39,7 +40,7 @@ export function BreweryHeader({
           className="flex h-7 shrink-0 items-center gap-1 rounded-lg border border-border bg-bg px-2 text-xs font-medium text-text-secondary"
           aria-label={`Find ${name} on the map`}
         >
-          📍 Find
+          <Signpost size={16} aria-hidden="true" />
         </Link>
       )}
     </div>
