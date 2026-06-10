@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef} from 'react';
+import {memo, useCallback, useEffect, useMemo, useRef} from 'react';
 import {MapSlot} from './MapSlot';
 import {usePanZoom} from '../../hooks/usePanZoom';
 import type {MapLayout, MapSlot as MapSlotType} from '../../lib/types';
@@ -12,9 +12,12 @@ interface FestivalMapProps {
 // highlight is pure props — a slot is always an addressable node, so no cached
 // image to re-export.
 export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
-  const {containerRef, size, view, setView, fit, fitView, centerOnRect, zoomBy, bind} =
+  const {containerRef, groupRef, size, transform, fit, centerOnRect, zoomBy, bind} =
     usePanZoom({width: layout.width, height: layout.height});
   const didInit = useRef(false);
+
+  const zoomIn = useCallback(() => zoomBy(1.25), [zoomBy]);
+  const zoomOut = useCallback(() => zoomBy(0.8), [zoomBy]);
 
   // Zones render first (background), tables on top.
   const ordered = useMemo(() => {
@@ -37,10 +40,10 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
       centerOnRect(highlightSlot);
       didInit.current = true;
     } else if (!didInit.current) {
-      setView(fitView());
+      fit();
       didInit.current = true;
     }
-  }, [size, highlightSlot, centerOnRect, setView, fitView]);
+  }, [size, highlightSlot, centerOnRect, fit]);
 
   return (
     <div className="relative flex-1 overflow-hidden bg-bg">
@@ -51,7 +54,7 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
         {...bind}
       >
         <svg width="100%" height="100%">
-          <g transform={`translate(${view.tx} ${view.ty}) scale(${view.scale})`}>
+          <g ref={groupRef} transform={transform}>
             {ordered.map((slot) => (
               <MapSlot
                 key={slot.id}
@@ -64,15 +67,15 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
       </div>
 
       <div className="absolute bottom-4 right-4 flex flex-col gap-2">
-        <MapButton label="+" onClick={() => zoomBy(1.25)} />
-        <MapButton label="−" onClick={() => zoomBy(0.8)} />
+        <MapButton label="+" onClick={zoomIn} />
+        <MapButton label="−" onClick={zoomOut} />
         <MapButton label="⤢" title="Fit" onClick={fit} />
       </div>
     </div>
   );
 }
 
-function MapButton({
+const MapButton = memo(function MapButton({
   label,
   title,
   onClick,
@@ -90,4 +93,4 @@ function MapButton({
       {label}
     </button>
   );
-}
+});

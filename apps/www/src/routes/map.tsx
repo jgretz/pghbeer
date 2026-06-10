@@ -33,7 +33,7 @@ function CenteredMessage({children}: {children: React.ReactNode}) {
 function MapPage() {
   const {theme, toggle: toggleTheme} = useTheme();
   const {brewery} = Route.useSearch();
-  const {data, isLoading} = useEventMap();
+  const {data, isLoading, isError} = useEventMap();
 
   const visible = isMapVisible(data?.enabled);
 
@@ -60,6 +60,10 @@ function MapPage() {
 
       {isLoading && !data ? (
         <CenteredMessage>Loading map…</CenteredMessage>
+      ) : isError && !data ? (
+        <CenteredMessage>
+          Couldn't load the map — check your connection and try again.
+        </CenteredMessage>
       ) : !visible ? (
         <CenteredMessage>The festival map isn't available yet.</CenteredMessage>
       ) : !data?.activeLayout ? (
