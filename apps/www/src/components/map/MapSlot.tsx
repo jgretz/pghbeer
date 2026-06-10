@@ -87,8 +87,7 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
               fontSize: nameSize,
               fontWeight: 700,
               color: 'var(--color-text)',
-              overflowWrap: 'anywhere',
-              hyphens: 'auto',
+              overflowWrap: 'break-word',
             }}
           >
             {slot.breweryName}
