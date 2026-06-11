@@ -7,6 +7,7 @@ import {beerRoutes} from './beers';
 import {eventRoutes} from './events';
 import {eventBeerRoutes} from './event-beers';
 import {mapRoutes} from './maps';
+import {cacheRoutes} from './cache';
 
 export const adminRoutes = new Hono();
 
@@ -20,3 +21,4 @@ adminRoutes.route('/beers', beerRoutes);
 adminRoutes.route('/events', eventRoutes);
 adminRoutes.route('/events', eventBeerRoutes);
 adminRoutes.route('/maps', mapRoutes);
+adminRoutes.route('/cache', cacheRoutes);
