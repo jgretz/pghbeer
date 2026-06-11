@@ -174,6 +174,27 @@ function splitSegments(text: string): string[] {
 }
 
 const vendorRe = /\b(jewelry|stickers?|magnets?|vendor|merch)\b/i;
+const numberedRe = /^\d{1,2}\s*[.)]\s*/;
+
+/**
+ * A multi-line numbered list ("1. X\n2. Y\n…"): the numbers are explicit beer
+ * delimiters, so ONLY numbered lines are beverages — any un-numbered header or
+ * footer (a brand label, a note) is dropped. Each line still parses normally,
+ * falling back to a name-only beer (style/abv → enrichment) when it carries no
+ * style/abv structure. Returns null when the cell isn't a numbered list.
+ */
+function parseNumberedList(text: string): ParsedBeer[] | null {
+  if (!/\n/.test(text)) return null;
+  const numbered = text
+    .split(/\n+/)
+    .map((l) => l.trim())
+    .filter((l) => numberedRe.test(l));
+  if (numbered.length < 2) return null;
+  return numbered.map((line) => {
+    const body = line.replace(numberedRe, '').replace(/\s+/g, ' ').trim();
+    return parseSegment(body) ?? beer(body, null, null, body);
+  });
+}
 
 /** Parse a free-text beer-list cell (col K, or M/N) into beers. */
 export function parseBeerCell(raw: string): ParseResult {
@@ -184,6 +205,9 @@ export function parseBeerCell(raw: string): ParseResult {
   if (vendorRe.test(text) && !/\d{1,2}(?:\.\d{1,2})?\s*%/.test(text)) {
     return {ok: false, reason: 'no-beers', raw};
   }
+
+  const numberedBeers = parseNumberedList(text);
+  if (numberedBeers && numberedBeers.length) return {ok: true, beers: numberedBeers};
 
   const segments = splitSegments(text);
   const beers: ParsedBeer[] = [];
