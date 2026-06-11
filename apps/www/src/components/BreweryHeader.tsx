@@ -23,7 +23,7 @@ export function BreweryHeader({
 
   return (
     <div
-      className="sticky z-10 flex items-center gap-2 border-b border-t border-border-light bg-surface-alt px-4 py-2.5 transition-all"
+      className="sticky z-10 flex items-center gap-2 border-b border-t border-border-light bg-surface-alt px-4 py-2.5 transition-colors"
       style={{top: stickyTop}}
     >
       <div className="min-w-0 flex-1 truncate font-display text-[15px] font-semibold uppercase tracking-wide text-text dark:text-gold">
