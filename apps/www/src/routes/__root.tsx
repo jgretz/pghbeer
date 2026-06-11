@@ -4,9 +4,16 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister';
 import type {Persister} from '@tanstack/react-query-persist-client';
-import {STORAGE_KEYS} from '../lib/constants';
+import {STORAGE_KEYS, CACHE_VERSION} from '../lib/constants';
 import {getAuthState} from '../lib/session-actions';
+import {useDataVersionSync} from '../hooks/useDataVersionSync';
 import '../globals.css';
+
+// Lives inside the QueryClient provider so it can invalidate on a version change.
+function VersionWatcher() {
+  useDataVersionSync();
+  return null;
+}
 
 function NotFound() {
   return (
@@ -69,6 +76,9 @@ function RootComponent() {
           queries: {
             gcTime: Infinity,
             staleTime: 5 * 60 * 1000,
+            // 300+ phones tabbing back in shouldn't stampede the API; staleTime
+            // governs freshness, manual invalidation/reload pulls edits through.
+            refetchOnWindowFocus: false,
           },
         },
       }),
@@ -93,7 +103,12 @@ function RootComponent() {
     })();
   `;
 
-  const content = <Outlet />;
+  const content = (
+    <>
+      <VersionWatcher />
+      <Outlet />
+    </>
+  );
 
   return (
     <html lang="en">
@@ -103,7 +118,10 @@ function RootComponent() {
       <body className="min-h-screen bg-bg font-sans text-text">
         <script dangerouslySetInnerHTML={{__html: themeInitScript}} />
         {persister ? (
-          <PersistQueryClientProvider client={queryClient} persistOptions={{persister}}>
+          <PersistQueryClientProvider
+            client={queryClient}
+            persistOptions={{persister, buster: CACHE_VERSION}}
+          >
             {content}
           </PersistQueryClientProvider>
         ) : (

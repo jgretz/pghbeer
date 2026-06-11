@@ -7,7 +7,14 @@ export const STORAGE_KEYS = {
   tried: 'pghbeer-tried-2026',
   userId: 'pghbeer-user-id',
   queryCache: 'pghbeer-query-cache-v2',
+  dataVersion: 'pghbeer-data-version',
 } as const;
+
+// Bump on any www deploy that changes the cached data shape, or to force every
+// phone to discard its persisted query cache on next load. Acts as the persister
+// kill-switch — a mismatched buster wipes the localStorage cache instead of
+// rehydrating a stale one.
+export const CACHE_VERSION = '2026.1';
 
 export const BEVERAGE_ICONS: Record<string, string> = {
   beer: '\u{1F37A}',

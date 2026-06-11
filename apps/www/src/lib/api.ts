@@ -60,6 +60,14 @@ export async function fetchEventMap(): Promise<EventMap> {
   return res.json();
 }
 
+export async function fetchDataVersion(): Promise<{version: string}> {
+  const res = await fetch(`${API_URL}/version?event_id=${EVENT_ID}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch data version: ${res.status} ${res.statusText}`);
+  }
+  return res.json();
+}
+
 export async function fetchDashboardStats(): Promise<DashboardStats> {
   const res = await fetch(`${API_URL}/stats/dashboard?event_id=${EVENT_ID}`);
   if (!res.ok) {
