@@ -17,9 +17,11 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
   const transform = rotation ? `rotate(${rotation} ${cx} ${cy})` : undefined;
 
   if (kind === 'zone') {
-    // Zones are an unlabeled background region for now — every zone's label is
-    // still the "Zone" placeholder, so printing it is noise. Drop the text
-    // until zone labeling is a real feature.
+    // A titled background region (e.g. "Inside" / "Outside"). The title sits in
+    // the top-left so it stays legible as tables fill the area; the legacy
+    // "Zone" placeholder is treated as untitled and skipped.
+    const title = slot.label && slot.label !== 'Zone' ? slot.label : null;
+    const titleSize = Math.max(16, Math.min(width, height) * 0.08);
     return (
       <g transform={transform} style={{pointerEvents: 'none'}}>
         <rect
@@ -34,6 +36,18 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
           strokeWidth={1}
           strokeDasharray="6 4"
         />
+        {title && (
+          <text
+            x={x + 12}
+            y={y + 12}
+            dominantBaseline="hanging"
+            fontSize={titleSize}
+            fontWeight={700}
+            fill="var(--color-text-muted)"
+          >
+            {title}
+          </text>
+        )}
       </g>
     );
   }
