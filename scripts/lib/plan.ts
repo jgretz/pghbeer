@@ -1,4 +1,5 @@
-import {isNoiseCell, parseBeerCell, type ParsedBeer} from './parse-beers.ts';
+import {dedupeBeers, isNoiseCell, parseBeerCell, type ParsedBeer} from './parse-beers.ts';
+import {lookupOverride, rowHasOverride} from './beer-overrides.ts';
 import {rowHash, rowKey, type Ledger, type RowStatus} from './state.ts';
 import type {SheetRow} from './sheet.ts';
 
@@ -24,7 +25,10 @@ export function planRows(rows: SheetRow[], ledger: Ledger): Plan {
   const cached: CachedRow[] = [];
   for (const row of rows) {
     const prev = ledger.rows[rowKey(row)];
-    if (prev && prev.hash === rowHash(row) && prev.status !== 'error') {
+    const cacheable = prev && prev.hash === rowHash(row) && prev.status !== 'error';
+    // An override must win even when the ledger still holds an old parse, so a
+    // matched row always re-plans rather than replaying its cached beers.
+    if (cacheable && !rowHasOverride(row)) {
       cached.push({row, beers: prev.beers, status: prev.status});
     } else {
       fresh.push(planFreshRow(row));
@@ -37,18 +41,31 @@ export function planRows(rows: SheetRow[], ledger: Ledger): Plan {
 function planFreshRow(row: SheetRow): FreshRow {
   const beers: ParsedBeer[] = [];
   const pending: PendingCell[] = [];
+  const extras: ParsedBeer[] = [];
 
-  const k = parseBeerCell(row.beerListRaw);
-  if (k.ok) beers.push(...k.beers);
-  else if (k.reason === 'unparseable') {
-    pending.push({key: `${rowKey(row)}|K`, kind: 'primary', raw: row.beerListRaw});
+  // A hand-authored override for the K cell wins over both parse paths.
+  const kOverride = lookupOverride(row.brewery, row.beerListRaw);
+  if (kOverride) {
+    beers.push(...kOverride);
+  } else {
+    const k = parseBeerCell(row.beerListRaw);
+    if (k.ok) beers.push(...k.beers);
+    else if (k.reason === 'unparseable') {
+      pending.push({key: `${rowKey(row)}|K`, kind: 'primary', raw: row.beerListRaw});
+    }
   }
 
-  // M/N are mostly logistics prose; let the runway batch decide (it returns [] for
-  // non-beers and extracts the rare misfiled beer, e.g. "Free For All NA IPA").
+  // M/N are mostly logistics prose; an override wins, else let the runway batch
+  // decide (it returns [] for non-beers and extracts the rare misfiled beer).
   for (const [col, raw] of [['M', row.naRaw] as const, ['N', row.specialRaw] as const]) {
-    if (!isNoiseCell(raw)) pending.push({key: `${rowKey(row)}|${col}`, kind: 'extra', raw});
+    if (isNoiseCell(raw)) continue;
+    const override = lookupOverride(row.brewery, raw);
+    if (override) extras.push(...override);
+    else pending.push({key: `${rowKey(row)}|${col}`, kind: 'extra', raw});
   }
+
+  // Dedupe override extras against K (matches the runway fold in resolve-parses).
+  if (extras.length) beers.push(...dedupeBeers(beers, extras));
 
   return {row, beers, pending, error: false};
 }

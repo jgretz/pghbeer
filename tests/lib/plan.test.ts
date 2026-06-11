@@ -54,6 +54,7 @@ describe('planRows', () => {
     const ledger: Ledger = {
       rows: {[rowKey(r)]: {hash: rowHash(r), status: 'parsed', beers: [], parsedAt: 'now'}},
       enrichment: {},
+      classification: {},
     };
     const {fresh, cached} = planRows([r], ledger);
     expect(fresh).toHaveLength(0);
@@ -65,9 +66,66 @@ describe('planRows', () => {
     const ledger: Ledger = {
       rows: {[rowKey(r)]: {hash: rowHash(r), status: 'error', beers: [], parsedAt: 'now'}},
       enrichment: {},
+      classification: {},
     };
     const {fresh, cached} = planRows([r], ledger);
     expect(fresh).toHaveLength(1);
     expect(cached).toHaveLength(0);
+  });
+
+  it('should use a K-cell override verbatim and queue no pending cell', () => {
+    const {fresh} = planRows(
+      [
+        row({
+          brewery: 'Lucky Sign Spirits',
+          beerListRaw: 'Canned cocktails - Key Lime & Dill, Blood Orange & Rosemary',
+        }),
+      ],
+      emptyLedger(),
+    );
+    expect(fresh[0]!.beers.map((b) => b.name)).toEqual([
+      'Key Lime & Dill',
+      'Blood Orange & Rosemary',
+    ]);
+    expect(fresh[0]!.pending).toHaveLength(0);
+  });
+
+  it('should fold an M-cell override in as deduped extras', () => {
+    const {fresh} = planRows(
+      [
+        row({
+          brewery: 'Lucky Sign Spirits',
+          beerListRaw: 'Canned cocktails - Key Lime & Dill, Blood Orange & Rosemary',
+          naRaw: 'Grapefruit Cucumber Dill - Watermelon Elderflower Basil - maybe more',
+        }),
+      ],
+      emptyLedger(),
+    );
+    expect(fresh[0]!.beers.map((b) => b.name)).toEqual([
+      'Key Lime & Dill',
+      'Blood Orange & Rosemary',
+      'Grapefruit Cucumber Dill',
+      'Watermelon Elderflower Basil',
+    ]);
+    expect(fresh[0]!.pending).toHaveLength(0);
+  });
+
+  it('should re-plan an overridden row even when the ledger holds an old parse', () => {
+    const r = row({
+      brewery: 'Lucky Sign Spirits',
+      beerListRaw: 'Canned cocktails - Key Lime & Dill, Blood Orange & Rosemary',
+    });
+    const stale = [{name: 'Canned cocktails', style: null, abv: null, isNa: false}];
+    const ledger: Ledger = {
+      rows: {[rowKey(r)]: {hash: rowHash(r), status: 'parsed', beers: stale, parsedAt: 'now'}},
+      enrichment: {},
+      classification: {},
+    };
+    const {fresh, cached} = planRows([r], ledger);
+    expect(cached).toHaveLength(0);
+    expect(fresh[0]!.beers.map((b) => b.name)).toEqual([
+      'Key Lime & Dill',
+      'Blood Orange & Rosemary',
+    ]);
   });
 });
