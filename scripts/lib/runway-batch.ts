@@ -199,6 +199,8 @@ export async function parseBatch(
       `{"key": <the item's key>, "beers": [{"name": string, "style": string|null, "abv": number|null, "isNa": boolean}]}\n\n` +
       `Rules:\n` +
       `- Do NOT invent beers, styles, or abv. Unknown style/abv -> null.\n` +
+      `- Commas (and newlines) separate distinct beverages. "&"/"and" is AMBIGUOUS: it may join the final item of a comma list, OR be part of one flavor's name — let the comma structure decide. "Citrus Vanilla, Wild Blueberry & Ginger Zest" -> 3 ("Citrus Vanilla", "Wild Blueberry", "Ginger Zest"); but "Key Lime & Dill, Blood Orange & Rosemary" -> 2 ("Key Lime & Dill", "Blood Orange & Rosemary").\n` +
+      `- Strip leading descriptors that are not part of any beverage's name (e.g. "Canned cocktails - X, Y" / "Cans: X, Y" -> beers "X" and "Y").\n` +
       `- Separate the beer NAME from its STYLE (e.g. "Banana Hammock Hefeweizen" -> name "Banana Hammock", style "Hefeweizen").\n` +
       `- "<0.5" -> abv 0.5 and isNa true. Non-alcoholic / NA / 0.0% / seltzer water -> isNa true.\n` +
       `- If "raw" is "TBD", empty, or a non-beer vendor (jewelry, stickers), output {"key": ..., "beers": []}.\n\n` +
