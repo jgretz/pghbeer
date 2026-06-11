@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {HeadContent, Outlet, Scripts, createRootRoute} from '@tanstack/react-router';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
-import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister';
+import {createAsyncStoragePersister} from '@tanstack/query-async-storage-persister';
 import type {Persister} from '@tanstack/react-query-persist-client';
 import {STORAGE_KEYS, CACHE_VERSION} from '../lib/constants';
 import {getAuthState} from '../lib/session-actions';
@@ -88,7 +88,7 @@ function RootComponent() {
   const [persister, setPersister] = useState<Persister | null>(null);
   useEffect(() => {
     setPersister(
-      createSyncStoragePersister({
+      createAsyncStoragePersister({
         storage: window.localStorage,
         key: STORAGE_KEYS.queryCache,
       }),
