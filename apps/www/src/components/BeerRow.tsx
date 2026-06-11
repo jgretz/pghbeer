@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {NABadge} from './NABadge';
 import type {Beer} from '../lib/types';
 
@@ -5,13 +6,15 @@ interface BeerRowProps {
   beer: Beer;
   breweryName: string;
   isTried: boolean;
-  onToggle: () => void;
+  // Stable identity from useTriedSet — keeps memo effective so only the toggled row re-renders.
+  onToggle: (key: string, beerId: number) => void;
 }
 
-export function BeerRow({beer, isTried, onToggle}: BeerRowProps) {
+export const BeerRow = memo(function BeerRow({beer, breweryName, isTried, onToggle}: BeerRowProps) {
+  const key = `${breweryName}::${beer.name}`;
   return (
     <button
-      onClick={onToggle}
+      onClick={() => onToggle(key, beer.id)}
       className={`flex w-full min-h-[58px] items-center gap-3 border-b border-border-light px-4 py-3.5 text-left transition-colors ${
         isTried ? 'bg-tried-bg' : 'bg-surface'
       }`}
@@ -51,4 +54,4 @@ export function BeerRow({beer, isTried, onToggle}: BeerRowProps) {
       </div>
     </button>
   );
-}
+});

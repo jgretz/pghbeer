@@ -13,6 +13,7 @@ import {isMapVisible} from '../lib/mapFlag';
 import {useTriedSet} from '../hooks/useTriedSet';
 import {useFilterState} from '../hooks/useFilterState';
 import {useFilteredData} from '../hooks/useFilteredData';
+import {useDebouncedValue} from '../hooks/useDebouncedValue';
 import {useFiltersVisible} from '../hooks/useFiltersVisible';
 import type {BeverageType} from '../lib/types';
 
@@ -78,7 +79,14 @@ function IndexPage() {
     toggleTried: toggleTriedFilter,
   } = useFilterState(availableTypes.length);
 
-  const filtered = useFilteredData(breweries, filters, tried);
+  // Input reflects `filters.search` immediately; the filter pass runs off the
+  // debounced value so typing doesn't re-filter on every keystroke.
+  const debouncedSearch = useDebouncedValue(filters.search, 200);
+  const filtersForList = useMemo(
+    () => ({...filters, search: debouncedSearch}),
+    [filters, debouncedSearch],
+  );
+  const filtered = useFilteredData(breweries, filtersForList, tried);
 
   const filteredBeerCount = useMemo(
     () => filtered.reduce((sum, b) => sum + b.beers.length, 0),

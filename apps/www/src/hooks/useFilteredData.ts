@@ -31,5 +31,7 @@ export function useFilteredData(
         return {...brewery, beers};
       })
       .filter((b) => b.beers.length > 0);
-  }, [breweries, filters, tried]);
+    // Depend on the individual fields, not the `filters` object — useFilterState
+    // rebuilds that object every render, which would defeat the memo entirely.
+  }, [breweries, filters.search, filters.activeTypes, filters.naOnly, filters.showTriedOnly, tried]);
 }

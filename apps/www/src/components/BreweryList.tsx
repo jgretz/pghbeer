@@ -46,7 +46,7 @@ export function BreweryList({
                 beer={beer}
                 breweryName={brewery.name}
                 isTried={tried.has(key)}
-                onToggle={() => onToggleTried(key, beer.id)}
+                onToggle={onToggleTried}
               />
             );
           })}
