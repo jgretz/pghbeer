@@ -3,10 +3,13 @@
   "exact": {
     "cabernet sauvignon": {"type": "wine"},
     "dry red": {"type": "wine"},
+    "dry red blend": {"type": "wine"},
     "dry rose": {"type": "wine"},
     "dry rose'": {"type": "wine"},
     "dry white": {"type": "wine"},
     "malbec": {"type": "wine"},
+    "sem-dry white": {"type": "wine"},
+    "semi-dry red": {"type": "wine"},
     "rose": {"type": "wine"},
     "sauvignon blanc": {"type": "wine"},
     "semi dry white": {"type": "wine"},
