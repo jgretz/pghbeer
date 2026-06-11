@@ -47,6 +47,8 @@ const beer = (name: string, style: string | null, abv: number | null, raw: strin
   isNa: detectNa(raw),
 });
 
+const pureAbvRe = /^<?\s*\d{1,2}(?:\.\d{1,2})?\s*%?(?:\s*abv)?$/i;
+
 /** Parse one beer segment into fields, or null when no pattern applies (→ punt the cell). */
 function parseSegment(rawSeg: string): ParsedBeer | null {
   const seg = rawSeg
@@ -54,6 +56,17 @@ function parseSegment(rawSeg: string): ParsedBeer | null {
     .replace(/^\((.*)\)$/, '$1')
     .trim();
   if (!seg) return null;
+
+  // name, style, abv  /  name, abv  — comma-delimited fields with a trailing abv token.
+  // Used when a slash separates beers (see splitSegments) so the comma is the field sep.
+  if (seg.includes(',')) {
+    const parts = seg.split(',').map((p) => p.trim()).filter(Boolean);
+    const last = parts.at(-1);
+    if ((parts.length === 2 || parts.length === 3) && parts[0] && last && pureAbvRe.test(last)) {
+      const style = parts.length === 3 ? parts[1]! : null;
+      return beer(parts[0]!, style, parseAbv(last), seg);
+    }
+  }
 
   // name / style / abv   (space-padded slash only, so "N/A" is not a field separator)
   if (/\s\/\s/.test(seg)) {
@@ -126,6 +139,16 @@ function splitSegments(text: string): string[] {
       .split(/\n+/)
       .map((s) => s.trim())
       .filter(Boolean);
+  // "title, style, abv / title, style, abv" — slash separates beers, comma separates
+  // fields within each. Only when every slash-group carries a comma, so a lone
+  // "name / style / abv" beer (no commas) still parses as a single beer below.
+  if (/\s\/\s/.test(text)) {
+    const groups = text
+      .split(/\s*\/\s*/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (groups.length >= 2 && groups.every((g) => g.includes(','))) return groups;
+  }
   // Parenthetical blocks: "(a / b / c) (d / e / f)"
   if (/^\s*\(.*\)\s*$/.test(text) && (text.match(/\(/g) ?? []).length >= 2) {
     return [...text.matchAll(/\(([^)]+)\)/g)].map((m) => m[1]!.trim());
