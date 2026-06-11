@@ -189,6 +189,7 @@ function AdminMap() {
             <SlotInspector
               slots={editor.selectedSlots}
               onField={editor.editField}
+              onLabel={editor.editLabel}
               onToggleLock={editor.toggleLock}
               onDuplicate={editor.duplicateSelected}
               onDelete={editor.deleteSelected}

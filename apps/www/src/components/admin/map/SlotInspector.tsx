@@ -6,6 +6,7 @@ import type {AlignKind} from '../../../lib/admin/mapAlign';
 interface SlotInspectorProps {
   slots: DraftSlot[]; // one or more selected
   onField: (field: 'x' | 'y' | 'width' | 'height', value: number) => void;
+  onLabel: (value: string) => void;
   onToggleLock: () => void;
   onDuplicate: () => void;
   onDelete: () => void;
@@ -24,6 +25,7 @@ function common<T>(slots: DraftSlot[], pick: (s: DraftSlot) => T): T | null {
 export function SlotInspector({
   slots,
   onField,
+  onLabel,
   onToggleLock,
   onDuplicate,
   onDelete,
@@ -32,6 +34,9 @@ export function SlotInspector({
   const multi = slots.length > 1;
   const allLocked = slots.every((s) => s.locked);
   const kind = common(slots, (s) => s.kind);
+  const titleId = useId();
+  // A single zone's label is its on-map title ("Inside" / "Outside").
+  const zoneTitle = !multi && kind === 'zone' ? slots[0] : null;
 
   const title = multi
     ? `${slots.length} selected`
@@ -69,6 +74,23 @@ export function SlotInspector({
           </button>
         </div>
       </div>
+
+      {zoneTitle && (
+        <div className="flex flex-col gap-1">
+          <label htmlFor={titleId} className="text-xs text-text-secondary">
+            Title
+          </label>
+          <input
+            id={titleId}
+            type="text"
+            maxLength={24}
+            value={zoneTitle.label === 'Zone' ? '' : zoneTitle.label}
+            placeholder="e.g. Inside"
+            onChange={(e) => onLabel(e.target.value)}
+            className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text placeholder:text-text-muted"
+          />
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-3">
         <Stepper label="X" value={common(slots, (s) => s.x)} onChange={(v) => onField('x', v)} />

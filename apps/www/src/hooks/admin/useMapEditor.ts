@@ -105,6 +105,20 @@ export function useMapEditor(params: {
     [selectedSlots],
   );
 
+  // Zone title (and table label) text. Capped to the column's 24 chars.
+  const editLabel = useCallback(
+    (value: string) => {
+      const label = value.slice(0, 24);
+      const updates = selectedSlots
+        .filter((s) => !s.locked)
+        .map((s) => ({id: s.id, patch: {label}}));
+      if (updates.length === 0) return;
+      dispatch({type: 'UPDATE_MANY', updates});
+      setDirty(true);
+    },
+    [selectedSlots],
+  );
+
   const moveSlots = useCallback((updates: {id: number; x: number; y: number}[]) => {
     dispatch({
       type: 'UPDATE_MANY',
@@ -264,6 +278,7 @@ export function useMapEditor(params: {
     assignedLabels,
     unassignedCount,
     editField,
+    editLabel,
     moveSlots,
     resizeSlot,
     toggleLock,
