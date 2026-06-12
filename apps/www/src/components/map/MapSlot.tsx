@@ -109,7 +109,7 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
           height={height + 8}
           rx={8}
           fill="none"
-          stroke="var(--color-gold)"
+          stroke="var(--color-highlight)"
           strokeWidth={3}
           className="animate-pulse"
         />
