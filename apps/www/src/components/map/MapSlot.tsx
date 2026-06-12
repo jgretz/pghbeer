@@ -58,9 +58,10 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
   }
 
   if (kind === 'zone') {
-    // A titled background region (e.g. "Inside" / "Outside"). The title sits in
-    // the top-left so it stays legible as tables fill the area; the legacy
-    // "Zone" placeholder is treated as untitled and skipped.
+    // A titled background region (e.g. "Inside" / "Outside"). The title is
+    // centered horizontally but pinned near the top so it stays legible as
+    // tables fill the area; the legacy "Zone" placeholder is treated as
+    // untitled and skipped.
     const title = slot.label && slot.label !== 'Zone' ? slot.label : null;
     const titleSize = Math.max(16, Math.min(width, height) * 0.08);
     return (
@@ -79,8 +80,9 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
         />
         {title && (
           <text
-            x={x + 12}
+            x={cx}
             y={y + 12}
+            textAnchor="middle"
             dominantBaseline="hanging"
             fontSize={titleSize}
             fontWeight={700}
