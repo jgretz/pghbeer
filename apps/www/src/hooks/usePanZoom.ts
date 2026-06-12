@@ -6,13 +6,6 @@ export interface PanZoomView {
   ty: number;
 }
 
-export interface Rect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
 const MIN_SCALE = 0.2;
 const MAX_SCALE = 6;
 
@@ -100,21 +93,6 @@ export function usePanZoom(world: {width: number; height: number}) {
   }, [size, world.width, world.height]);
 
   const fit = useCallback(() => commit(fitView()), [commit, fitView]);
-
-  const centerOnRect = useCallback(
-    (r: Rect) => {
-      const {w, h} = size;
-      if (!w || !h) return;
-      const fitScale = Math.min(w / world.width, h / world.height) * 0.92;
-      const target = clampScale(
-        Math.max(fitScale, (Math.min(w, h) * 0.4) / Math.max(r.width, r.height)),
-      );
-      const cx = r.x + r.width / 2;
-      const cy = r.y + r.height / 2;
-      commit({scale: target, tx: w / 2 - cx * target, ty: h / 2 - cy * target});
-    },
-    [size, world.width, world.height, commit],
-  );
 
   const zoomBy = useCallback(
     (factor: number) => {
@@ -214,7 +192,6 @@ export function usePanZoom(world: {width: number; height: number}) {
     view,
     fit,
     fitView,
-    centerOnRect,
     zoomBy,
     bind,
   };

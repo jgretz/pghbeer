@@ -1,6 +1,6 @@
 import {memo, useCallback, useEffect, useMemo, useRef} from 'react';
 import {MapSlot} from './MapSlot';
-import {usePanZoom, type Rect} from '../../hooks/usePanZoom';
+import {usePanZoom} from '../../hooks/usePanZoom';
 import type {MapLayout, MapSlot as MapSlotType} from '../../lib/types';
 
 interface FestivalMapProps {
@@ -14,18 +14,16 @@ interface FestivalMapProps {
 //
 // The world is derived from the slots' actual bounding box, not the stored
 // canvas dims — slots overflow the nominal canvas, so the box is the source of
-// truth for fit. A leading translate shifts the box origin to (0,0), and
-// `toWorldRect` maps a slot's box into that world space for "find me" centering.
-// Wide layouts read poorly in portrait; the /map route nudges the user to turn
-// the phone to landscape rather than fighting it with an SVG rotation.
+// truth for fit. A leading translate shifts the box origin to (0,0). Wide
+// layouts read poorly in portrait; the /map route nudges the user to turn the
+// phone to landscape rather than fighting it with an SVG rotation.
 export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
-  const {world, worldTransform, toWorldRect} = useMemo(() => {
+  const {world, worldTransform} = useMemo(() => {
     const {slots} = layout;
     if (slots.length === 0) {
       return {
         world: {width: layout.width, height: layout.height},
         worldTransform: undefined as string | undefined,
-        toWorldRect: (r: Rect): Rect => r,
       };
     }
     const minX = Math.min(...slots.map((s) => s.x));
@@ -36,16 +34,10 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
     return {
       world: {width: maxX - minX, height: maxY - minY},
       worldTransform: `translate(${-minX} ${-minY})`,
-      toWorldRect: (r: Rect): Rect => ({
-        x: r.x - minX,
-        y: r.y - minY,
-        width: r.width,
-        height: r.height,
-      }),
     };
   }, [layout]);
 
-  const {containerRef, groupRef, size, fit, centerOnRect, zoomBy, bind} = usePanZoom(world);
+  const {containerRef, groupRef, size, fit, zoomBy, bind} = usePanZoom(world);
   const didInit = useRef(false);
 
   const zoomIn = useCallback(() => zoomBy(1.25), [zoomBy]);
@@ -59,6 +51,8 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
     return [...zones, ...tables, ...labels];
   }, [layout.slots]);
 
+  // The highlighted brewery's table just pulses in place — we fit the whole map
+  // rather than zooming to it, so the user keeps their bearings.
   const highlightSlot = useMemo<MapSlotType | undefined>(() => {
     if (highlightBreweryId == null) return undefined;
     return layout.slots.find(
@@ -66,23 +60,12 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
     );
   }, [layout.slots, highlightBreweryId]);
 
-  // The highlight's box has to be expressed in world space for centering.
-  const highlightRect = useMemo(
-    () => (highlightSlot ? toWorldRect(highlightSlot) : undefined),
-    [highlightSlot, toWorldRect],
-  );
-
-  // Fit once the container is measured; re-center when the highlight changes.
+  // Fit the whole map once the container is measured.
   useEffect(() => {
-    if (!size.w || !size.h) return;
-    if (highlightRect) {
-      centerOnRect(highlightRect);
-      didInit.current = true;
-    } else if (!didInit.current) {
-      fit();
-      didInit.current = true;
-    }
-  }, [size, highlightRect, centerOnRect, fit]);
+    if (!size.w || !size.h || didInit.current) return;
+    fit();
+    didInit.current = true;
+  }, [size, fit]);
 
   return (
     <div className="relative flex-1 overflow-hidden bg-bg">
