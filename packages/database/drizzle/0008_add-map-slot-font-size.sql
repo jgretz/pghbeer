@@ -1,0 +1,1 @@
+ALTER TABLE "map_slots" ADD COLUMN "font_size" integer;

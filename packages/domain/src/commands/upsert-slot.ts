@@ -5,16 +5,17 @@ import {getDb} from '../db';
 import {loadMapSlot} from '../queries/load-map-slots';
 import type {MapSlot, UpsertSlotInput} from '../types';
 
-// Create (no id) or update (id present) a single slot. Zones never carry a
-// brewery assignment regardless of input. Returns null when updating an id that
-// no longer exists, so the route can answer 404 instead of crashing.
+// Create (no id) or update (id present) a single slot. Only tables carry a
+// brewery assignment; zones and labels never do, regardless of input. Returns
+// null when updating an id that no longer exists, so the route can answer 404
+// instead of crashing.
 export async function upsertSlot(
   layoutId: number,
   input: UpsertSlotInput,
 ): Promise<MapSlot | null> {
   const db = getDb();
   const now = new Date();
-  const breweryId = input.kind === 'zone' ? null : input.breweryId ?? null;
+  const breweryId = input.kind === 'table' ? input.breweryId ?? null : null;
 
   const fields = {
     label: input.label,
@@ -24,6 +25,8 @@ export async function upsertSlot(
     width: input.width,
     height: input.height,
     rotation: input.rotation,
+    fontSize: input.fontSize ?? null,
+    vertical: input.vertical ?? false,
     locked: input.locked,
     breweryId,
   };

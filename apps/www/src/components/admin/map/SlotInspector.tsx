@@ -7,6 +7,8 @@ interface SlotInspectorProps {
   slots: DraftSlot[]; // one or more selected
   onField: (field: 'x' | 'y' | 'width' | 'height', value: number) => void;
   onLabel: (value: string) => void;
+  onFontSize: (value: number) => void;
+  onOrientation: (vertical: boolean) => void;
   onToggleLock: () => void;
   onDuplicate: () => void;
   onDelete: () => void;
@@ -26,6 +28,8 @@ export function SlotInspector({
   slots,
   onField,
   onLabel,
+  onFontSize,
+  onOrientation,
   onToggleLock,
   onDuplicate,
   onDelete,
@@ -35,14 +39,19 @@ export function SlotInspector({
   const allLocked = slots.every((s) => s.locked);
   const kind = common(slots, (s) => s.kind);
   const titleId = useId();
-  // A single zone's label is its on-map title ("Inside" / "Outside").
-  const zoneTitle = !multi && kind === 'zone' ? slots[0] : null;
+  // A single zone's label is its on-map title ("Inside" / "Outside"); a label's
+  // is its on-map text. Both are edited through the same Text field.
+  const textSlot = !multi && (kind === 'zone' || kind === 'label') ? slots[0] : null;
+  const labelSlot = !multi && kind === 'label' ? slots[0] : null;
+  const placeholderDefault = kind === 'zone' ? 'Zone' : 'Label';
 
   const title = multi
     ? `${slots.length} selected`
     : kind === 'zone'
       ? 'Zone'
-      : 'Table';
+      : kind === 'label'
+        ? 'Label'
+        : 'Table';
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-4">
@@ -75,38 +84,63 @@ export function SlotInspector({
         </div>
       </div>
 
-      {zoneTitle && (
+      {textSlot && (
         <div className="flex flex-col gap-1">
           <label htmlFor={titleId} className="text-xs text-text-secondary">
-            Title
+            {kind === 'label' ? 'Text' : 'Title'}
           </label>
           <input
             id={titleId}
             type="text"
             maxLength={24}
-            value={zoneTitle.label === 'Zone' ? '' : zoneTitle.label}
-            placeholder="e.g. Inside"
+            value={textSlot.label === placeholderDefault ? '' : textSlot.label}
+            placeholder={kind === 'label' ? 'e.g. Bar' : 'e.g. Inside'}
             onChange={(e) => onLabel(e.target.value)}
             className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text placeholder:text-text-muted"
           />
         </div>
       )}
 
+      {labelSlot && (
+        <div className="flex flex-col gap-1">
+          <span className="text-xs text-text-secondary">Orientation</span>
+          <div className="flex overflow-hidden rounded-lg border border-border">
+            <OrientationTab active={!labelSlot.vertical} onClick={() => onOrientation(false)}>
+              Horizontal
+            </OrientationTab>
+            <OrientationTab active={labelSlot.vertical} onClick={() => onOrientation(true)}>
+              Vertical
+            </OrientationTab>
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-2 gap-3">
         <Stepper label="X" value={common(slots, (s) => s.x)} onChange={(v) => onField('x', v)} />
         <Stepper label="Y" value={common(slots, (s) => s.y)} onChange={(v) => onField('y', v)} />
-        <Stepper
-          label="Width"
-          value={common(slots, (s) => s.width)}
-          min={20}
-          onChange={(v) => onField('width', v)}
-        />
-        <Stepper
-          label="Height"
-          value={common(slots, (s) => s.height)}
-          min={20}
-          onChange={(v) => onField('height', v)}
-        />
+        {labelSlot ? (
+          <Stepper
+            label="Font size"
+            value={labelSlot.fontSize ?? null}
+            min={8}
+            onChange={onFontSize}
+          />
+        ) : (
+          <>
+            <Stepper
+              label="Width"
+              value={common(slots, (s) => s.width)}
+              min={20}
+              onChange={(v) => onField('width', v)}
+            />
+            <Stepper
+              label="Height"
+              value={common(slots, (s) => s.height)}
+              min={20}
+              onChange={(v) => onField('height', v)}
+            />
+          </>
+        )}
       </div>
 
       {multi && (
@@ -147,6 +181,28 @@ export function SlotInspector({
         </div>
       )}
     </div>
+  );
+}
+
+function OrientationTab({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex-1 px-3 py-2 text-xs font-medium ${
+        active ? 'bg-gold text-check-fg' : 'bg-surface text-text-secondary hover:text-text'
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 

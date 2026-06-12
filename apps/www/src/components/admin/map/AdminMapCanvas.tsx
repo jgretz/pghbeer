@@ -129,8 +129,9 @@ function AdminMapCanvasImpl({
 
   const ordered = useMemo(() => {
     const zones = slots.filter((s) => s.kind === 'zone');
-    const tables = slots.filter((s) => s.kind !== 'zone');
-    return [...zones, ...tables];
+    const tables = slots.filter((s) => s.kind === 'table');
+    const labels = slots.filter((s) => s.kind === 'label');
+    return [...zones, ...tables, ...labels];
   }, [slots]);
 
   const selectedSlots = useMemo(
@@ -138,9 +139,13 @@ function AdminMapCanvasImpl({
     [slots, selectedSet],
   );
 
-  // Resize handles show only for a single, unlocked selection.
+  // Resize handles show only for a single, unlocked selection — and never for
+  // labels, whose box auto-fits the text (size is set via the font-size field).
   const handleSlot =
-    mode === 'layout' && selectedSlots.length === 1 && !selectedSlots[0].locked
+    mode === 'layout' &&
+    selectedSlots.length === 1 &&
+    !selectedSlots[0].locked &&
+    selectedSlots[0].kind !== 'label'
       ? selectedSlots[0]
       : null;
 

@@ -6,7 +6,7 @@ import {createServerFn} from '@tanstack/react-start';
 import {adminFetch, adminFetchRaw} from './server-fn';
 import {parseDeleteResponse, type DeleteEventResult} from './events';
 
-export type AdminMapSlotKind = 'table' | 'zone';
+export type AdminMapSlotKind = 'table' | 'zone' | 'label';
 
 export type AdminMapSlot = {
   id: number;
@@ -17,6 +17,8 @@ export type AdminMapSlot = {
   width: number;
   height: number;
   rotation: number;
+  fontSize: number | null;
+  vertical: boolean;
   locked: boolean;
   breweryId: number | null;
   breweryName: string | null;
@@ -58,6 +60,8 @@ export type SlotInput = {
   width: number;
   height: number;
   rotation: number;
+  fontSize?: number | null;
+  vertical: boolean;
   locked: boolean;
   breweryId?: number | null;
 };

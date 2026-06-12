@@ -51,11 +51,12 @@ export function FestivalMap({layout, highlightBreweryId}: FestivalMapProps) {
   const zoomIn = useCallback(() => zoomBy(1.25), [zoomBy]);
   const zoomOut = useCallback(() => zoomBy(0.8), [zoomBy]);
 
-  // Zones render first (background), tables on top.
+  // Zones render first (background), then tables, then labels on top.
   const ordered = useMemo(() => {
     const zones = layout.slots.filter((s) => s.kind === 'zone');
-    const tables = layout.slots.filter((s) => s.kind !== 'zone');
-    return [...zones, ...tables];
+    const tables = layout.slots.filter((s) => s.kind === 'table');
+    const labels = layout.slots.filter((s) => s.kind === 'label');
+    return [...zones, ...tables, ...labels];
   }, [layout.slots]);
 
   const highlightSlot = useMemo<MapSlotType | undefined>(() => {

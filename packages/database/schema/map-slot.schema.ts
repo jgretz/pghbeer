@@ -13,11 +13,11 @@ import {breweries} from './brewery.schema';
 import {mapLayouts} from './map-layout.schema';
 import {dates} from './helpers';
 
-// A positioned element within a layout: either an assignable brewery `table`
-// or a decorative `zone` (Inside / Outside / Entrance) used for orientation.
-// Both kinds share geometry so they reuse the same editor and render path.
-// `kind` is a varchar, not a pg enum, to avoid migration churn if more kinds
-// are added later.
+// A positioned element within a layout: an assignable brewery `table`, a
+// decorative `zone` (Inside / Outside / Entrance) used for orientation, or a
+// free-standing text `label`. All kinds share geometry so they reuse the same
+// editor and render path. `kind` is a varchar, not a pg enum, to avoid
+// migration churn if more kinds are added later.
 export const mapSlots = pgTable(
   'map_slots',
   {
@@ -35,6 +35,11 @@ export const mapSlots = pgTable(
     width: doublePrecision('width').notNull().default(40),
     height: doublePrecision('height').notNull().default(40),
     rotation: doublePrecision('rotation').notNull().default(0),
+    // Explicit text size for `label` slots (tables/zones derive theirs from
+    // geometry). Null for non-label kinds.
+    fontSize: integer('font_size'),
+    // `label` slots only: stack characters top-to-bottom instead of left-to-right.
+    vertical: boolean('vertical').notNull().default(false),
     // Editor convenience: a locked slot can't be moved/resized/aligned.
     locked: boolean('locked').notNull().default(false),
     // Null for zones and unassigned tables.

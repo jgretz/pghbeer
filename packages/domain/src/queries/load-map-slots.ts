@@ -13,6 +13,8 @@ const slotColumns = {
   width: mapSlots.width,
   height: mapSlots.height,
   rotation: mapSlots.rotation,
+  fontSize: mapSlots.fontSize,
+  vertical: mapSlots.vertical,
   locked: mapSlots.locked,
   breweryId: mapSlots.breweryId,
   breweryName: breweries.name,
@@ -27,6 +29,8 @@ function toMapSlot(row: {
   width: number;
   height: number;
   rotation: number;
+  fontSize: number | null;
+  vertical: boolean;
   locked: boolean;
   breweryId: number | null;
   breweryName: string | null;
@@ -40,6 +44,8 @@ function toMapSlot(row: {
     width: row.width,
     height: row.height,
     rotation: row.rotation,
+    fontSize: row.fontSize,
+    vertical: row.vertical,
     locked: row.locked,
     breweryId: row.breweryId,
     breweryName: row.breweryName ?? null,

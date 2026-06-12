@@ -57,6 +57,20 @@
       "when": 1781105822441,
       "tag": "0007_map-slot-unique-table-label",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1781307091312,
+      "tag": "0008_add-map-slot-font-size",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1781307947282,
+      "tag": "0009_add-map-slot-vertical",
+      "breakpoints": true
     }
   ]
 }

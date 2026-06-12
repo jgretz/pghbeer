@@ -42,7 +42,7 @@ export interface BreweryGroup {
   beers: Beer[];
 }
 
-export type MapSlotKind = 'table' | 'zone';
+export type MapSlotKind = 'table' | 'zone' | 'label';
 
 export interface MapSlot {
   id: number;
@@ -53,6 +53,8 @@ export interface MapSlot {
   width: number;
   height: number;
   rotation: number;
+  fontSize: number | null;
+  vertical: boolean;
   locked: boolean;
   breweryId: number | null;
   breweryName: string | null;

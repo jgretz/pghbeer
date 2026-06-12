@@ -16,6 +16,47 @@ function MapSlotImpl({slot, highlighted}: MapSlotProps) {
   const cy = y + height / 2;
   const transform = rotation ? `rotate(${rotation} ${cx} ${cy})` : undefined;
 
+  if (kind === 'label') {
+    // Free-standing text, centered in its (text-fitted) box. Size is explicit,
+    // not derived from geometry, so admins control it directly. Vertical labels
+    // stack one upright character per row (top-to-bottom reading), not a rotation.
+    const size = slot.fontSize ?? 24;
+    if (slot.vertical) {
+      const lineH = size * 1.05;
+      return (
+        <g style={{pointerEvents: 'none'}}>
+          <text
+            textAnchor="middle"
+            fontSize={size}
+            fontWeight={700}
+            fill="var(--color-text)"
+          >
+            {[...slot.label].map((ch, i) => (
+              <tspan key={i} x={cx} y={y + lineH * (i + 0.5)} dominantBaseline="central">
+                {ch}
+              </tspan>
+            ))}
+          </text>
+        </g>
+      );
+    }
+    return (
+      <g style={{pointerEvents: 'none'}}>
+        <text
+          x={cx}
+          y={cy}
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontSize={size}
+          fontWeight={700}
+          fill="var(--color-text)"
+        >
+          {slot.label}
+        </text>
+      </g>
+    );
+  }
+
   if (kind === 'zone') {
     // A titled background region (e.g. "Inside" / "Outside"). The title sits in
     // the top-left so it stays legible as tables fill the area; the legacy

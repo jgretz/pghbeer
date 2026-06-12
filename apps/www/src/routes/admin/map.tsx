@@ -136,6 +136,9 @@ function AdminMap() {
                 <ToolbarButton onClick={() => editor.addSlot('zone')}>
                   + Zone
                 </ToolbarButton>
+                <ToolbarButton onClick={() => editor.addSlot('label')}>
+                  + Label
+                </ToolbarButton>
                 <div className="flex overflow-hidden rounded-lg border border-border">
                   <ModeTab active={tool === 'move'} onClick={() => setTool('move')}>
                     Move
@@ -190,6 +193,8 @@ function AdminMap() {
               slots={editor.selectedSlots}
               onField={editor.editField}
               onLabel={editor.editLabel}
+              onFontSize={editor.editFontSize}
+              onOrientation={editor.setLabelOrientation}
               onToggleLock={editor.toggleLock}
               onDuplicate={editor.duplicateSelected}
               onDelete={editor.deleteSelected}

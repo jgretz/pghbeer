@@ -152,11 +152,11 @@ export const addBeerToEventSchema = z.object({beerId: z.number().int()});
 export type AddBeerToEventInput = z.infer<typeof addBeerToEventSchema>;
 
 // --- Festival map ---
-// A layout holds positioned elements ("slots"). A slot is either an assignable
-// brewery `table` or a decorative `zone` (Inside / Outside / Entrance) used for
-// orientation; both share geometry.
+// A layout holds positioned elements ("slots"). A slot is an assignable brewery
+// `table`, a decorative `zone` (Inside / Outside / Entrance) used for
+// orientation, or a free-standing text `label`; all share geometry.
 
-export type MapSlotKind = 'table' | 'zone';
+export type MapSlotKind = 'table' | 'zone' | 'label';
 
 export interface MapSlot {
   id: number;
@@ -167,6 +167,10 @@ export interface MapSlot {
   width: number;
   height: number;
   rotation: number;
+  // Explicit text size for `label` slots; null for tables/zones.
+  fontSize: number | null;
+  // `label` slots only: stack characters top-to-bottom.
+  vertical: boolean;
   locked: boolean;
   breweryId: number | null;
   breweryName: string | null;
@@ -202,7 +206,7 @@ export interface LayoutSwitchPreview {
   droppedBreweries: {id: number; name: string}[];
 }
 
-export const mapSlotKindSchema = z.enum(['table', 'zone']);
+export const mapSlotKindSchema = z.enum(['table', 'zone', 'label']);
 
 export const createLayoutSchema = z.object({
   name: z.string().min(1),
@@ -228,6 +232,8 @@ export const upsertSlotSchema = z.object({
   width: z.number().positive(),
   height: z.number().positive(),
   rotation: z.number().default(0),
+  fontSize: z.number().int().positive().nullable().optional(),
+  vertical: z.boolean().optional(),
   locked: z.boolean().default(false),
   breweryId: z.number().int().nullable().optional(),
 });

@@ -55,6 +55,8 @@ export async function duplicateLayout(
         width: s.width,
         height: s.height,
         rotation: s.rotation,
+        fontSize: s.fontSize,
+        vertical: s.vertical,
         locked: s.locked,
         breweryId: s.breweryId,
         createDate: now,

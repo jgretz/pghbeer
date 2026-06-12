@@ -3,7 +3,14 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 
 import * as maps from '../../lib/admin/maps';
 import {alignSlots, type AlignKind} from '../../lib/admin/mapAlign';
-import {draftReducer, isTempId, makeSlot, type DraftSlot} from '../../lib/admin/mapDraft';
+import {
+  DEFAULT_LABEL_FONT_SIZE,
+  draftReducer,
+  isTempId,
+  labelBox,
+  makeSlot,
+  type DraftSlot,
+} from '../../lib/admin/mapDraft';
 
 type World = {width: number; height: number};
 
@@ -105,13 +112,69 @@ export function useMapEditor(params: {
     [selectedSlots],
   );
 
-  // Zone title (and table label) text. Capped to the column's 24 chars.
+  // Zone title / table label / label text. Capped to the column's 24 chars. A
+  // label's box tracks its text so its draggable hit area stays tight.
   const editLabel = useCallback(
     (value: string) => {
       const label = value.slice(0, 24);
       const updates = selectedSlots
         .filter((s) => !s.locked)
-        .map((s) => ({id: s.id, patch: {label}}));
+        .map((s) =>
+          s.kind === 'label'
+            ? {
+                id: s.id,
+                patch: {
+                  label,
+                  ...labelBox(label || 'Label', s.fontSize ?? DEFAULT_LABEL_FONT_SIZE, s.vertical),
+                },
+              }
+            : {id: s.id, patch: {label}},
+        );
+      if (updates.length === 0) return;
+      dispatch({type: 'UPDATE_MANY', updates});
+      setDirty(true);
+    },
+    [selectedSlots],
+  );
+
+  // Label text size. Recomputes the box so the hit area follows the glyphs.
+  const editFontSize = useCallback(
+    (value: number) => {
+      const fontSize = Math.max(8, Math.round(value));
+      const updates = selectedSlots
+        .filter((s) => !s.locked && s.kind === 'label')
+        .map((s) => ({
+          id: s.id,
+          patch: {fontSize, ...labelBox(s.label || 'Label', fontSize, s.vertical)},
+        }));
+      if (updates.length === 0) return;
+      dispatch({type: 'UPDATE_MANY', updates});
+      setDirty(true);
+    },
+    [selectedSlots],
+  );
+
+  // Label orientation: vertical stacks characters top-to-bottom. Resize the box
+  // for the new shape and keep the label centered in place so it doesn't jump.
+  const setLabelOrientation = useCallback(
+    (vertical: boolean) => {
+      const updates = selectedSlots
+        .filter((s) => !s.locked && s.kind === 'label')
+        .map((s) => {
+          const box = labelBox(s.label || 'Label', s.fontSize ?? DEFAULT_LABEL_FONT_SIZE, vertical);
+          const cx = s.x + s.width / 2;
+          const cy = s.y + s.height / 2;
+          return {
+            id: s.id,
+            patch: {
+              vertical,
+              width: box.width,
+              height: box.height,
+              x: Math.round(cx - box.width / 2),
+              y: Math.round(cy - box.height / 2),
+            },
+          };
+        });
       if (updates.length === 0) return;
       dispatch({type: 'UPDATE_MANY', updates});
       setDirty(true);
@@ -160,8 +223,9 @@ export function useMapEditor(params: {
   );
 
   const addSlot = useCallback(
-    (kind: 'table' | 'zone') => {
-      const label = kind === 'zone' ? 'Zone' : String(nextTableLabel());
+    (kind: 'table' | 'zone' | 'label') => {
+      const label =
+        kind === 'zone' ? 'Zone' : kind === 'label' ? 'Label' : String(nextTableLabel());
       const slot = makeSlot(nextTempId(), kind, label, world, draft.length);
       dispatch({type: 'ADD', slot});
       setSelectedIds([slot.id]);
@@ -217,6 +281,8 @@ export function useMapEditor(params: {
           width: s.width,
           height: s.height,
           rotation: s.rotation,
+          fontSize: s.fontSize,
+          vertical: s.vertical,
           locked: s.locked,
           breweryId: s.breweryId,
         };
@@ -279,6 +345,8 @@ export function useMapEditor(params: {
     unassignedCount,
     editField,
     editLabel,
+    editFontSize,
+    setLabelOrientation,
     moveSlots,
     resizeSlot,
     toggleLock,
