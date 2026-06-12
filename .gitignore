@@ -51,3 +51,5 @@ scripts/.import-report.json
 
 # neonctl local context
 .neon
+# one-off 2026 import scripts/data
+scripts/data/2026/
