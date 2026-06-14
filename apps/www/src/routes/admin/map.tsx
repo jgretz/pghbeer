@@ -43,7 +43,9 @@ function AdminMap() {
   const editor = useMapEditor({
     layout: manager.layout,
     world,
-    roster: manager.roster,
+    // Full catalog (a superset of the event roster) so optimistic assignment can
+    // resolve the name for non-beer vendors too, not just beer breweries.
+    roster: manager.allBreweries.length ? manager.allBreweries : manager.roster,
     layoutId: manager.selectedLayoutId,
   });
 
@@ -208,6 +210,7 @@ function AdminMap() {
         <BreweryPickerSheet
           slotLabel={editor.pickerSlot.label}
           breweries={manager.roster}
+          allBreweries={manager.allBreweries}
           assignedLabels={editor.assignedLabels}
           currentBreweryId={editor.pickerSlot.breweryId}
           onPick={(breweryId) => editor.assign(editor.pickerSlot!.id, breweryId)}

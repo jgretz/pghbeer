@@ -3,7 +3,10 @@ import type {EventBrewery} from '../../../lib/admin/maps';
 
 interface BreweryPickerSheetProps {
   slotLabel: string;
+  // Event roster: breweries with beers on this event (the default source).
   breweries: EventBrewery[];
+  // Full catalog, searchable via the "All breweries" toggle for non-beer vendors.
+  allBreweries: EventBrewery[];
   // breweryId -> the slot label it is currently assigned to (if any)
   assignedLabels: Record<number, string>;
   currentBreweryId: number | null;
@@ -14,10 +17,12 @@ interface BreweryPickerSheetProps {
 
 // Day-of assignment: tap a table, search ~70 breweries, tap one. Unassigned
 // breweries sort to the top; already-assigned ones are dimmed and tagged with
-// their current slot.
+// their current slot. The "All breweries" toggle widens the source from the
+// event roster to the full catalog so non-beer vendors can be assigned.
 export function BreweryPickerSheet({
   slotLabel,
   breweries,
+  allBreweries,
   assignedLabels,
   currentBreweryId,
   onPick,
@@ -25,12 +30,14 @@ export function BreweryPickerSheet({
   onClear,
 }: BreweryPickerSheetProps) {
   const [query, setQuery] = useState('');
+  const [searchAll, setSearchAll] = useState(false);
 
   const results = useMemo(() => {
+    const source = searchAll ? allBreweries : breweries;
     const q = query.trim().toLowerCase();
     const filtered = q
-      ? breweries.filter((b) => b.name.toLowerCase().includes(q))
-      : breweries;
+      ? source.filter((b) => b.name.toLowerCase().includes(q))
+      : source;
     // Unassigned first, then by name (stable).
     return [...filtered].sort((a, b) => {
       const aAssigned = assignedLabels[a.id] != null ? 1 : 0;
@@ -38,7 +45,7 @@ export function BreweryPickerSheet({
       if (aAssigned !== bAssigned) return aAssigned - bAssigned;
       return a.name.localeCompare(b.name);
     });
-  }, [breweries, query, assignedLabels]);
+  }, [breweries, allBreweries, searchAll, query, assignedLabels]);
 
   return (
     <div
@@ -70,9 +77,19 @@ export function BreweryPickerSheet({
           autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search breweries…"
+          placeholder={searchAll ? 'Search all breweries…' : 'Search breweries…'}
           className="mb-3 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text placeholder:text-text-muted"
         />
+
+        <label className="mb-3 flex cursor-pointer items-center gap-2 text-xs text-text-secondary">
+          <input
+            type="checkbox"
+            checked={searchAll}
+            onChange={(e) => setSearchAll(e.target.checked)}
+            className="accent-gold"
+          />
+          Search all breweries (include non-beer vendors)
+        </label>
 
         <ul className="flex flex-col divide-y divide-border-light overflow-y-auto">
           {results.map((b) => {

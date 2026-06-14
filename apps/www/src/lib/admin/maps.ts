@@ -237,3 +237,11 @@ export const listEventBreweries = createServerFn({method: 'GET'})
       a.name.localeCompare(b.name),
     );
   });
+
+// Every brewery in the catalog, not just those with beers on the event. Used by
+// the picker's "search all" toggle to assign non-beer vendors (food trucks, etc).
+export const listAllBreweries = createServerFn({method: 'GET'})
+  .handler(
+    async (): Promise<EventBrewery[]> =>
+      (await adminFetch('/admin/breweries')).json(),
+  );

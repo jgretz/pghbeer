@@ -32,6 +32,11 @@ export function useLayoutManager(eventId: number | null) {
     queryFn: () => maps.listEventBreweries({data: {eventId: eventId!}}),
     enabled: eventId != null,
   });
+  const allBreweriesQ = useQuery({
+    queryKey: ['admin', 'map', 'all-breweries'],
+    queryFn: () => maps.listAllBreweries(),
+    enabled: eventId != null,
+  });
   const layoutQ = useQuery({
     queryKey: ['admin', 'map', 'layout', selectedLayoutId],
     queryFn: () => maps.getLayout({data: {layoutId: selectedLayoutId!}}),
@@ -147,6 +152,7 @@ export function useLayoutManager(eventId: number | null) {
     layoutsLoading: layoutsQ.isLoading,
     layout: layoutQ.data,
     roster: rosterQ.data ?? [],
+    allBreweries: allBreweriesQ.data ?? [],
     eventEnabled: enabledQ.data?.enabled ?? false,
     enablePending: enabledMutation.isPending,
     toggleEnabled,
