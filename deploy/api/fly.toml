@@ -12,7 +12,7 @@ primary_region = 'bos'
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 2
+  min_machines_running = 0
   processes = ['app']
 
   [[http_service.checks]]
@@ -23,6 +23,6 @@ primary_region = 'bos'
     timeout = "10s"
 
 [[vm]]
-  memory = '1gb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
